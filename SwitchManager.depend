@@ -1,0 +1,50 @@
+# depslib dependency file v1.0
+1483915366 source:/home/charquet/Documents/SwitchManager/gestionfichier.c
+	"gestionfichier.h"
+	"constantes.h"
+	"configuration.h"
+	"listecodes.h"
+	<stdlib.h>
+	<string.h>
+	<assert.h>
+
+1483906282 source:/home/charquet/Documents/SwitchManager/serveurudp.c
+	"constantes.h"
+	"configuration.h"
+	"listecodes.h"
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	<arpa/inet.h>
+	<sys/socket.h>
+
+1483707035 source:/home/charquet/Documents/SwitchManager/main.c
+	"configuration.h"
+	<stdio.h>
+	<stdlib.h>
+
+1483915837 source:/home/charquet/Documents/SwitchManager/gestioncommandes.c
+	"gestioncommandes.h"
+	"gestionfichier.h"
+	"listecodes.h"
+	"constantes.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1483823273 /home/charquet/Documents/SwitchManager/listecodes.h
+
+1483915818 /home/charquet/Documents/SwitchManager/constantes.h
+
+1483912123 /home/charquet/Documents/SwitchManager/gestioncommandes.h
+
+1483824673 /home/charquet/Documents/SwitchManager/gestionfichier.h
+	<stdio.h>
+	<stdbool.h>
+
+1483650276 source:/home/charquet/Documents/SwitchManager/Configuration.c
+	"constantes.h"
+
+1483705179 /home/charquet/Documents/SwitchManager/configuration.h
+	"constantes.h"
+
