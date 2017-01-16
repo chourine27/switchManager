@@ -2,14 +2,20 @@
 #define CONSTANTES_H_INCLUDED
 
 #define BUFLEN 512  //Max length of buffer
-#define MAXBUF 1024
+#define MAXBUF 1024 // Taille maximum dans le BUFFER
 #define DELIM "=" // Delimiteur de parametre / valeur
+#define MAXARG 10 // Nombre maximum d'argument pour une commande
 
 #define COMMANDE_NOMSERVEUR "TonNom" // command pour recuperer le nom du serveur
+#define COMMANDE_RENOMMERSERVEUR "RenommerTonNom" // commande pour changer le nom du serveur
 #define COMMANDE_IMAGESERVEUR "TonImage" // commande pour recuper l image representant le serveur
+#define COMMANDE_CHANGERIMAGESERVEUR "ChangeTonImage" // commande pour changer l'image du serveur
 #define COMMANDE_NOMBREINTERRUPTEUR "CombienIlYEnA" // commande pour recuperer le nombre de prise connecte
+#define COMMANDE_CHANGERNOMBREINTERRUPTEUR "ChangeLeNombre" // commande pour modifier le nombre de prises connectées
 #define COMMANDE_NOMBOUTON "NomBouton_" // prefix de commande pour gerer une prise
+#define COMMANDE_RENOMMERNOMBOUTON "RenommerNomBouton_" //prefix de commande pour renommer un bouton
 #define COMMANDE_IMAGEBOUTON "ImageBouton_" // prefix de commande pour gerer l image d une prise
+#define COMMANDE_CHANGERIMAGEBOUTON "ChangerImageBouton_" // prefix pour changer l'image d'une prise
 
 #define CONFIG_NOMFICHIER "switchmanager.config" // nom du fichier de config
 #define FICHIERTEMPORAIRE "config.tmp" // nom du fichier temporaire
