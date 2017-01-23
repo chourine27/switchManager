@@ -16,6 +16,7 @@
 #define COMMANDE_RENOMMERNOMBOUTON "RenommerNomBouton_" //prefix de commande pour renommer un bouton
 #define COMMANDE_IMAGEBOUTON "ImageBouton_" // prefix de commande pour gerer l image d une prise
 #define COMMANDE_CHANGERIMAGEBOUTON "ChangerImageBouton_" // prefix pour changer l'image d'une prise
+#define COMMANDE_STATUTBOUTON "EtatBouton" // Change l'etat d'une prise
 
 #define CONFIG_NOMFICHIER "switchmanager.config" // nom du fichier de config
 #define FICHIERTEMPORAIRE "config.tmp" // nom du fichier temporaire

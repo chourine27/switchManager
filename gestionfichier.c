@@ -46,6 +46,7 @@ int copieTexteDeConfig(char* parametre, char* ligne, char* configParam)
         valeurDansLaLigne = valeurDansLaLigne + strlen(DELIM);
 
         strcpy(configParam, valeurDansLaLigne);
+        //strlcpy(configParam, valeurDansLaLigne, sizeof(valeurDansLaLigne));
         return MSG_OK;
     }
     return MSG_NotFound;
@@ -70,7 +71,7 @@ FILE* OuvrirFichier(char* NomFichier)
     FILE* fichier = NULL;
     if (NomFichier == NULL)
     {
-        printf("OuverirFichier - Nom de fichier non défini");
+        printf("OuverirFichier - Nom de fichier non dï¿½fini");
         return NULL;
     }
     fichier = fopen(NomFichier, "a+");
@@ -81,7 +82,7 @@ FILE* OuvrirFichier(char* NomFichier)
     }
     else
     {
-        printf("OuvrirFichier - Erreur à l'ouverture du fichier : %s", NomFichier);
+        printf("OuvrirFichier - Erreur ï¿½ l'ouverture du fichier : %s", NomFichier);
         return NULL;
     }
 }
@@ -210,7 +211,7 @@ int EcrireParametre(char* NomFichier, char* parametre, char* valeur)
 
     if (fichier == NULL)
     {
-        printf("EcrireParametre - Problème d'ouverture du fichier : %s", NomFichier);
+        printf("EcrireParametre - Problï¿½me d'ouverture du fichier : %s", NomFichier);
         return -1;
     }
 
@@ -226,7 +227,7 @@ int EcrireParametre(char* NomFichier, char* parametre, char* valeur)
         {
             printf("%s\n", ligne);
             //Refaire le fichier
-            //Est se ce paramètre
+            //Est se ce paramï¿½tre
             if (strncmp(parametre, ligne, strlen(parametre)) == 0)
             {
                 // mise a jour du parametre

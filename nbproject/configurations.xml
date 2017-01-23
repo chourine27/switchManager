@@ -8,7 +8,9 @@
       <itemPath>constantes.h</itemPath>
       <itemPath>gestioncommandes.h</itemPath>
       <itemPath>gestionfichier.h</itemPath>
+      <itemPath>gestiongpio.h</itemPath>
       <itemPath>listecodes.h</itemPath>
+      <itemPath>serveurudp.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -19,6 +21,7 @@
                    projectFiles="true">
       <itemPath>gestioncommandes.c</itemPath>
       <itemPath>gestionfichier.c</itemPath>
+      <itemPath>gestiongpio.c</itemPath>
       <itemPath>main.c</itemPath>
       <itemPath>serveurudp.c</itemPath>
     </logicalFolder>
@@ -56,11 +59,17 @@
       </item>
       <item path="gestionfichier.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="gestiongpio.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="gestiongpio.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="listecodes.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="serveurudp.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="serveurudp.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="1">
@@ -95,11 +104,17 @@
       </item>
       <item path="gestionfichier.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="gestiongpio.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="gestiongpio.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="listecodes.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="serveurudp.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="serveurudp.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>

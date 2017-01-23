@@ -7,6 +7,9 @@
 /*   Serveur UDP                                                              */
 /* ========================================================================== */
 
+#include "serveurudp.h"
+#include "gestioncommandes.h"
+#include "gestionfichier.h"
 #include "constantes.h"
 #include "configuration.h"
 #include "listecodes.h"
@@ -29,7 +32,7 @@ int StartServerUDP(void)
 {
     struct sockaddr_in si_me, si_other;
 
-    int s, i, slen = sizeof(si_other) , recv_len;
+    int s, retourCode, slen = sizeof(si_other) , recv_len;
     char buf[BUFLEN];
     char resultat[BUFLEN];
 
@@ -45,7 +48,7 @@ int StartServerUDP(void)
     si_me.sin_family = AF_INET;
     if (LireParametre(CONFIG_NOMFICHIER, PARAMETRE_PORTSERVEUR, resultat) != MSG_OK)
     {
-        printf("StartServerUDP - Erreur de recuperation du port de connexion");
+        printf("StartServerUDP - Erreur de recuperation du port de connexion\n");
         return MSG_InternalServerError;
     }
 
@@ -58,7 +61,7 @@ int StartServerUDP(void)
         die("bind");
     }
 
-    printf("Server started. Ready to receive data");
+    printf("Server started. Ready to receive data\n");
     //keep listening for data
     while(1)
     {
@@ -73,9 +76,10 @@ int StartServerUDP(void)
 
         //print details of the client/peer and the data received
         //printf("Received packet from %s:%d\n", inet_ntoa(si_other.sin_addr), ntohs(si_other.sin_port));
-        if (ExecuterCommande(buf, resultat) != MSG_OK)
+        retourCode = ExecuterCommande(buf, resultat);
+        if (retourCode != MSG_OK)
         {
-            printf("StartServerUDP - Commande retourne une erreur");
+            printf("StartServerUDP - Commande retourne une erreur : %c\n ", retourCode);
         }
         else
         {
@@ -88,5 +92,5 @@ int StartServerUDP(void)
     }
 
     close(s);
-    return 0;
+    return MSG_OK;
 }
