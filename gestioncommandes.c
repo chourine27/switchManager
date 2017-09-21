@@ -30,7 +30,8 @@ int ExecuterCommande(char* commande, char* resultat)
     int codeResultat = MSG_NotImplemented;
     size_t i = 0;
     // Verification si la commande contient des espaces
-    if (strstr(commande, spaceChar) != NULL)
+//    if (strstr(commande, spaceChar) != NULL)
+    if (strpbrk(commande, spaceChar) != NULL)
     {
         // Decoupage de la commande et des arguments
         argv = malloc(sizeof(char *) * MAXARG);
@@ -53,31 +54,35 @@ int ExecuterCommande(char* commande, char* resultat)
         }
         argv[i] = NULL;
         
-        if (strncmp(argv[0], COMMANDE_CHANGERIMAGESERVEUR, sizeof(COMMANDE_CHANGERIMAGEBOUTON) -2) == 0)
+        if (strncmp(argv[0], COMMANDE_CHANGERIMAGESERVEUR, sizeof(COMMANDE_CHANGERIMAGEBOUTON)) == 0)
         {
             strcpy(parametreComplet, PARAMETRE_IMAGEBOUTON);
             strcat(parametreComplet, argv[1]);
             codeResultat = ModifierInformationsConfig(PARAMETRE_IMAGEBOUTON, argv[1]);
         }
-        else if (strncmp(argv[0], COMMANDE_CHANGERIMAGESERVEUR, sizeof(COMMANDE_CHANGERIMAGESERVEUR) -2) == 0)
+        else if (strncmp(argv[0], COMMANDE_CHANGERIMAGESERVEUR, sizeof(COMMANDE_CHANGERIMAGESERVEUR)) == 0)
         {
             codeResultat = ModifierInformationsConfig(PARAMETRE_IMAGESERVEUR, argv[1]);
         }
-        else if (strncmp(argv[0], COMMANDE_CHANGERNOMBREINTERRUPTEUR, sizeof(COMMANDE_CHANGERNOMBREINTERRUPTEUR) -2) == 0)
+        else if (strncmp(argv[0], COMMANDE_CHANGERNOMBREINTERRUPTEUR, sizeof(COMMANDE_CHANGERNOMBREINTERRUPTEUR)) == 0)
         {
             codeResultat = ModifierInformationsConfig(PARAMETRE_NOMBREINTERRUPTEUR, argv[1]);
         }
-        else if (strncmp(argv[0], COMMANDE_RENOMMERNOMBOUTON, sizeof(COMMANDE_RENOMMERNOMBOUTON)-2) == 0)
+        else if (strncmp(argv[0], COMMANDE_RENOMMERNOMBOUTON, sizeof(COMMANDE_RENOMMERNOMBOUTON)) == 0)
         {
             strcpy(parametreComplet, PARAMETRE_NOMBOUTON);
             strcat(parametreComplet, argv[1]);
             codeResultat = ModifierInformationsConfig(PARAMETRE_NOMBOUTON, argv[2]);
         }
-        else if (strncmp(argv[0], COMMANDE_RENOMMERSERVEUR, sizeof(COMMANDE_RENOMMERSERVEUR)-2) == 0)
+        else if (strncmp(argv[0], COMMANDE_RENOMMERSERVEUR, sizeof(COMMANDE_RENOMMERSERVEUR)) == 0)
         {
             codeResultat = ModifierInformationsConfig(PARAMETRE_NOMSERVEUR, argv[1]);
         }
-        else if (strncmp(argv[0], COMMANDE_STATUTBOUTON, sizeof(COMMANDE_STATUTBOUTON)-2) == 0)
+        else if (strncmp(argv[0], COMMANDE_STATUTBOUTON, sizeof(COMMANDE_STATUTBOUTON)) == 0)
+        {
+            codeResultat = RetournerEtatBouton (atoi(argv[1]), resultat);
+        }
+        else if (strncmp(argv[0], COMMANDE_CHANGESTATUTBOUTON, sizeof(COMMANDE_CHANGESTATUTBOUTON)) == 0)
         {
             if (argv[1] == NULL || argv[2] == NULL)
             {
@@ -85,12 +90,16 @@ int ExecuterCommande(char* commande, char* resultat)
             }
             else
             {
-                codeResultat = ChangerStatutBouton (atoi(argv[1]), argv[2]);
+                codeResultat = ChangerStatutBouton (atoi(argv[1]), atoi(argv[2]));
             }
+        }
+        else
+        { // Commande inconnue
+            codeResultat = MSG_BadRequest;
         }
     }
     else
-    {
+    { // Commande sans argument
         if (strncmp(commande, COMMANDE_IMAGEBOUTON, sizeof(COMMANDE_IMAGEBOUTON)-2) == 0)
         {
             codeResultat = RetournerInformationConfigIndex(PARAMETRE_IMAGEBOUTON, commande, INITIAL_IMAGEBOUTON, resultat);
@@ -107,13 +116,22 @@ int ExecuterCommande(char* commande, char* resultat)
         {
             codeResultat = RetournerInformationConfig(PARAMETRE_NOMSERVEUR, INITIAL_NOMSERVEUR, resultat);
         }
+        else
+        {
+            codeResultat = MSG_BadRequest;
+        }
     }
     free(argv);
     free(p);
-    if (codeResultat == MSG_OK)
-        strcpy(resultat, "OK");
-    else
+    if (codeResultat != MSG_OK)
         sprintf(resultat, "%d", codeResultat);
+    else
+    {
+        if (strcmp(resultat, "") == 0) //Résultat vide
+        {
+            sprintf(resultat, "%d", MSG_OK);
+        }
+    }
     return codeResultat;
 }
 
@@ -127,7 +145,7 @@ int RetournerInformationConfig(char* parametreALire, char* valeurDefaut, char* r
     if (retourFonction != MSG_OK)
         return retourFonction;
 
-    if (strcmp(resultat, "") == 0) //Resultat vide
+    if (strcmp(resultat, "") == 0) //Résultat vide
     {
         retourFonction = ModifierInformationsConfig(parametreALire, valeurDefaut);
         if (retourFonction != MSG_OK)
@@ -169,22 +187,58 @@ int ModifierInformationsConfig (char* parametreAMettreAJour, char* valeurAMettre
     return EcrireParametre(CONFIG_NOMFICHIER, parametreAMettreAJour, valeurAMettreAJour);
 }
 
+// Retourne l'état d'un bouton
+// identifiantBouton : Identifiant de la prise à consulter
+// resultat : Etat du bouton (sortie)
+// sortie : code erreur
+int RetournerEtatBouton (int identifiantBouton, char* resultat)
+{
+    int codeRetour = retournerEtatBouton (identifiantBouton);
+    if (codeRetour == CONFIG_ALLUME || codeRetour == CONFIG_ETEINT)
+    {
+        sprintf(resultat, "%d", codeRetour);
+        codeRetour = MSG_OK;
+    }
+    return codeRetour;
+}
+
+// [Interne]
+// Retourne l'état d'un bouton
+// identifiantBouton : Identifiant de la prise à consulter
+// Sortie : Etat du bouton / Code erreur
+int retournerEtatBouton (int identifiantBouton)
+{
+    //Verification de l'index va pas faire planter
+    int codeRetour = IdentifiantBoutonPlosible(identifiantBouton);
+    if (codeRetour != MSG_OK)
+    {
+        return codeRetour;
+    }
+    
+    return EtatRelai(identifiantBouton);
+}
+
 // Change le statut d'une prise
 // identifiantBouton : Identifiant de la prise à modifier
 // statutBouton : Nouveau statut de la prise
-// Retour : code résultat d'execution
-int ChangerStatutBouton (int identifiantBouton, char* statutBouton)
+// sortie : code résultat d'execution
+int ChangerStatutBouton (int identifiantBouton, int statutBouton)
 {
     //Verification de l'index va pas faire planter
     int codeRetour = IdentifiantBoutonPlosible(identifiantBouton);
     if (codeRetour != MSG_OK)
         return codeRetour;
     
-    if (strncmp(statutBouton, CONFIG_ALLUME, sizeof(CONFIG_ALLUME)) == 0)
+    //Verification du statut à assigner
+    codeRetour = StatutBoutonPlosible(statutBouton);
+    if (codeRetour != MSG_OK)
+        return codeRetour;
+    
+    if (statutBouton == CONFIG_ALLUME)
     {
         codeRetour = ActiverRelai(identifiantBouton);
     }
-    else if (strncmp(statutBouton, CONFIG_ETEINT, sizeof(CONFIG_ETEINT)) == 0)
+    else if (statutBouton == CONFIG_ETEINT)
     {
         codeRetour = DesactiverRelai(identifiantBouton);
     }
@@ -198,6 +252,7 @@ int ChangerStatutBouton (int identifiantBouton, char* statutBouton)
 
 // Contrôle si l'index de la prise n'est pas en dehors des limites
 // identifiantBouton : Identifiant de la prise à contrôler
+// sortie : Code erreur
 int IdentifiantBoutonPlosible (int identifiantBouton)
 {
     char nbrMax[2];
@@ -210,11 +265,26 @@ int IdentifiantBoutonPlosible (int identifiantBouton)
     indexMax = atoi(nbrMax);
     if (identifiantBouton > indexMax)
     {
-        return MSG_NoContent;
+        return MSG_RangeUnsatisfiable;
     }
     if (identifiantBouton < 1)
     {
         return MSG_Forbidden;
     }
     return MSG_OK;    
+}
+
+// Controle si le statut du bouton est eligible
+// statutBouton : valeur du statut
+// sorite : Code erreur
+int StatutBoutonPlosible (int statutBouton)
+{
+    if (statutBouton == CONFIG_ALLUME || statutBouton == CONFIG_ETEINT)
+    {
+        return MSG_OK;
+    }
+    else
+    {
+        return MSG_BadRequest;
+    }
 }

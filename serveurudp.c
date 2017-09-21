@@ -75,22 +75,19 @@ int StartServerUDP(void)
         }
 
         //print details of the client/peer and the data received
-        //printf("Received packet from %s:%d\n", inet_ntoa(si_other.sin_addr), ntohs(si_other.sin_port));
+        printf("Received packet from %s:%d\n", inet_ntoa(si_other.sin_addr), ntohs(si_other.sin_port));
         retourCode = ExecuterCommande(buf, resultat);
         if (retourCode != MSG_OK)
         {
             printf("StartServerUDP - Commande retourne une erreur : %c\n ", retourCode);
+            //now reply this error to client
         }
-        else
+        if (sendto(s, resultat, strlen(resultat), 0, (struct sockaddr*) &si_other, slen) == -1)
         {
-            //now reply the client with the same data
-            if (sendto(s, resultat, strlen(resultat), 0, (struct sockaddr*) &si_other, slen) == -1)
-            {
-                die("sendto()");
-            }
+            die("sendto()");
         }
+        memset(resultat, 0, sizeof (resultat));
     }
-
     close(s);
     return MSG_OK;
 }

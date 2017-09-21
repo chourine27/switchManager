@@ -37,8 +37,10 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/gestioncommandes.o \
 	${OBJECTDIR}/gestionfichier.o \
+	${OBJECTDIR}/gestiongpio.o \
 	${OBJECTDIR}/main.o \
-	${OBJECTDIR}/serveurudp.o
+	${OBJECTDIR}/serveurudp.o \
+	${OBJECTDIR}/tools.o
 
 
 # C Compiler Flags
@@ -75,6 +77,11 @@ ${OBJECTDIR}/gestionfichier.o: gestionfichier.c
 	${RM} "$@.d"
 	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/gestionfichier.o gestionfichier.c
 
+${OBJECTDIR}/gestiongpio.o: gestiongpio.c
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/gestiongpio.o gestiongpio.c
+
 ${OBJECTDIR}/main.o: main.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
@@ -84,6 +91,11 @@ ${OBJECTDIR}/serveurudp.o: serveurudp.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/serveurudp.o serveurudp.c
+
+${OBJECTDIR}/tools.o: tools.c
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/tools.o tools.c
 
 # Subprojects
 .build-subprojects:

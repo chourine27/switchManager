@@ -15,6 +15,11 @@
 #include <stdlib.h>
 #include <string.h>
 
+int EtatRelai(int index)
+{
+    return CONFIG_ALLUME;
+}
+
 int ActiverRelai(int index)
 {
     return MSG_NotImplemented;
