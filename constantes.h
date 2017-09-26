@@ -15,9 +15,9 @@
 #define COMMANDE_NOMBOUTON "NomBouton" // prefix de commande pour gerer une prise
 #define COMMANDE_RENOMMERNOMBOUTON "RenommerNomBouton" //prefix de commande pour renommer un bouton
 #define COMMANDE_IMAGEBOUTON "ImageBouton" // prefix de commande pour gerer l image d une prise
-#define COMMANDE_CHANGERIMAGEBOUTON "ChangerImageBouton" // prefix pour changer l'image d'une prise
+#define COMMANDE_CHANGERIMAGEBOUTON "ChangeImageBouton" // prefix pour changer l'image d'une prise
 #define COMMANDE_STATUTBOUTON "EtatBouton" // Retourne l'etat d'une prise
-#define COMMANDE_CHANGESTATUTBOUTON "ChangerEtatBouton" // Change l'état d'un bouton
+#define COMMANDE_CHANGESTATUTBOUTON "ChangeEtatBouton" // Change l'état d'un bouton
 
 #define CONFIG_NOMFICHIER "switchmanager.config" // nom du fichier de config
 #define FICHIERTEMPORAIRE "config.tmp" // nom du fichier temporaire
@@ -33,7 +33,7 @@
 #define PARAMETRE_IMAGESERVEUR "ImageServeur" // Image representant le serveur
 #define INITIAL_IMAGESERVEUR "ImageServer.png" // Image par defaut representant le serveur
 #define PARAMETRE_NOMBOUTON "NomBouton_" // nom du paramtre qui reference le nom de la prise
-#define INITIAL_NOMBOUTON "Bouton_" // nom par defaut d une prise
+#define INITIAL_NOMBOUTON "Bouton" // nom par defaut d une prise
 #define PARAMETRE_NOMBREINTERRUPTEUR "NombreBouton" // Nombre de prise connecte au serveur
 #define INITIAL_NOMBREINTERRUPTEUR "1" // nombre de prise par defaut connecte au serveur
 #define PARAMETRE_IMAGEBOUTON "ImageBouton_" // nom du parametre qui reference l image de la prise

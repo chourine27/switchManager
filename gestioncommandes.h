@@ -3,7 +3,7 @@
 
 int ExecuterCommande(char* commande, char* resultat);
 int RetournerInformationConfig(char* parametreALire, char* valeurDefaut, char* resultat);
-int RetournerInformationConfigIndex (char* parametreALire, char* commande, char* valeurDefaut, char* resultat);
+int RetournerInformationConfigIndex (char* parametreALire, char* index, char* valeurDefaut, char* resultat);
 int ModifierInformationsConfig (char* parametreAMettreAJour, char* valeurAMettreAJour);
 int RetournerEtatBouton (int identifiantBouton, char* resultat);
 int retournerEtatBouton (int identifiantBouton);

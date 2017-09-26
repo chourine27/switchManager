@@ -209,7 +209,7 @@ int EcrireParametre(char* NomFichier, char* parametre, char* valeur)
 
     if (fichier == NULL)
     {
-        printf("EcrireParametre - Probl�me d'ouverture du fichier : %s", NomFichier);
+        printf("EcrireParametre - Problème d'ouverture du fichier : %s", NomFichier);
         return -1;
     }
 

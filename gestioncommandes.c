@@ -25,13 +25,13 @@ int ExecuterCommande(char* commande, char* resultat)
 {
     char **argv = NULL;
     char *p = NULL;
-    char spaceChar[1] = " ";
+    const char *spaceChar = " ";
     char parametreComplet[MAXBUF];
     int codeResultat = MSG_NotImplemented;
     size_t i = 0;
     // Verification si la commande contient des espaces
 //    if (strstr(commande, spaceChar) != NULL)
-    if (strpbrk(commande, spaceChar) != NULL)
+    if (strpbrk(commande, spaceChar) != 0)
     {
         // Decoupage de la commande et des arguments
         argv = malloc(sizeof(char *) * MAXARG);
@@ -52,17 +52,39 @@ int ExecuterCommande(char* commande, char* resultat)
             // Possible de changer de délimiteur
            p = strtok(NULL, " ");
         }
+        // retrait du retour chariot pour le dernier parametre
+        if (i > 0)
+        {
+            argv[i-1][strlen(argv[i-1])-1] = 0;
+        }
         argv[i] = NULL;
         
-        if (strncmp(argv[0], COMMANDE_CHANGERIMAGESERVEUR, sizeof(COMMANDE_CHANGERIMAGEBOUTON)) == 0)
+        if (strncmp(argv[0], COMMANDE_CHANGERIMAGESERVEUR, sizeof(COMMANDE_CHANGERIMAGESERVEUR)) == 0)
         {
-            strcpy(parametreComplet, PARAMETRE_IMAGEBOUTON);
+            strcpy(parametreComplet, PARAMETRE_IMAGESERVEUR);
             strcat(parametreComplet, argv[1]);
-            codeResultat = ModifierInformationsConfig(PARAMETRE_IMAGEBOUTON, argv[1]);
-        }
-        else if (strncmp(argv[0], COMMANDE_CHANGERIMAGESERVEUR, sizeof(COMMANDE_CHANGERIMAGESERVEUR)) == 0)
-        {
             codeResultat = ModifierInformationsConfig(PARAMETRE_IMAGESERVEUR, argv[1]);
+        }
+        else if (strncmp(argv[0], COMMANDE_NOMBOUTON, sizeof(COMMANDE_NOMBOUTON)) == 0)
+        {
+            codeResultat = RetournerInformationConfigIndex(PARAMETRE_NOMBOUTON, argv[1], INITIAL_NOMBOUTON, resultat);
+        }
+        else if (strncmp(argv[0], COMMANDE_IMAGEBOUTON, sizeof(COMMANDE_IMAGEBOUTON)) == 0)
+        {
+            codeResultat = RetournerInformationConfigIndex(PARAMETRE_IMAGEBOUTON, argv[1], INITIAL_IMAGEBOUTON, resultat);
+        }
+        else if (strncmp(argv[0], COMMANDE_CHANGERIMAGEBOUTON, sizeof(COMMANDE_CHANGERIMAGEBOUTON)) == 0)
+        {
+            if (argv[1] == NULL || argv[2] == NULL)
+            {
+                codeResultat = MSG_RangeUnsatisfiable;
+            }
+            else
+            {
+                strcpy(parametreComplet, PARAMETRE_IMAGEBOUTON);
+                strcat(parametreComplet, argv[1]);
+                codeResultat = ModifierInformationsConfig(parametreComplet, argv[2]);
+            }
         }
         else if (strncmp(argv[0], COMMANDE_CHANGERNOMBREINTERRUPTEUR, sizeof(COMMANDE_CHANGERNOMBREINTERRUPTEUR)) == 0)
         {
@@ -70,9 +92,16 @@ int ExecuterCommande(char* commande, char* resultat)
         }
         else if (strncmp(argv[0], COMMANDE_RENOMMERNOMBOUTON, sizeof(COMMANDE_RENOMMERNOMBOUTON)) == 0)
         {
-            strcpy(parametreComplet, PARAMETRE_NOMBOUTON);
-            strcat(parametreComplet, argv[1]);
-            codeResultat = ModifierInformationsConfig(PARAMETRE_NOMBOUTON, argv[2]);
+            if (argv[1] == NULL || argv[2] == NULL)
+            {
+                codeResultat = MSG_RangeUnsatisfiable;
+            }
+            else
+            {
+                strcpy(parametreComplet, PARAMETRE_NOMBOUTON);
+                strcat(parametreComplet, argv[1]);
+                codeResultat = ModifierInformationsConfig(parametreComplet, argv[2]);
+            }
         }
         else if (strncmp(argv[0], COMMANDE_RENOMMERSERVEUR, sizeof(COMMANDE_RENOMMERSERVEUR)) == 0)
         {
@@ -100,11 +129,7 @@ int ExecuterCommande(char* commande, char* resultat)
     }
     else
     { // Commande sans argument
-        if (strncmp(commande, COMMANDE_IMAGEBOUTON, sizeof(COMMANDE_IMAGEBOUTON)-2) == 0)
-        {
-            codeResultat = RetournerInformationConfigIndex(PARAMETRE_IMAGEBOUTON, commande, INITIAL_IMAGEBOUTON, resultat);
-        }
-        else if (strncmp(commande, COMMANDE_IMAGESERVEUR, sizeof(COMMANDE_IMAGESERVEUR)-2) == 0)
+        if (strncmp(commande, COMMANDE_IMAGESERVEUR, sizeof(COMMANDE_IMAGESERVEUR)-2) == 0)
         {
             codeResultat = RetournerInformationConfig(PARAMETRE_IMAGESERVEUR, INITIAL_IMAGESERVEUR, resultat);
         }
@@ -157,16 +182,13 @@ int RetournerInformationConfig(char* parametreALire, char* valeurDefaut, char* r
 
 // Retourne le contenu d'un parametre ayant un index (lié à une prise)
 // parametreALire : Nom du champs à consulter
-// commande : Commande qui a été executé
+// index : Index du paramètre à consulter
 // valeurParDefaut : Valeur par defaut du parametre si vide
 // resultat : Valeur du parametre reel (sortie)
-int RetournerInformationConfigIndex (char* parametreALire, char* commande, char* valeurDefaut, char* resultat)
+int RetournerInformationConfigIndex (char* parametreALire, char* index, char* valeurDefaut, char* resultat)
 {
     int codeRetour;
-    char nbrMax[2];
     char parametreComplet[MAXBUF];
-    char* index = strstr((char *)commande, "_");
-    index = index + strlen("_");
     
     codeRetour = IdentifiantBoutonPlosible(atoi(index));
     if (codeRetour != MSG_OK)
