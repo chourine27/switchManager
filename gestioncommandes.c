@@ -150,7 +150,6 @@ int RetournerInformationConfig(char* parametreALire, char* valeurDefaut, char* r
         retourFonction = ModifierInformationsConfig(parametreALire, valeurDefaut);
         if (retourFonction != MSG_OK)
             return retourFonction;
-        //memcpy(resultat, valeurDefaut, strlen(valeurDefaut));
         strcpy(resultat, valeurDefaut);
     }
     return MSG_OK;

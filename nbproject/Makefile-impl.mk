@@ -27,11 +27,11 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 PROJECTNAME=switchManager
 
 # Active Configuration
-DEFAULTCONF=Debug
+DEFAULTCONF=VoCore_Debug
 CONF=${DEFAULTCONF}
 
 # All Configurations
-ALLCONFS=Debug Release 
+ALLCONFS=VoCore_Debug Release Debug 
 
 
 # build

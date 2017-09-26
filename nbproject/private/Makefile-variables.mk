@@ -3,5 +3,6 @@
 #
 # NOCDDL
 #
-# Debug configuration
+# VoCore_Debug configuration
 # Release configuration
+# Debug configuration

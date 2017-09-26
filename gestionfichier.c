@@ -40,13 +40,12 @@ bool isEmpty(FILE *file)
 int copieTexteDeConfig(char* parametre, char* ligne, char* configParam)
 {
     char *valeurDansLaLigne;
-    if(strncmp(parametre, ligne, strlen(parametre)) == 0 ) //strlen(parametre)) == 0)
+    if(strncmp(parametre, ligne, strlen(parametre)) == 0 )
     {
         valeurDansLaLigne = strstr((char *)ligne, DELIM);
         valeurDansLaLigne = valeurDansLaLigne + strlen(DELIM);
 
         strcpy(configParam, valeurDansLaLigne);
-        //strlcpy(configParam, valeurDansLaLigne, sizeof(valeurDansLaLigne));
         return MSG_OK;
     }
     return MSG_NotFound;
@@ -54,10 +53,9 @@ int copieTexteDeConfig(char* parametre, char* ligne, char* configParam)
 
 int copieEntierDeConfig(char* parametre, char* ligne, int* configParam, int valeur)
 {
-    if(strncmp(parametre, ligne, strlen(parametre)) == 0 ) //strlen(parametre)) == 0)
+    if(strncmp(parametre, ligne, strlen(parametre)) == 0 )
     {
         *configParam = valeur;
-        //memcpy(configParam, atoi(valeur), strlen(int));
         return MSG_OK;
     }
     return MSG_NotFound;
@@ -134,7 +132,7 @@ int LireParametre(char *NomFichier, char *Parametre, char *valeur)
     FILE* fichier = OuvrirFichier(NomFichier);
     char ligne[MAXBUF];
     int i=0;
-    //valeur[0] = "\0";
+
     while (fgets(ligne, sizeof(ligne), fichier) != NULL)
     {
         if(strncmp("#", ligne, strlen("#")) == 0 || strncmp("\n", ligne, strlen("\n")) == 0)
@@ -161,7 +159,7 @@ int InitialiseValeur(char* nomFichier, char* parametre, char* valeur)
 {
     if(strncmp(parametre, PARAMETRE_ETATDEFAUT, strlen(PARAMETRE_ETATDEFAUT)) == 0 )
     {
-        strcpy(valeur, INITIAL_ETATDEFAUT);
+        strcpy(valeur, "0");
     }
     else if(strncmp(parametre, PARAMETRE_IMAGEBOUTON, strlen(PARAMETRE_IMAGEBOUTON)) == 0 )
     {

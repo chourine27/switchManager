@@ -12,10 +12,10 @@
 #define COMMANDE_CHANGERIMAGESERVEUR "ChangeTonImage" // commande pour changer l'image du serveur
 #define COMMANDE_NOMBREINTERRUPTEUR "CombienIlYEnA" // commande pour recuperer le nombre de prise connecte
 #define COMMANDE_CHANGERNOMBREINTERRUPTEUR "ChangeLeNombre" // commande pour modifier le nombre de prises connectées
-#define COMMANDE_NOMBOUTON "NomBouton_" // prefix de commande pour gerer une prise
-#define COMMANDE_RENOMMERNOMBOUTON "RenommerNomBouton_" //prefix de commande pour renommer un bouton
-#define COMMANDE_IMAGEBOUTON "ImageBouton_" // prefix de commande pour gerer l image d une prise
-#define COMMANDE_CHANGERIMAGEBOUTON "ChangerImageBouton_" // prefix pour changer l'image d'une prise
+#define COMMANDE_NOMBOUTON "NomBouton" // prefix de commande pour gerer une prise
+#define COMMANDE_RENOMMERNOMBOUTON "RenommerNomBouton" //prefix de commande pour renommer un bouton
+#define COMMANDE_IMAGEBOUTON "ImageBouton" // prefix de commande pour gerer l image d une prise
+#define COMMANDE_CHANGERIMAGEBOUTON "ChangerImageBouton" // prefix pour changer l'image d'une prise
 #define COMMANDE_STATUTBOUTON "EtatBouton" // Retourne l'etat d'une prise
 #define COMMANDE_CHANGESTATUTBOUTON "ChangerEtatBouton" // Change l'état d'un bouton
 
@@ -41,6 +41,6 @@
 #define PARAMETRE_MINUTERIEACTIVE "MinuterieActive" // nom du parametre pour la minuterie
 #define INITIAL_MINUTERIEACTIVE CONFIG_DESACTIVER // valeur par defaut du parametre minuterie
 #define PARAMETRE_ETATDEFAUT "EtatDefaut" // nom du parametre d etat d initialisation d une prise au demarrage
-#define INITIAL_ETATDEFAUT CONFIG_ALLUME // etat par defaut d une prise au demarrage
+#define INITIAL_ETATDEFAUT 0 // etat par defaut d une prise au demarrage
 
 #endif // CONSTANTES_H_INCLUDED

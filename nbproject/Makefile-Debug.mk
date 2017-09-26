@@ -39,12 +39,11 @@ OBJECTFILES= \
 	${OBJECTDIR}/gestionfichier.o \
 	${OBJECTDIR}/gestiongpio.o \
 	${OBJECTDIR}/main.o \
-	${OBJECTDIR}/serveurudp.o \
-	${OBJECTDIR}/tools.o
+	${OBJECTDIR}/serveurudp.o
 
 
 # C Compiler Flags
-CFLAGS=
+CFLAGS=-m32
 
 # CC Compiler Flags
 CCFLAGS=
@@ -67,35 +66,30 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/switchmanager: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/switchmanager ${OBJECTFILES} ${LDLIBSOPTIONS}
 
-${OBJECTDIR}/gestioncommandes.o: gestioncommandes.c
+${OBJECTDIR}/gestioncommandes.o: gestioncommandes.c nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/gestioncommandes.o gestioncommandes.c
 
-${OBJECTDIR}/gestionfichier.o: gestionfichier.c
+${OBJECTDIR}/gestionfichier.o: gestionfichier.c nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/gestionfichier.o gestionfichier.c
 
-${OBJECTDIR}/gestiongpio.o: gestiongpio.c
+${OBJECTDIR}/gestiongpio.o: gestiongpio.c nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/gestiongpio.o gestiongpio.c
 
-${OBJECTDIR}/main.o: main.c
+${OBJECTDIR}/main.o: main.c nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.c
 
-${OBJECTDIR}/serveurudp.o: serveurudp.c
+${OBJECTDIR}/serveurudp.o: serveurudp.c nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/serveurudp.o serveurudp.c
-
-${OBJECTDIR}/tools.o: tools.c
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/tools.o tools.c
 
 # Subprojects
 .build-subprojects:

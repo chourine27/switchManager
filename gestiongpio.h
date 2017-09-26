@@ -10,6 +10,6 @@
 
 int ActiverRelai(int index);
 int DesactiverRelai(int index);
+int EtatRelai(int index);
 
 #endif /* GESTIONGPIO_H */
-
