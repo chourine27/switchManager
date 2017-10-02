@@ -39,7 +39,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/gestionfichier.o \
 	${OBJECTDIR}/gestiongpio.o \
 	${OBJECTDIR}/main.o \
-	${OBJECTDIR}/serveurudp.o
+	${OBJECTDIR}/serveurudp.o \
+	${OBJECTDIR}/voCoreGPIO.o
 
 
 # C Compiler Flags
@@ -90,6 +91,11 @@ ${OBJECTDIR}/serveurudp.o: serveurudp.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/serveurudp.o serveurudp.c
+
+${OBJECTDIR}/voCoreGPIO.o: voCoreGPIO.c
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/voCoreGPIO.o voCoreGPIO.c
 
 # Subprojects
 .build-subprojects:
