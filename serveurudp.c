@@ -28,6 +28,13 @@ void die(char *s)
     exit(1);
 }
 
+// Execute le serveur en mode thread
+// threadData : Données
+void * fn_StartServerUDP (void * threadData)
+{
+    int error = StartServerUDP();
+}
+
 int StartServerUDP(void)
 {
     struct sockaddr_in si_me, si_other;

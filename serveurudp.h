@@ -8,6 +8,7 @@
 #ifndef SERVEURUDP_H
 #define SERVEURUDP_H
 
+void * fn_StartServerUDP (void * threadData);
 int StartServerUDP(void);
 
 #endif /* SERVEURUDP_H */

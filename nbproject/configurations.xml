@@ -147,6 +147,7 @@
         <cTool>
           <architecture>1</architecture>
           <commandlineTool>gcc</commandlineTool>
+          <commandLine>-pthread</commandLine>
           <preprocessorList>
             <Elem>DEBUG</Elem>
           </preprocessorList>
