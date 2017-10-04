@@ -42,6 +42,20 @@ OBJECTFILES= \
 	${OBJECTDIR}/serveurudp.o \
 	${OBJECTDIR}/voCoreGPIO.o
 
+# Test Directory
+TESTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/tests
+
+# Test Files
+TESTFILES= \
+	${TESTDIR}/TestFiles/f1 \
+	${TESTDIR}/TestFiles/f2 \
+	${TESTDIR}/TestFiles/f3
+
+# Test Object Files
+TESTOBJECTFILES= \
+	${TESTDIR}/tests/Test_gestioncommandes.o \
+	${TESTDIR}/tests/Test_gestionfichier.o \
+	${TESTDIR}/tests/Test_gestiongpio.o
 
 # C Compiler Flags
 CFLAGS=-m32 -pthread
@@ -99,6 +113,130 @@ ${OBJECTDIR}/voCoreGPIO.o: voCoreGPIO.c nbproject/Makefile-${CND_CONF}.mk
 
 # Subprojects
 .build-subprojects:
+
+# Build Test Targets
+.build-tests-conf: .build-tests-subprojects .build-conf ${TESTFILES}
+.build-tests-subprojects:
+
+${TESTDIR}/TestFiles/f1: ${TESTDIR}/tests/Test_gestioncommandes.o ${OBJECTFILES:%.o=%_nomain.o}
+	${MKDIR} -p ${TESTDIR}/TestFiles
+	${LINK.c} -o ${TESTDIR}/TestFiles/f1 $^ ${LDLIBSOPTIONS}   
+
+${TESTDIR}/TestFiles/f2: ${TESTDIR}/tests/Test_gestionfichier.o ${OBJECTFILES:%.o=%_nomain.o}
+	${MKDIR} -p ${TESTDIR}/TestFiles
+	${LINK.c} -o ${TESTDIR}/TestFiles/f2 $^ ${LDLIBSOPTIONS}   
+
+${TESTDIR}/TestFiles/f3: ${TESTDIR}/tests/Test_gestiongpio.o ${OBJECTFILES:%.o=%_nomain.o}
+	${MKDIR} -p ${TESTDIR}/TestFiles
+	${LINK.c} -o ${TESTDIR}/TestFiles/f3 $^ ${LDLIBSOPTIONS}   
+
+
+${TESTDIR}/tests/Test_gestioncommandes.o: tests/Test_gestioncommandes.c 
+	${MKDIR} -p ${TESTDIR}/tests
+	${RM} "$@.d"
+	$(COMPILE.c) -g -DDEBUG -I. -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/Test_gestioncommandes.o tests/Test_gestioncommandes.c
+
+
+${TESTDIR}/tests/Test_gestionfichier.o: tests/Test_gestionfichier.c 
+	${MKDIR} -p ${TESTDIR}/tests
+	${RM} "$@.d"
+	$(COMPILE.c) -g -DDEBUG -I. -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/Test_gestionfichier.o tests/Test_gestionfichier.c
+
+
+${TESTDIR}/tests/Test_gestiongpio.o: tests/Test_gestiongpio.c 
+	${MKDIR} -p ${TESTDIR}/tests
+	${RM} "$@.d"
+	$(COMPILE.c) -g -DDEBUG -I. -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/Test_gestiongpio.o tests/Test_gestiongpio.c
+
+
+${OBJECTDIR}/gestioncommandes_nomain.o: ${OBJECTDIR}/gestioncommandes.o gestioncommandes.c 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/gestioncommandes.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.c) -g -DDEBUG -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/gestioncommandes_nomain.o gestioncommandes.c;\
+	else  \
+	    ${CP} ${OBJECTDIR}/gestioncommandes.o ${OBJECTDIR}/gestioncommandes_nomain.o;\
+	fi
+
+${OBJECTDIR}/gestionfichier_nomain.o: ${OBJECTDIR}/gestionfichier.o gestionfichier.c 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/gestionfichier.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.c) -g -DDEBUG -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/gestionfichier_nomain.o gestionfichier.c;\
+	else  \
+	    ${CP} ${OBJECTDIR}/gestionfichier.o ${OBJECTDIR}/gestionfichier_nomain.o;\
+	fi
+
+${OBJECTDIR}/gestiongpio_nomain.o: ${OBJECTDIR}/gestiongpio.o gestiongpio.c 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/gestiongpio.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.c) -g -DDEBUG -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/gestiongpio_nomain.o gestiongpio.c;\
+	else  \
+	    ${CP} ${OBJECTDIR}/gestiongpio.o ${OBJECTDIR}/gestiongpio_nomain.o;\
+	fi
+
+${OBJECTDIR}/main_nomain.o: ${OBJECTDIR}/main.o main.c 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/main.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.c) -g -DDEBUG -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main_nomain.o main.c;\
+	else  \
+	    ${CP} ${OBJECTDIR}/main.o ${OBJECTDIR}/main_nomain.o;\
+	fi
+
+${OBJECTDIR}/serveurudp_nomain.o: ${OBJECTDIR}/serveurudp.o serveurudp.c 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/serveurudp.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.c) -g -DDEBUG -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/serveurudp_nomain.o serveurudp.c;\
+	else  \
+	    ${CP} ${OBJECTDIR}/serveurudp.o ${OBJECTDIR}/serveurudp_nomain.o;\
+	fi
+
+${OBJECTDIR}/voCoreGPIO_nomain.o: ${OBJECTDIR}/voCoreGPIO.o voCoreGPIO.c 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/voCoreGPIO.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.c) -g -DDEBUG -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/voCoreGPIO_nomain.o voCoreGPIO.c;\
+	else  \
+	    ${CP} ${OBJECTDIR}/voCoreGPIO.o ${OBJECTDIR}/voCoreGPIO_nomain.o;\
+	fi
+
+# Run Test Targets
+.test-conf:
+	@if [ "${TEST}" = "" ]; \
+	then  \
+	    ${TESTDIR}/TestFiles/f1 || true; \
+	    ${TESTDIR}/TestFiles/f2 || true; \
+	    ${TESTDIR}/TestFiles/f3 || true; \
+	else  \
+	    ./${TEST} || true; \
+	fi
 
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}

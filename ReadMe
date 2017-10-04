@@ -1,0 +1,10 @@
+Ce document permet d'installer l'ensemble des dépendances de l'application pour pouvoir la compiler et la méthode pour l'installer sur le VoCore
+
+1 - Installation de log4c
+Téléchargé le dernier package ici : http://log4c.sourceforge.net/
+Executer les commandes suivantes :
+tar -xvzf log4c-1.2.4.tar.gz {Attention au numéro de version}
+cd log4c-1.2.4 {Attention au numéro de version}
+./configure --prefix=/usr/lib/lib4c
+make
+sudo make install
