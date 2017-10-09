@@ -1,4 +1,5 @@
 #include "configuration.h"
+#include "initialisation.h"
 #include "serveurudp.h"
 
 #include <stdio.h>
@@ -18,7 +19,9 @@ int main()
     printf(" \\| |¯ |¯\\  ¯| | |_| | |   |/|    |\n");
     printf("     ¯      ¯               ¯   °   \n");
 
-//    StartServerUDP();
+
+    // Initialisation
+    initGPIO();
     pthread_create (&thread_ServeurUDP, NULL, fn_StartServerUDP, NULL);
     pthread_join (thread_ServeurUDP, NULL);
     return 0;

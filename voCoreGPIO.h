@@ -26,7 +26,8 @@
 
 
 int voCore_gpioDirectionOut(char* index);
-int voCore_gpioSetValue(char* index, char* value);
+int voCore_gpioSetValue(char* index, char* valeur);
+int voCore_gpioInit(char* index);
 
 #ifdef __cplusplus
 extern "C" {

@@ -38,6 +38,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/gestioncommandes.o \
 	${OBJECTDIR}/gestionfichier.o \
 	${OBJECTDIR}/gestiongpio.o \
+	${OBJECTDIR}/initialisation.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/serveurudp.o \
 	${OBJECTDIR}/voCoreGPIO.o
@@ -95,6 +96,11 @@ ${OBJECTDIR}/gestiongpio.o: gestiongpio.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/gestiongpio.o gestiongpio.c
+
+${OBJECTDIR}/initialisation.o: initialisation.c
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/initialisation.o initialisation.c
 
 ${OBJECTDIR}/main.o: main.c
 	${MKDIR} -p ${OBJECTDIR}
@@ -186,6 +192,19 @@ ${OBJECTDIR}/gestiongpio_nomain.o: ${OBJECTDIR}/gestiongpio.o gestiongpio.c
 	    $(COMPILE.c) -O2 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/gestiongpio_nomain.o gestiongpio.c;\
 	else  \
 	    ${CP} ${OBJECTDIR}/gestiongpio.o ${OBJECTDIR}/gestiongpio_nomain.o;\
+	fi
+
+${OBJECTDIR}/initialisation_nomain.o: ${OBJECTDIR}/initialisation.o initialisation.c 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/initialisation.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.c) -O2 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/initialisation_nomain.o initialisation.c;\
+	else  \
+	    ${CP} ${OBJECTDIR}/initialisation.o ${OBJECTDIR}/initialisation_nomain.o;\
 	fi
 
 ${OBJECTDIR}/main_nomain.o: ${OBJECTDIR}/main.o main.c 
