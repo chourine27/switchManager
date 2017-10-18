@@ -9,17 +9,18 @@
 
 #include "initialisation.h"
 #include "constantes.h"
+#include "gestioncommandes.h"
 #include "listecodes.h"
 #include "voCoreGPIO.h"
 
 #include <stdio.h>
-//#include <stdlib.h>
+#include <stdlib.h>
 
 // Initialise les ports en sortie avec la valeur par defaut
 // Retour : MSG_OK si OK, code d'erreur sinon
 int initGPIO()
 {
-    char* resultat = "";
+    char resultat[BUFLEN];
     int codeResultat;
     int nbrPort = 0;
     int i = 0;

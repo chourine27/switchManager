@@ -234,7 +234,7 @@ int EcrireParametre(char* NomFichier, char* parametre, char* valeur)
             }
             else
             {
-                fprintf(fichierMiseAJour, ligne);
+                fputs(ligne, fichierMiseAJour);
             }
         }
         if (!found)

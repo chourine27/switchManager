@@ -20,8 +20,6 @@
 #include <arpa/inet.h>
 #include <sys/socket.h>
 
-//extern struct Configuration config;
-
 void die(char *s)
 {
     perror(s);
@@ -95,6 +93,6 @@ int StartServerUDP(void)
         }
         memset(resultat, 0, sizeof (resultat));
     }
-    close(s);
+
     return MSG_OK;
 }

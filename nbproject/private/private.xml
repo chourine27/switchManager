@@ -9,11 +9,18 @@
         <group>
             <file>file:/NetBeansProjects/switchManager/main.c</file>
             <file>file:/NetBeansProjects/switchManager/voCoreGPIO.h</file>
+            <file>file:/NetBeansProjects/switchManager/gestiongpio.c</file>
             <file>file:/NetBeansProjects/switchManager/voCoreGPIO.c</file>
             <file>file:/NetBeansProjects/switchManager/serveurudp.c</file>
             <file>file:/NetBeansProjects/switchManager/ReadMe</file>
             <file>file:/NetBeansProjects/switchManager/gestionfichier.c</file>
+            <file>file:/NetBeansProjects/switchManager/constantes.h</file>
+            <file>file:/NetBeansProjects/switchManager/gestioncommandes.c</file>
+            <file>file:/NetBeansProjects/switchManager/gestionfichier.h</file>
+            <file>file:/NetBeansProjects/switchManager/gestioncommandes.h</file>
             <file>file:/NetBeansProjects/switchManager/serveurudp.h</file>
+            <file>file:/NetBeansProjects/switchManager/initialisation.c</file>
+            <file>file:/NetBeansProjects/switchManager/listecodes.h</file>
         </group>
     </open-files>
 </project-private>
