@@ -18,6 +18,7 @@
 extern "C" {
 #endif
 
+    int initConfig();
     int initGPIO();
 
 

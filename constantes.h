@@ -41,6 +41,6 @@
 #define PARAMETRE_MINUTERIEACTIVE "MinuterieActive" // nom du parametre pour la minuterie
 #define INITIAL_MINUTERIEACTIVE CONFIG_DESACTIVER // valeur par defaut du parametre minuterie
 #define PARAMETRE_ETATDEFAUT "EtatDefaut" // nom du parametre d etat d initialisation d une prise au demarrage
-#define INITIAL_ETATDEFAUT 0 // etat par defaut d une prise au demarrage
+#define INITIAL_ETATDEFAUT "0" // etat par defaut d une prise au demarrage
 
 #endif // CONSTANTES_H_INCLUDED

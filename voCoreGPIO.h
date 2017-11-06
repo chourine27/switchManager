@@ -24,7 +24,7 @@
 #define VALEURCHEMIN "/value" // Chemin pour accéder à la valeur du port
 #define DIRECTIONSORTIE "out" // Valeur à définir pour mettre le port en sortie
 
-
+int voCore_writeFile(char* cheminFichier, char* index, char* valeur);
 int voCore_gpioDirectionOut(char* index);
 int voCore_gpioSetValue(char* index, char* valeur);
 int voCore_gpioInit(char* index);

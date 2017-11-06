@@ -17,20 +17,7 @@
 // Retour : MSG_OK si OK, code d'erreur sinon
 int voCore_gpioDirectionOut(char* index)
 {
-    FILE* fp;
-    char cheminComplet[MAXBUF] = RACINECHEMIN;
-    
-    strcat(cheminComplet, index);
-    strcat(cheminComplet, DIRECTIONCHEMIN);
-    
-    fp = fopen(cheminComplet, "w");
-    if (fp == NULL)
-    {
-        return MSG_NotFound;
-    }
-    fwrite(DIRECTIONSORTIE, 1, strlen(DIRECTIONSORTIE) + 1, fp);
-    fclose(fp);
-    return MSG_OK;
+    return voCore_writeFile(DIRECTIONCHEMIN, index, DIRECTIONSORTIE);
 }
 
 // Définie la valeur de sortie du port
@@ -39,24 +26,35 @@ int voCore_gpioDirectionOut(char* index)
 // Retour : MSG_OK si OK, code d'erreur sinon
 int voCore_gpioSetValue(char* index, char* valeur)
 {
+    return voCore_writeFile(VALEURCHEMIN, index, valeur);
+}
+
+// Ecrit dans un fichier specifique au GPIO
+// cheminFichier : Chemin du fichier à traiter
+// index : Index de la GPIO
+// valeur : valeur à écrire dans le fichier
+// Retour : MSG_OK si OK, code d'erreur sinon
+int voCore_writeFile(char* cheminFichier, char* index, char* valeur)
+{
     FILE* fp;
     char cheminComplet[MAXBUF] = RACINECHEMIN;
     
     strcat(cheminComplet, index);
-    strcat(cheminComplet, VALEURCHEMIN);
+    strcat(cheminComplet, cheminFichier);
     fp = fopen(cheminComplet, "w");
     if (fp == NULL)
     {
         return MSG_NotFound;
     }
-    fwrite(valeur, 1, strlen(DIRECTIONSORTIE) + 1, fp);
+    fwrite(valeur, 1, strlen(valeur) + 1, fp);
     fclose(fp);
+    fp=NULL;
     return MSG_OK;
 }
 
 // Définie la direction et la valeur par defaut d'un port
 // Index : Index du port à traiter
-// Retour : MSGçOK si OK, code d'erreur sinon
+// Retour : MSG_OK si OK, code d'erreur sinon
 int voCore_gpioInit(char* index)
 {
     int retourValeur = voCore_gpioDirectionOut(index);

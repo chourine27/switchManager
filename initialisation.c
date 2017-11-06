@@ -16,6 +16,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// Initilise le fichier de config si il n'existe pas
+// Retour : MSG_OK si OK, code d'erreur sinon
+int initConfig()
+{
+    char resultat[BUFLEN];
+    int codeResultat;
+    
+    codeResultat = RetournerInformationConfig(PARAMETRE_NOMSERVEUR, INITIAL_NOMSERVEUR, resultat);
+    codeResultat = RetournerInformationConfig(PARAMETRE_NOMBREINTERRUPTEUR, INITIAL_NOMBREINTERRUPTEUR, resultat);
+}
+
 // Initialise les ports en sortie avec la valeur par defaut
 // Retour : MSG_OK si OK, code d'erreur sinon
 int initGPIO()
