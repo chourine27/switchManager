@@ -26,6 +26,7 @@
 
 int voCore_writeFile(char* cheminFichier, char* index, char* valeur);
 int voCore_gpioDirectionOut(char* index);
+int voCore_gpioSetValueByIndex(int index, int valeur);
 int voCore_gpioSetValue(char* index, char* valeur);
 int voCore_gpioInit(char* index);
 

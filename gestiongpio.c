@@ -10,6 +10,7 @@
 #include "gestiongpio.h"
 #include "listecodes.h"
 #include "constantes.h"
+#include "voCoreGPIO.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -28,7 +29,7 @@ int EtatRelai(int index)
 // Retour : MSG_OK si OK, code d'erreur sinon
 int ActiverRelai(int index)
 {
-    return MSG_NotImplemented;
+    return voCore_gpioSetValueByIndex(index, CONFIG_ALLUME);
 }
 
 // Désactive un relai
@@ -36,5 +37,5 @@ int ActiverRelai(int index)
 // Retour : MSG_OK si OK, code d'erreur sinon
 int DesactiverRelai (int index)
 {
-    return MSG_NotImplemented;
+    return voCore_gpioSetValueByIndex(index, CONFIG_ETEINT);
 }

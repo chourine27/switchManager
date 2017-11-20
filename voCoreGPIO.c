@@ -24,6 +24,19 @@ int voCore_gpioDirectionOut(char* index)
 // index : Index du port à traiter
 // valeur : Valeur de sortie à définir
 // Retour : MSG_OK si OK, code d'erreur sinon
+int voCore_gpioSetValueByIndex(int index, int valeur)
+{
+    char indexChar[10];
+    char valeurChar[10];
+    sprintf(indexChar, "%d", index);
+    sprintf(valeurChar, "%d", valeur);
+    return voCore_gpioSetValue(indexChar, valeurChar);
+}
+
+// Définie la valeur de sortie du port
+// index : Index du port à traiter en char
+// valeur : Valeur de sortie à définir
+// Retour : MSG_OK si OK, code d'erreur sinon
 int voCore_gpioSetValue(char* index, char* valeur)
 {
     return voCore_writeFile(VALEURCHEMIN, index, valeur);

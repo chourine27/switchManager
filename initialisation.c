@@ -45,6 +45,7 @@ int initGPIO()
     {
         sprintf(resultat, "%d", i);
         voCore_gpioInit(resultat);
+        i++;
     }
     return MSG_OK;
 }
