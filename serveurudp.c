@@ -38,6 +38,7 @@ int StartServerUDP(void)
     struct sockaddr_in si_me, si_other;
 
     int s, retourCode, slen = sizeof(si_other) , recv_len;
+    int broadcast=1;
     char buf[BUFLEN];
     char resultat[BUFLEN];
 
@@ -47,6 +48,8 @@ int StartServerUDP(void)
         die("socket");
     }
 
+//    setsockopt(s, SOL_SOCKET, SO_BROADCAST, &broadcast, sizeof broadcast);
+    
     // zero out the structure
     memset((char *) &si_me, 0, sizeof(si_me));
 
@@ -68,6 +71,7 @@ int StartServerUDP(void)
 
     printf("Server started. Ready to receive data\n");
     //keep listening for data
+    
     while(1)
     {
         bzero(buf, BUFLEN);
@@ -95,4 +99,18 @@ int StartServerUDP(void)
     }
 
     return MSG_OK;
+}
+
+/*
+** listener.c -- a datagram sockets "server" demo
+*/
+
+// get sockaddr, IPv4 or IPv6:
+void *get_in_addr(struct sockaddr *sa)
+{
+    if (sa->sa_family == AF_INET) {
+        return &(((struct sockaddr_in*)sa)->sin_addr);
+    }
+
+    return &(((struct sockaddr_in6*)sa)->sin6_addr);
 }

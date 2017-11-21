@@ -34,18 +34,21 @@ int initGPIO()
     char resultat[BUFLEN];
     int codeResultat;
     int nbrPort = 0;
-    int i = 0;
     codeResultat = RetournerInformationConfig(PARAMETRE_NOMBREINTERRUPTEUR, INITIAL_NOMBREINTERRUPTEUR, resultat);
     if (codeResultat != MSG_OK)
     {
         return codeResultat;
     }
     nbrPort = atoi(resultat);
-    while (i < nbrPort)
+    for(int i=0; i<nbrPort; i++)
     {
         sprintf(resultat, "%d", i);
+        //Initialise le port en sortie avec la valeur par défaut
         voCore_gpioInit(resultat);
-        i++;
+        //Initialise le fichier de configuration avec le nom du bouton
+        RetournerInformationConfig(PARAMETRE_NOMBOUTON, INITIAL_NOMBOUTON, resultat);
+        //Initialise le fichier de configuration avec l'image du bouton
+        RetournerInformationConfig(PARAMETRE_IMAGEBOUTON, INITIAL_IMAGEBOUTON, resultat);
     }
     return MSG_OK;
 }
