@@ -40,6 +40,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/gestiongpio.o \
 	${OBJECTDIR}/initialisation.o \
 	${OBJECTDIR}/main.o \
+	${OBJECTDIR}/minuterie.o \
 	${OBJECTDIR}/serveurudp.o \
 	${OBJECTDIR}/voCoreGPIO.o
 
@@ -106,6 +107,11 @@ ${OBJECTDIR}/main.o: main.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -g -DVOCORE -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.c
+
+${OBJECTDIR}/minuterie.o: minuterie.c
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -g -DVOCORE -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/minuterie.o minuterie.c
 
 ${OBJECTDIR}/serveurudp.o: serveurudp.c
 	${MKDIR} -p ${OBJECTDIR}
@@ -218,6 +224,19 @@ ${OBJECTDIR}/main_nomain.o: ${OBJECTDIR}/main.o main.c
 	    $(COMPILE.c) -g -DVOCORE -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main_nomain.o main.c;\
 	else  \
 	    ${CP} ${OBJECTDIR}/main.o ${OBJECTDIR}/main_nomain.o;\
+	fi
+
+${OBJECTDIR}/minuterie_nomain.o: ${OBJECTDIR}/minuterie.o minuterie.c 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/minuterie.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.c) -g -DVOCORE -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/minuterie_nomain.o minuterie.c;\
+	else  \
+	    ${CP} ${OBJECTDIR}/minuterie.o ${OBJECTDIR}/minuterie_nomain.o;\
 	fi
 
 ${OBJECTDIR}/serveurudp_nomain.o: ${OBJECTDIR}/serveurudp.o serveurudp.c 

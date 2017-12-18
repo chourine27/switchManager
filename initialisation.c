@@ -12,6 +12,7 @@
 #include "gestioncommandes.h"
 #include "listecodes.h"
 #include "voCoreGPIO.h"
+#include "minuterie.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -53,3 +54,8 @@ int initGPIO()
     return MSG_OK;
 }
 
+int initMinuterie()
+{
+//    signal(SIGALRM, sigMinut_handler);
+//    alarm(5);
+}

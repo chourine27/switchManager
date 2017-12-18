@@ -23,6 +23,7 @@ int main()
     // Initialisation
     initConfig();
     initGPIO();
+    initMinuterie();
     pthread_create (&thread_ServeurUDP, NULL, fn_StartServerUDP, NULL);
     pthread_join (thread_ServeurUDP, NULL);
     return 0;
