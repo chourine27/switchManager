@@ -56,6 +56,5 @@ int initGPIO()
 
 int initMinuterie()
 {
-//    signal(SIGALRM, sigMinut_handler);
-//    alarm(5);
+    return MSG_NotImplemented;
 }

@@ -96,7 +96,7 @@ void FermerFichier(FILE* fichier)
   fclose(fichier);
 }
 
-int ChargerConfiguration(FILE* fichier)
+/*int ChargerConfiguration(FILE* fichier)
 {
     char ligne[MAXBUF];
     int i=0;
@@ -118,14 +118,10 @@ int ChargerConfiguration(FILE* fichier)
         {
             continue;
         }
-        /*else
-        {
-            config.portServeur = 29876;
-        }*/
     }
-    config.Charge = 1;
+    config.parametre = 1;
     return MSG_OK;
-}
+}*/
 
 int LireParametre(char *NomFichier, char *Parametre, char *valeur)
 {
@@ -255,4 +251,49 @@ int EcrireParametre(char* NomFichier, char* parametre, char* valeur)
         return -1;
     }
     return MSG_OK;
+}
+
+int ChargerMinuterie(FILE* fichier)
+{
+    int i=0;
+    int result;
+    char *param;
+    char ligne[MAXBUF];
+    char valeurMinuterie[MAXBUF];
+    struct InformationsMinuteries infoMinuterie;
+    
+    while (fgets(ligne, sizeof(ligne), fichier) != NULL)
+    {
+        if(strncmp("#", ligne, strlen("#")) == 0 || strncmp("\n", ligne, strlen("\n")) == 0)
+        {
+            continue;
+        }
+        sprintf(param, "%s%d", PARAMETRE_MINUTERIE, i);
+        
+        if(copieTexteDeConfig(param, ligne, valeurMinuterie) == MSG_OK)
+        {
+            //Convertion de la ligne paramètre en structure infoMinuterie
+            result = LireMinuterie(valeurMinuterie, &infoMinuterie);
+            if (result != MSG_OK)
+            {
+                // TODO : tracer l'erreur 
+                continue;
+            }
+            // La convertion est OK, sauvegarde
+            config.infoMinuteries = malloc(sizeof(struct InformationsMinuteries *) * ++i);
+            config.infoMinuteries[i-1] = infoMinuterie;
+        }
+    }
+    config.minuterie = i;
+    return MSG_OK;    
+}
+
+int LireMinuterie(char *NomFichier, struct InformationsMinuteries *Minuterie)
+{
+    return MSG_NotImplemented;
+}
+
+int EcrireMinuterie(char *NomFichier, struct InformationsMinuteries Minuterie)
+{
+    return MSG_NotImplemented;
 }

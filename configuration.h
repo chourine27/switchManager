@@ -2,14 +2,12 @@
 #define CONFIGURATION_H_INCLUDED
 
 #include "constantes.h"
+#include "informationsminuteries.h"
 
 struct Configuration
 {
-    int Charge;
-    char nomServeur[MAXBUF];
-    char imageServeur[MAXBUF];
-    int portServeur;
-    char nombreInterrupteur[MAXBUF];
+    int minuterie;
+    struct InformationsMinuteries *infoMinuteries;
 };
 
 struct Configuration config;

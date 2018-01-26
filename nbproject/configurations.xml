@@ -9,6 +9,7 @@
       <itemPath>gestioncommandes.h</itemPath>
       <itemPath>gestionfichier.h</itemPath>
       <itemPath>gestiongpio.h</itemPath>
+      <itemPath>informationsminuteries.h</itemPath>
       <itemPath>initialisation.h</itemPath>
       <itemPath>listecodes.h</itemPath>
       <itemPath>minuterie.h</itemPath>
@@ -143,6 +144,8 @@
       </item>
       <item path="gestiongpio.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="informationsminuteries.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="initialisation.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="initialisation.h" ex="false" tool="3" flavor2="0">
@@ -255,6 +258,8 @@
       </item>
       <item path="gestiongpio.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="informationsminuteries.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="initialisation.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="initialisation.h" ex="false" tool="3" flavor2="0">
@@ -362,6 +367,8 @@
       <item path="gestiongpio.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="gestiongpio.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="informationsminuteries.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="initialisation.c" ex="false" tool="0" flavor2="0">
       </item>

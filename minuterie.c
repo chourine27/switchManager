@@ -7,15 +7,8 @@
 #include "minuterie.h"
 
 #include <stdio.h>
-
-struct timerControl
-{
-    timer_t timerID;
-    int identifiantBouton;
-    bool etatBouton;
-    char *commande;
-};
-
+#include <signal.h>
+#include <time.h>
 
 int ajouterTimer( char *name, timer_t *timerID, int expireMS, int intervalMS )
 {
@@ -38,13 +31,13 @@ int ajouterTimer( char *name, timer_t *timerID, int expireMS, int intervalMS )
     te.sigev_notify = SIGEV_SIGNAL;
     te.sigev_signo = sigNo;
     te.sigev_value.sival_ptr = timerID;
-    timer_create(CLOCK_REALTIME, &te, timerID);
+//    timer_create(CLOCK_REALTIME, &te, timerID);
 
     its.it_interval.tv_sec = 0;
     its.it_interval.tv_nsec = intervalMS * 1000000;
     its.it_value.tv_sec = 0;
     its.it_value.tv_nsec = expireMS * 1000000;
-    timer_settime(*timerID, 0, &its, NULL);
+//    timer_settime(*timerID, 0, &its, NULL);
 
     return(0);
 }
@@ -54,10 +47,10 @@ void sigMinut_handler( int sig, siginfo_t *si, void *uc )
     timer_t *tidp;
     tidp = si->si_value.sival_ptr;
 
-    if ( *tidp == firstTimerID )
+    /* if ( *tidp == firstTimerID )
         firstCB(sig, si, uc);
     else if ( *tidp == secondTimerID )
         secondCB(sig, si, uc);
     else if ( *tidp == thirdTimerID )
-        thirdCB(sig, si, uc);
+        thirdCB(sig, si, uc); */
 }

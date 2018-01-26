@@ -3,7 +3,10 @@
 
 #define BUFLEN 512  //Max length of buffer
 #define MAXBUF 1024 // Taille maximum dans le BUFFER
+// Exemple ligne : {Paramètre}{DELIM}{Information = {Valeur1}{SEPARINFO}{Valeur2.1}{SEPARVALEUR}{Valeur2.2}}...
 #define DELIM "=" // Delimiteur de parametre / valeur
+#define SEPARINFO " " // Séparateur d'information
+#define SEPARVALEUR "|" // Séprateur de valeur dans l'info
 #define MAXARG 10 // Nombre maximum d'argument pour une commande
 
 #define COMMANDE_NOMSERVEUR "TonNom" // command pour recuperer le nom du serveur
@@ -42,5 +45,6 @@
 #define INITIAL_MINUTERIEACTIVE CONFIG_DESACTIVER // valeur par defaut du parametre minuterie
 #define PARAMETRE_ETATDEFAUT "EtatDefaut" // nom du parametre d etat d initialisation d une prise au demarrage
 #define INITIAL_ETATDEFAUT "0" // etat par defaut d une prise au demarrage
-
+#define PARAMETRE_MINUTERIE "Minuterie" // Information sur une minuterie
+#define INITIAL_MINUTERIE "0" // Valeur par defaut d'une minuterie
 #endif // CONSTANTES_H_INCLUDED

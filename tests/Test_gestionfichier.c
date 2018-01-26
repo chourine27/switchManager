@@ -14,6 +14,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "gestionfichier.h"
+#include "listecodes.h"
 
 /*
  * Simple C Test Suite
@@ -64,11 +65,25 @@ void testFermerFichier() {
     }
 }
 
-void testChargerConfiguration() {
+/*void testChargerConfiguration() {
     FILE* fichier;
     int result = ChargerConfiguration(fichier);
     if (1 /*check result*/) {
         printf("%%TEST_FAILED%% time=0 testname=testChargerConfiguration (Test_gestionfichier) message=error message sample\n");
+    }
+}*/
+
+
+void testChargerMinuterie() {
+    FILE* fichier = OuvrirFichier("switchManager.config");    
+    int result = ChargerMinuterie(fichier); 
+    if (result != MSG_OK)
+    {
+        printf("%%TEST_FAILED%% time=0 testname=testChargerMinuterie (Test_gestionfichier) message=%d\n", result);
+    }
+    else
+    {
+        printf("%%TEST_OK%%");
     }
 }
 
