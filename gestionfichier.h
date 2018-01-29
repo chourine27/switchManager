@@ -14,8 +14,5 @@ void FermerFichier(FILE* fichier);
 int InitialiseValeur(char* nomFichier, char* parametre, char* valeur);
 int LireParametre(char *NomFichier, char *Parametre, char *valeur);
 int EcrireParametre(char* NomFichier, char* Parametre, char* Valeur);
-int ChargerMinuterie(FILE* fichier);
-int LireMinuterie(char *NomFichier, struct InformationsMinuteries *Minuterie);
-int EcrireMinuterie(char *NomFichier, struct InformationsMinuteries Minuterie);
 
 #endif // GESTIONFICHIER_H_INCLUDED

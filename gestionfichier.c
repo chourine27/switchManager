@@ -15,8 +15,6 @@
 #include <string.h>
 #include <assert.h>
 
-//extern struct Configuration config;
-
 // Control si le fichier est vide
 bool isEmpty(FILE *file)
 {
@@ -253,47 +251,3 @@ int EcrireParametre(char* NomFichier, char* parametre, char* valeur)
     return MSG_OK;
 }
 
-int ChargerMinuterie(FILE* fichier)
-{
-    int i=0;
-    int result;
-    char *param;
-    char ligne[MAXBUF];
-    char valeurMinuterie[MAXBUF];
-    struct InformationsMinuteries infoMinuterie;
-    
-    while (fgets(ligne, sizeof(ligne), fichier) != NULL)
-    {
-        if(strncmp("#", ligne, strlen("#")) == 0 || strncmp("\n", ligne, strlen("\n")) == 0)
-        {
-            continue;
-        }
-        sprintf(param, "%s%d", PARAMETRE_MINUTERIE, i);
-        
-        if(copieTexteDeConfig(param, ligne, valeurMinuterie) == MSG_OK)
-        {
-            //Convertion de la ligne paramètre en structure infoMinuterie
-            result = LireMinuterie(valeurMinuterie, &infoMinuterie);
-            if (result != MSG_OK)
-            {
-                // TODO : tracer l'erreur 
-                continue;
-            }
-            // La convertion est OK, sauvegarde
-            config.infoMinuteries = malloc(sizeof(struct InformationsMinuteries *) * ++i);
-            config.infoMinuteries[i-1] = infoMinuterie;
-        }
-    }
-    config.minuterie = i;
-    return MSG_OK;    
-}
-
-int LireMinuterie(char *NomFichier, struct InformationsMinuteries *Minuterie)
-{
-    return MSG_NotImplemented;
-}
-
-int EcrireMinuterie(char *NomFichier, struct InformationsMinuteries Minuterie)
-{
-    return MSG_NotImplemented;
-}

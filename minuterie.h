@@ -17,11 +17,14 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
+#include "informationsminuteries.h"
+    
 #include <signal.h>
 #include <time.h>
     
-    
+    int ChargerMinuterie();
+    int LireMinuterie(char *NomFichier, struct InformationsMinuteries *Minuterie);
+    int EcrireMinuterie(char *NomFichier, struct InformationsMinuteries Minuterie);    
     int ActiverMinuterie ();
     int DesactiverMinuterie ();
     void sigMinut_handler( int sig, siginfo_t *si, void *uc );

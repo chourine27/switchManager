@@ -26,6 +26,8 @@ int initConfig()
     
     codeResultat = RetournerInformationConfig(PARAMETRE_NOMSERVEUR, INITIAL_NOMSERVEUR, resultat);
     codeResultat = RetournerInformationConfig(PARAMETRE_NOMBREINTERRUPTEUR, INITIAL_NOMBREINTERRUPTEUR, resultat);
+    
+    codeResultat = ChargerMinuterie();
 }
 
 // Initialise les ports en sortie avec la valeur par defaut

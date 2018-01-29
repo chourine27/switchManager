@@ -4,11 +4,70 @@
  * and open the template in the editor.
  */
 
+#include "gestionfichier.h"
 #include "minuterie.h"
+#include "constantes.h"
+#include "listecodes.h"
+#include "configuration.h"
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <signal.h>
 #include <time.h>
+
+
+int ChargerMinuterie()
+{
+    int i=0;
+    int result;
+    char param[MAXBUF];
+    char ligne[MAXBUF];
+    char valeurMinuterie[MAXBUF];
+    struct InformationsMinuteries infoMinuterie;
+    
+    FILE *fichierConfig = OuvrirFichier(CONFIG_NOMFICHIER);
+    
+    //Init du nom du paramètre minuterire
+    sprintf(param, "%s%d", PARAMETRE_MINUTERIE, i);
+    
+    while (fgets(ligne, sizeof(ligne), fichierConfig) != NULL)
+    {
+        if(strncmp("#", ligne, strlen("#")) == 0 || strncmp("\n", ligne, strlen("\n")) == 0)
+        {
+            continue;
+        }
+       
+        if(copieTexteDeConfig(param, ligne, valeurMinuterie) == MSG_OK)
+        {
+            //Convertion de la ligne paramètre en structure infoMinuterie
+            result = LireMinuterie(valeurMinuterie, &infoMinuterie);
+            if (result != MSG_OK)
+            {
+                // TODO : tracer l'erreur 
+                continue;
+            }
+            // La convertion est OK, sauvegarde
+            config.infoMinuteries = malloc(sizeof(struct InformationsMinuteries *) * ++i);
+            config.infoMinuteries[i-1] = infoMinuterie;
+            //Mise à jour du paramètre minuterie comme le compteur évolue.
+            sprintf(param, "%s%d", PARAMETRE_MINUTERIE, i);
+        }
+    }
+    config.minuterie = i;
+    FermerFichier(fichierConfig);
+    return MSG_OK;    
+}
+
+int LireMinuterie(char *NomFichier, struct InformationsMinuteries *Minuterie)
+{
+    return MSG_NotImplemented;
+}
+
+int EcrireMinuterie(char *NomFichier, struct InformationsMinuteries Minuterie)
+{
+    return MSG_NotImplemented;
+}
 
 int ajouterTimer( char *name, timer_t *timerID, int expireMS, int intervalMS )
 {
