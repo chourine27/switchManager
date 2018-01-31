@@ -8,17 +8,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/NetBeansProjects/switchManager/gestioncommandes.c</file>
-            <file>file:/NetBeansProjects/switchManager/main.c</file>
-            <file>file:/NetBeansProjects/switchManager/voCoreGPIO.h</file>
-            <file>file:/NetBeansProjects/switchManager/ToDo</file>
             <file>file:/NetBeansProjects/switchManager/informationsminuteries.h</file>
             <file>file:/NetBeansProjects/switchManager/gestionfichier.h</file>
             <file>file:/NetBeansProjects/switchManager/minuterie.c</file>
-            <file>file:/NetBeansProjects/switchManager/serveurudp.c</file>
-            <file>file:/NetBeansProjects/switchManager/gestionfichier.c</file>
-            <file>file:/NetBeansProjects/switchManager/serveurudp.h</file>
             <file>file:/NetBeansProjects/switchManager/initialisation.c</file>
-            <file>file:/NetBeansProjects/switchManager/constantes.h</file>
+            <file>file:/NetBeansProjects/switchManager/minuterie.h</file>
         </group>
     </open-files>
 </project-private>

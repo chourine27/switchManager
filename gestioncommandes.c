@@ -12,6 +12,7 @@
 #include "gestiongpio.h"
 #include "listecodes.h"
 #include "constantes.h"
+#include "tools.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -28,36 +29,14 @@ int ExecuterCommande(char* commande, char* resultat)
     const char *spaceChar = " ";
     char parametreComplet[MAXBUF];
     int codeResultat = MSG_NotImplemented;
-    size_t i = 0;
     // Verification si la commande contient des espaces
-//    if (strstr(commande, spaceChar) != NULL)
     if (strpbrk(commande, spaceChar) != 0)
     {
-        // Decoupage de la commande et des arguments
-        argv = malloc(sizeof(char *) * MAXARG);
-        // Récuperation de la commande
-        p = strtok(commande, spaceChar);
-        while(p != NULL)
+        codeResultat = splitLine(commande, argv);
+        if (codeResultat > 3)
         {
-           // p est un pointeur sur une chaine qui contient exactement l'argument i
-           if(i < MAXARG)
-           {
-              argv[i] = malloc(sizeof(char) * (1+strlen(p)));
-              strcpy(argv[i], p);
-              i++;
-           }
-           else
-              break; // Trop d'arguments
-            // Nouvel appel avec 1er argument NULL afin de poursuivre le découpage
-            // Possible de changer de délimiteur
-           p = strtok(NULL, " ");
+            return MSG_BadMapping;
         }
-        // retrait du retour chariot pour le dernier parametre
-        if (i > 0)
-        {
-            argv[i-1][strlen(argv[i-1])-1] = 0;
-        }
-        argv[i] = NULL;
         
         if (strncmp(argv[0], COMMANDE_CHANGERIMAGESERVEUR, sizeof(COMMANDE_CHANGERIMAGESERVEUR)) == 0)
         {

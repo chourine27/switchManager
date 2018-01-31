@@ -13,6 +13,7 @@
 #include "listecodes.h"
 #include "voCoreGPIO.h"
 #include "minuterie.h"
+#include "configuration.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -26,6 +27,9 @@ int initConfig()
     
     codeResultat = RetournerInformationConfig(PARAMETRE_NOMSERVEUR, INITIAL_NOMSERVEUR, resultat);
     codeResultat = RetournerInformationConfig(PARAMETRE_NOMBREINTERRUPTEUR, INITIAL_NOMBREINTERRUPTEUR, resultat);
+    
+    //Pour pouvoir utiliser tout le temps realloc, init à NULL
+    config.infoMinuteries = NULL;
     
     codeResultat = ChargerMinuterie();
 }

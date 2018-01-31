@@ -42,6 +42,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/minuterie.o \
 	${OBJECTDIR}/serveurudp.o \
+	${OBJECTDIR}/tools.o \
 	${OBJECTDIR}/voCoreGPIO.o
 
 # Test Directory
@@ -117,6 +118,11 @@ ${OBJECTDIR}/serveurudp.o: serveurudp.c nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -g -DDEBUG -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/serveurudp.o serveurudp.c
+
+${OBJECTDIR}/tools.o: tools.c nbproject/Makefile-${CND_CONF}.mk
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -g -DDEBUG -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/tools.o tools.c
 
 ${OBJECTDIR}/voCoreGPIO.o: voCoreGPIO.c nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} -p ${OBJECTDIR}
@@ -250,6 +256,19 @@ ${OBJECTDIR}/serveurudp_nomain.o: ${OBJECTDIR}/serveurudp.o serveurudp.c
 	    $(COMPILE.c) -g -DDEBUG -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/serveurudp_nomain.o serveurudp.c;\
 	else  \
 	    ${CP} ${OBJECTDIR}/serveurudp.o ${OBJECTDIR}/serveurudp_nomain.o;\
+	fi
+
+${OBJECTDIR}/tools_nomain.o: ${OBJECTDIR}/tools.o tools.c 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/tools.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.c) -g -DDEBUG -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/tools_nomain.o tools.c;\
+	else  \
+	    ${CP} ${OBJECTDIR}/tools.o ${OBJECTDIR}/tools_nomain.o;\
 	fi
 
 ${OBJECTDIR}/voCoreGPIO_nomain.o: ${OBJECTDIR}/voCoreGPIO.o voCoreGPIO.c 

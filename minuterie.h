@@ -23,7 +23,7 @@ extern "C" {
 #include <time.h>
     
     int ChargerMinuterie();
-    int LireMinuterie(char *NomFichier, struct InformationsMinuteries *Minuterie);
+    int LireMinuterie(char *valeurMinuterie, struct InformationsMinuteries *Minuterie);
     int EcrireMinuterie(char *NomFichier, struct InformationsMinuteries Minuterie);    
     int ActiverMinuterie ();
     int DesactiverMinuterie ();

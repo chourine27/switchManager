@@ -14,6 +14,7 @@
       <itemPath>listecodes.h</itemPath>
       <itemPath>minuterie.h</itemPath>
       <itemPath>serveurudp.h</itemPath>
+      <itemPath>tools.h</itemPath>
       <itemPath>voCoreGPIO.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
@@ -31,6 +32,7 @@
       <itemPath>main.c</itemPath>
       <itemPath>minuterie.c</itemPath>
       <itemPath>serveurudp.c</itemPath>
+      <itemPath>tools.c</itemPath>
       <itemPath>voCoreGPIO.c</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -168,6 +170,10 @@
       </item>
       <item path="tests/Test_gestiongpio.c" ex="false" tool="0" flavor2="0">
       </item>
+      <item path="tools.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="tools.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="voCoreGPIO.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="voCoreGPIO.h" ex="false" tool="3" flavor2="0">
@@ -282,6 +288,10 @@
       </item>
       <item path="tests/Test_gestiongpio.c" ex="false" tool="0" flavor2="0">
       </item>
+      <item path="tools.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="tools.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="voCoreGPIO.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="voCoreGPIO.h" ex="false" tool="3" flavor2="0">
@@ -391,6 +401,10 @@
       <item path="tests/Test_gestionfichier.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="tests/Test_gestiongpio.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="tools.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="tools.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="voCoreGPIO.c" ex="false" tool="0" flavor2="0">
       </item>

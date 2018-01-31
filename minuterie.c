@@ -9,6 +9,7 @@
 #include "constantes.h"
 #include "listecodes.h"
 #include "configuration.h"
+#include "informationsminuteries.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -24,7 +25,7 @@ int ChargerMinuterie()
     char param[MAXBUF];
     char ligne[MAXBUF];
     char valeurMinuterie[MAXBUF];
-    struct InformationsMinuteries infoMinuterie;
+    struct InformationsMinuteries infoMinuterie, *temp;
     
     FILE *fichierConfig = OuvrirFichier(CONFIG_NOMFICHIER);
     
@@ -41,15 +42,22 @@ int ChargerMinuterie()
         if(copieTexteDeConfig(param, ligne, valeurMinuterie) == MSG_OK)
         {
             //Convertion de la ligne paramètre en structure infoMinuterie
-            result = LireMinuterie(valeurMinuterie, &infoMinuterie);
+            // L'identifiant de la minuterie
+            temp = realloc(config.infoMinuteries, sizeof(struct InformationsMinuteries) * ++i);
+            if (temp == NULL)
+            {
+                return MSG_InsufficientStorage;
+            }
+            config.infoMinuteries = temp;
+            config.infoMinuteries[i-1].id = malloc(sizeof(char *) * strlen(param));
+            strcpy(config.infoMinuteries[i-1].id, param);
+            // Tous les autres paramètres
+            result = LireMinuterie(valeurMinuterie, config.infoMinuteries +(i-1));
             if (result != MSG_OK)
             {
                 // TODO : tracer l'erreur 
                 continue;
             }
-            // La convertion est OK, sauvegarde
-            config.infoMinuteries = malloc(sizeof(struct InformationsMinuteries *) * ++i);
-            config.infoMinuteries[i-1] = infoMinuterie;
             //Mise à jour du paramètre minuterie comme le compteur évolue.
             sprintf(param, "%s%d", PARAMETRE_MINUTERIE, i);
         }
@@ -59,9 +67,27 @@ int ChargerMinuterie()
     return MSG_OK;    
 }
 
-int LireMinuterie(char *NomFichier, struct InformationsMinuteries *Minuterie)
+int LireMinuterie(char* valeurMinuterie, struct InformationsMinuteries* Minuterie)
 {
-    return MSG_NotImplemented;
+    char **donneesMinuterie= malloc(sizeof(char *) * MAXARG);
+    int codeRestult = MSG_NotImplemented;
+    // Verification si la minuterie contient des espaces
+    if (strpbrk(valeurMinuterie, SEPARINFO) != 0)
+    {
+        codeRestult = splitLine(valeurMinuterie, donneesMinuterie);
+        if (codeRestult != 6)
+        {
+            return MSG_BadMapping;
+        }
+        Minuterie->seconde = atoi((char*) donneesMinuterie[0]);
+        Minuterie->minute = atoi((char*) donneesMinuterie[1]);
+        Minuterie->heure = atoi((char*) donneesMinuterie[2]);
+        Minuterie->jour = atoi((char*) donneesMinuterie[3]);
+        Minuterie->etat = atoi((char*) donneesMinuterie[4]);
+        Minuterie->bouton = malloc(sizeof(char) * (strlen(donneesMinuterie[5])));
+        strcpy(Minuterie->bouton, donneesMinuterie[5]);
+    }
+    return MSG_OK;
 }
 
 int EcrireMinuterie(char *NomFichier, struct InformationsMinuteries Minuterie)
