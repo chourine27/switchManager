@@ -19,6 +19,9 @@ extern "C" {
 #endif
 
     int splitLine (char* content, char** result);
+    int splitString (char *content, char ** result, char *separator);
+    int splitInformationInt(char *content, int *result);
+    int splitInformationString(char *content, char **result);
 
 
 #ifdef __cplusplus

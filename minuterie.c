@@ -10,6 +10,7 @@
 #include "listecodes.h"
 #include "configuration.h"
 #include "informationsminuteries.h"
+#include "tools.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -79,13 +80,34 @@ int LireMinuterie(char* valeurMinuterie, struct InformationsMinuteries* Minuteri
         {
             return MSG_BadMapping;
         }
-        Minuterie->seconde = atoi((char*) donneesMinuterie[0]);
-        Minuterie->minute = atoi((char*) donneesMinuterie[1]);
-        Minuterie->heure = atoi((char*) donneesMinuterie[2]);
-        Minuterie->jour = atoi((char*) donneesMinuterie[3]);
+        Minuterie->seconde = malloc(sizeof(int));
+        if (splitInformationInt(donneesMinuterie[0], Minuterie->seconde) == 0)
+        {
+            return MSG_MethodFailure;
+        }
+        Minuterie->minute = malloc(sizeof(int));
+        if (splitInformationInt(donneesMinuterie[1], Minuterie->minute) == 0)
+        {
+            return MSG_MethodFailure;
+        }
+        Minuterie->heure = malloc(sizeof(int));
+        if (splitInformationInt(donneesMinuterie[2], Minuterie->heure) == 0)
+        {
+            return MSG_MethodFailure;
+        }
+        Minuterie->jour = malloc(sizeof(int));
+        if (splitInformationInt(donneesMinuterie[3], Minuterie->jour) == 0)
+        {
+            return MSG_MethodFailure;
+        }
         Minuterie->etat = atoi((char*) donneesMinuterie[4]);
-        Minuterie->bouton = malloc(sizeof(char) * (strlen(donneesMinuterie[5])));
-        strcpy(Minuterie->bouton, donneesMinuterie[5]);
+        Minuterie->bouton = malloc(sizeof(char *) * MAXARG);
+        Minuterie->nbrBouton = splitInformationString(donneesMinuterie[5], Minuterie->bouton);
+        if (Minuterie->nbrBouton == 0)
+        {
+            return MSG_MethodFailure;
+        }
+        //strcpy(Minuterie->bouton, donneesMinuterie[5]);
     }
     return MSG_OK;
 }

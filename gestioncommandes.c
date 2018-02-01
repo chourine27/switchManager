@@ -32,8 +32,10 @@ int ExecuterCommande(char* commande, char* resultat)
     // Verification si la commande contient des espaces
     if (strpbrk(commande, spaceChar) != 0)
     {
+        // Initialise le tableau d'arguments
+        argv = malloc(sizeof(char *) * MAXARG);
         codeResultat = splitLine(commande, argv);
-        if (codeResultat > 3)
+        if (codeResultat > 6)
         {
             return MSG_BadMapping;
         }
@@ -101,6 +103,33 @@ int ExecuterCommande(char* commande, char* resultat)
                 codeResultat = ChangerStatutBouton (atoi(argv[1]), atoi(argv[2]));
             }
         }
+        else if (strncmp(argv[0], COMMANDE_SAUVEGARDERMINUTERIE, sizeof(COMMANDE_SAUVEGARDERMINUTERIE)) == 0)
+        {
+            if (argv[1] == NULL || argv[2] == NULL)
+            {
+                codeResultat = MSG_RangeUnsatisfiable;
+            }
+            else
+            {
+                // Identification de la minuterie
+                strcpy(parametreComplet, PARAMETRE_MINUTERIE);
+                strcat(parametreComplet, argv[1]);
+                // Récupère tous les arguments
+                char arguments[100];
+                int i=0;
+                int start = strlen(COMMANDE_SAUVEGARDERMINUTERIE) + 1;
+                while (commande[i] != 0) //for (int i=0; i < strlen(commande) - strlen(COMMANDE_SAUVEGARDERMINUTERIE) +1; i++)
+                {
+                    arguments[i] = commande[start+i];
+                    i++;
+                }
+                // Sauvegarde des informations                
+                codeResultat = ModifierInformationsConfig(parametreComplet, arguments);
+            }
+            // Mise à jour de la config en mémoire
+            
+            // Relancer le traitement de la minuterie
+        }        
         else
         { // Commande inconnue
             codeResultat = MSG_BadRequest;

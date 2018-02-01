@@ -21,12 +21,13 @@ extern "C" {
     struct InformationsMinuteries
     {
         char *id;
-        int seconde;
-        int minute;
-        int heure;
-        int jour;
+        int *seconde;
+        int *minute;
+        int *heure;
+        int *jour;
         int etat;
-        char *bouton;
+        char **bouton;
+        int nbrBouton;
     };
 
 

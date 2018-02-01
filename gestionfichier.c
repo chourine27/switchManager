@@ -245,7 +245,7 @@ int EcrireParametre(char* NomFichier, char* parametre, char* valeur)
     }
     if(rename(FICHIERTEMPORAIRE, NomFichier) != 0)
     {
-        printf("EcritureParametre - Erreur en renommanr le fichier temporaire");
+        printf("EcritureParametre - Erreur en rennomant le fichier temporaire");
         return -1;
     }
     return MSG_OK;
