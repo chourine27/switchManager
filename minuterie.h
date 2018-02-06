@@ -24,7 +24,6 @@ extern "C" {
     
     int ChargerMinuterie();
     int LireMinuterie(char *valeurMinuterie, struct InformationsMinuteries *Minuterie);
-    int EcrireMinuterie(char *NomFichier, struct InformationsMinuteries Minuterie);    
     int ActiverMinuterie ();
     int DesactiverMinuterie ();
     void sigMinut_handler( int sig, siginfo_t *si, void *uc );

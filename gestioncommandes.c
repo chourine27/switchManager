@@ -35,7 +35,7 @@ int ExecuterCommande(char* commande, char* resultat)
         // Initialise le tableau d'arguments
         argv = malloc(sizeof(char *) * MAXARG);
         codeResultat = splitLine(commande, argv);
-        if (codeResultat > 6)
+        if (codeResultat > 9)
         {
             return MSG_BadMapping;
         }
@@ -114,15 +114,21 @@ int ExecuterCommande(char* commande, char* resultat)
                 // Identification de la minuterie
                 strcpy(parametreComplet, PARAMETRE_MINUTERIE);
                 strcat(parametreComplet, argv[1]);
-                // Récupère tous les arguments
+                // Récupère tous les arguments déjà découpé
                 char arguments[100];
-                int i=0;
-                int start = strlen(COMMANDE_SAUVEGARDERMINUTERIE) + 1;
-                while (commande[i] != 0) //for (int i=0; i < strlen(commande) - strlen(COMMANDE_SAUVEGARDERMINUTERIE) +1; i++)
+                int i=2; // 1er c'est la commande, 2ème c'est le numéro de la minuterie
+                int index = 0;
+                while (argv[i] != 0) //for (int i=0; i < strlen(commande) - strlen(COMMANDE_SAUVEGARDERMINUTERIE) +1; i++)
                 {
-                    arguments[i] = commande[start+i];
+                    for(int j=0; j< strlen(argv[i]); j++)
+                    {
+                        arguments[index++] = argv[i][j];
+                    }
+                    arguments[index++] = ' ';
                     i++;
                 }
+                // Suppression du dernier espace
+                arguments[--index] = 0;
                 // Sauvegarde des informations                
                 codeResultat = ModifierInformationsConfig(parametreComplet, arguments);
             }
@@ -148,6 +154,10 @@ int ExecuterCommande(char* commande, char* resultat)
         else if (strncmp(commande, COMMANDE_NOMSERVEUR, sizeof(COMMANDE_NOMSERVEUR)-2) == 0)
         {
             codeResultat = RetournerInformationConfig(PARAMETRE_NOMSERVEUR, INITIAL_NOMSERVEUR, resultat);
+        }
+        else if (strcmp(commande, COMMANDE_PURGERMINUTERIE, sizeof(COMMANDE_PURGERMINUTERIE)-2) == 0)
+        {
+            codeResultat = PurgerMinuterieConfig();
         }
         else
         {
@@ -250,7 +260,7 @@ int retournerEtatBouton (int identifiantBouton)
 // Change le statut d'une prise
 // identifiantBouton : Identifiant de la prise à modifier
 // statutBouton : Nouveau statut de la prise
-// sortie : code résultat d'execution
+// Sortie : code résultat d'execution
 int ChangerStatutBouton (int identifiantBouton, int statutBouton)
 {
     //Verification de l'index va pas faire planter
@@ -281,7 +291,7 @@ int ChangerStatutBouton (int identifiantBouton, int statutBouton)
 
 // Contrôle si l'index de la prise n'est pas en dehors des limites
 // identifiantBouton : Identifiant de la prise à contrôler
-// sortie : Code erreur
+// Sortie : Code erreur
 int IdentifiantBoutonPlosible (int identifiantBouton)
 {
     char nbrMax[2];
@@ -305,7 +315,7 @@ int IdentifiantBoutonPlosible (int identifiantBouton)
 
 // Controle si le statut du bouton est eligible
 // statutBouton : valeur du statut
-// sorite : Code erreur
+// Sortie : Code erreur
 int StatutBoutonPlosible (int statutBouton)
 {
     if (statutBouton == CONFIG_ALLUME || statutBouton == CONFIG_ETEINT)
@@ -315,5 +325,16 @@ int StatutBoutonPlosible (int statutBouton)
     else
     {
         return MSG_BadRequest;
+    }
+}
+
+int PurgerMinuterieConfig()
+{
+    for (int i = 0; i < strlen(config.infoMinuteries); i++)
+    {
+        // Efface du fichier de config
+        EffacerParametre(CONFIG_NOMFICHIER, config.infoMinuteries[i].id);
+        //Supprime du cache config
+        //TODO
     }
 }

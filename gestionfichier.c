@@ -94,33 +94,6 @@ void FermerFichier(FILE* fichier)
   fclose(fichier);
 }
 
-/*int ChargerConfiguration(FILE* fichier)
-{
-    char ligne[MAXBUF];
-    int i=0;
-    while (fgets(ligne, sizeof(ligne), fichier) != NULL)
-    {
-        char *cfligne;
-        cfligne = strstr((char *)ligne, DELIM);
-        cfligne = cfligne + strlen(DELIM);
-
-        if(strncmp("#", ligne, strlen("#")) == 0 || strncmp("\n", ligne, strlen("\n")) == 0)
-        {
-            continue;
-        }
-        if(copieTexteDeConfig(PARAMETRE_NOMSERVEUR, ligne, config.nomServeur) == MSG_OK)
-        {
-            continue;
-        }
-        if(copieEntierDeConfig(PARAMETRE_PORTSERVEUR, ligne, &config.portServeur, atoi(cfligne)) == MSG_OK)
-        {
-            continue;
-        }
-    }
-    config.parametre = 1;
-    return MSG_OK;
-}*/
-
 int LireParametre(char *NomFichier, char *Parametre, char *valeur)
 {
     FILE* fichier = OuvrirFichier(NomFichier);
@@ -191,6 +164,11 @@ int InitialiseValeur(char* nomFichier, char* parametre, char* valeur)
     return EcrireParametre(nomFichier, parametre, valeur);
 }
 
+// Sauvegarde le paramètre avec sa valeur ou met à jour
+// NomFichier : Nom du fichier à traiter
+// parametre : Nom du parametre à ajouter ou mettre à jour
+// valeur : Valeur du parametre sauvegarder
+// Sortie : code résultat d'execution
 int EcrireParametre(char* NomFichier, char* parametre, char* valeur)
 {
     FILE* fichier = OuvrirFichier(NomFichier);
@@ -217,10 +195,10 @@ int EcrireParametre(char* NomFichier, char* parametre, char* valeur)
         //Lecture ligne par ligne
         while (fgets(ligne, sizeof(ligne), fichier) != NULL)
         {
-            printf("%s\n", ligne);
+            printf("%s", ligne);
             //Refaire le fichier
-            //Est se ce param�tre
-            if (strncmp(parametre, ligne, strlen(parametre)) == 0)
+            //Est se ce param�tre et sauvegarde pas déjà faite
+            if (!found && strncmp(parametre, ligne, strlen(parametre)) == 0)
             {
                 // mise a jour du parametre
                 fprintf(fichierMiseAJour, "%s=%s\n", parametre, valeur);
@@ -251,3 +229,11 @@ int EcrireParametre(char* NomFichier, char* parametre, char* valeur)
     return MSG_OK;
 }
 
+// Efface un parametre du fichier de configuration
+// NomFichier : Nom du fichier à traiter
+// parametre : Nom du parametre à effacer
+// Sortie : code résultat d'execution
+int EffacerParametre(char* NomFichier, char* parametre)
+{
+    return MSG_NotImplemented;
+}

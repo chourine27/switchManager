@@ -112,11 +112,6 @@ int LireMinuterie(char* valeurMinuterie, struct InformationsMinuteries* Minuteri
     return MSG_OK;
 }
 
-int EcrireMinuterie(char *NomFichier, struct InformationsMinuteries Minuterie)
-{
-    return MSG_NotImplemented;
-}
-
 int ajouterTimer( char *name, timer_t *timerID, int expireMS, int intervalMS )
 {
     struct sigevent         te;

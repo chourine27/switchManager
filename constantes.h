@@ -22,6 +22,7 @@
 #define COMMANDE_STATUTBOUTON "EtatBouton" // Retourne l'etat d'une prise
 #define COMMANDE_CHANGESTATUTBOUTON "ChangeEtatBouton" // Change l'état d'un bouton
 #define COMMANDE_SAUVEGARDERMINUTERIE "SauvegarderMinuterie" // Enregistre les informations d'une minuterie
+#define COMMANDE_PURGERMINUTERIE "PurgerMinuterie" // Efface toutes les informations des minuteries
 
 #define CONFIG_NOMFICHIER "switchmanager.config" // nom du fichier de config
 #define FICHIERTEMPORAIRE "config.tmp" // nom du fichier temporaire

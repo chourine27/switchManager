@@ -20,6 +20,15 @@ int splitLine(char* content, char** result)
     return splitString(content, result, SEPARINFO);
 }
 
+/**
+ * splitString
+ * 
+ * Découpe une chaine de caractère en tableau de chaine
+ * @param content Le contenu à découper
+ * @param result Le tableau de résultat
+ * @param separator le séparateur de chaine
+ * @return Le nombre de chaine dans le tableau
+ */
 int splitString(char* content, char** result, char *separator)
 {
     char *p;
@@ -70,7 +79,7 @@ int splitInformationInt(char *content, int *result)
        // p est un pointeur sur une chaine qui contient les valeurs
        if(i < MAXARG)
        {
-          result = realloc (result, sizeof(int) * (i+1));
+          result = realloc(result, sizeof(int) * (i+1));
           if (result == NULL)
           {
               return MSG_UnprocessableEntity;
