@@ -18,6 +18,7 @@
 #include <signal.h>
 #include <time.h>
 
+
 /**
  * ChargerMinuterie
  * 
@@ -81,22 +82,26 @@ int LireMinuterie(char* valeurMinuterie, struct InformationsMinuteries* Minuteri
             return MSG_BadMapping;
         }
         Minuterie->seconde = malloc(sizeof(int));
-        if (splitInformationInt(donneesMinuterie[0], Minuterie->seconde) == 0)
+        Minuterie->nbSeconde = splitInformationInt(donneesMinuterie[0], Minuterie->seconde);
+        if (Minuterie->nbSeconde == 0)
         {
             return MSG_MethodFailure;
         }
         Minuterie->minute = malloc(sizeof(int));
-        if (splitInformationInt(donneesMinuterie[1], Minuterie->minute) == 0)
+        Minuterie->nbMinute = splitInformationInt(donneesMinuterie[1], Minuterie->minute);
+        if (Minuterie->nbMinute == 0)
         {
             return MSG_MethodFailure;
         }
         Minuterie->heure = malloc(sizeof(int));
-        if (splitInformationInt(donneesMinuterie[2], Minuterie->heure) == 0)
+        Minuterie->nbHeure = splitInformationInt(donneesMinuterie[2], Minuterie->heure);
+        if (Minuterie->nbHeure == 0)
         {
             return MSG_MethodFailure;
         }
         Minuterie->jour = malloc(sizeof(int));
-        if (splitInformationInt(donneesMinuterie[3], Minuterie->jour) == 0)
+        Minuterie->nbJour = splitInformationInt(donneesMinuterie[3], Minuterie->jour);
+        if (Minuterie->nbJour == 0)
         {
             return MSG_MethodFailure;
         }
@@ -107,7 +112,6 @@ int LireMinuterie(char* valeurMinuterie, struct InformationsMinuteries* Minuteri
         {
             return MSG_MethodFailure;
         }
-        //strcpy(Minuterie->bouton, donneesMinuterie[5]);
     }
     return MSG_OK;
 }
@@ -161,7 +165,7 @@ int AjouterMinuterie(char* NomMinuterie, char* InfoMinuterie)
         return MSG_InsufficientStorage;
     }
     config.infoMinuteries = temp;
-    config.infoMinuteries[config.minuterie].id = malloc(sizeof(char *) * strlen(NomMinuterie));
+    config.infoMinuteries[config.minuterie].id = malloc(sizeof(char) * strlen(NomMinuterie));
     strcpy(config.infoMinuteries[config.minuterie].id, NomMinuterie);
     // Tous les autres paramètres
     codeResultat = LireMinuterie(InfoMinuterie, config.infoMinuteries +(config.minuterie));
@@ -182,9 +186,45 @@ int AjouterMinuterie(char* NomMinuterie, char* InfoMinuterie)
  */
 int RetournerDetailMinuterie (char *IndexMinuterie, char *Informations)
 {
-    char *parametre = malloc(sizeof(char*) * (strlen(PARAMETRE_MINUTERIE) + strlen(IndexMinuterie)));
+    char *parametre = malloc(sizeof(char) * (strlen(PARAMETRE_MINUTERIE) + strlen(IndexMinuterie)));
     sprintf(parametre, "%s%s", PARAMETRE_MINUTERIE, IndexMinuterie);
     return LireParametre(CONFIG_NOMFICHIER, parametre, Informations);
+}
+
+int DelaiPourLeProchain(int *IdentifiantMinuterie)
+{
+    int delai = 1000000;
+    int current_delai;
+    time_t now;
+    struct tm *current_time;
+    now = time(NULL);
+    current_time = localtime(&now);    
+
+    for(int i=0; i < config.minuterie; i++)
+    {
+        for(int j=0; j < config.infoMinuteries[i].nbSeconde; j++)
+        {
+            if (config.infoMinuteries[i].seconde[j] == 0)
+            {
+                current_delai = 1;
+            }
+            else
+            {
+                current_delai = config.infoMinuteries[i].seconde[j] - current_time->tm_sec;
+                if (current_delai < 0)
+                {
+                    current_delai += 60;
+                }
+            }
+            if (delai > current_delai)
+            {
+                delai = current_delai;
+                IdentifiantMinuterie[0] = i;
+            }
+        } 
+    }
+    printf("Prochain délai : %d\n", delai);
+    return delai;
 }
 
 int ajouterTimer( char *name, timer_t *timerID, int expireMS, int intervalMS )

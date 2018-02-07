@@ -17,6 +17,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include <x86_64-linux-gnu/bits/signum-generic.h>
 
 // Initilise le fichier de config si il n'existe pas
 // Retour : MSG_OK si OK, code d'erreur sinon
@@ -59,8 +61,26 @@ int initGPIO()
     }
     return MSG_OK;
 }
+void dingdong(int unused);
 
 int initMinuterie()
 {
-    return MSG_NotImplemented;
+    int *numeroMinuterie = malloc(sizeof(int));
+    if (config.minuterie ==0)
+        return MSG_NoContent;
+    int delai = DelaiPourLeProchain(numeroMinuterie);
+    signal(SIGALRM,dingdong);    
+    alarm(delai);
+    return MSG_OK;
+}
+
+void dingdong(int unused)
+{
+    int *numeroMinuterie;
+    if (config.minuterie ==0)
+        return MSG_NoContent;
+    int delai = DelaiPourLeProchain(numeroMinuterie);
+    signal(SIGALRM,dingdong);    
+    alarm(delai);
+    printf("Trop fort : %d\n", unused);
 }

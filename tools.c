@@ -91,7 +91,7 @@ int splitInformationInt(char *content, int *result)
           break; // Trop d'arguments
         // Nouvel appel avec 1er argument NULL afin de poursuivre le découpage
         // Possible de changer de délimiteur
-       p = strtok(NULL, SEPARINFO);
+       p = strtok(NULL, SEPARVALEUR);
     }
     return i;    
 }

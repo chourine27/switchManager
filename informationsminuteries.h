@@ -22,9 +22,13 @@ extern "C" {
     {
         char *id;
         int *seconde;
+        int nbSeconde;
         int *minute;
+        int nbMinute;
         int *heure;
+        int nbHeure;
         int *jour;
+        int nbJour;
         int etat;
         char **bouton;
         int nbrBouton;
