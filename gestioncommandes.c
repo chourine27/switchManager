@@ -13,6 +13,7 @@
 #include "listecodes.h"
 #include "constantes.h"
 #include "tools.h"
+#include "configuration.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -115,7 +116,7 @@ int ExecuterCommande(char* commande, char* resultat)
                 strcpy(parametreComplet, PARAMETRE_MINUTERIE);
                 strcat(parametreComplet, argv[1]);
                 // Récupère tous les arguments déjà découpé
-                char arguments[100];
+                char arguments[MAXBUF];
                 int i=2; // 1er c'est la commande, 2ème c'est le numéro de la minuterie
                 int index = 0;
                 while (argv[i] != 0) //for (int i=0; i < strlen(commande) - strlen(COMMANDE_SAUVEGARDERMINUTERIE) +1; i++)
@@ -131,11 +132,21 @@ int ExecuterCommande(char* commande, char* resultat)
                 arguments[--index] = 0;
                 // Sauvegarde des informations                
                 codeResultat = ModifierInformationsConfig(parametreComplet, arguments);
+                if (codeResultat != MSG_OK)
+                {
+                    return codeResultat;
+                }
+                //Mise à jour du cache Minuterie
+                AjouterMinuterie(argv[1], arguments);
             }
             // Mise à jour de la config en mémoire
             
             // Relancer le traitement de la minuterie
         }        
+        else if (strncmp(argv[0], COMMANDE_DETAILMINUTERIE, sizeof(COMMANDE_DETAILMINUTERIE)) == 0)
+        {
+            codeResultat = RetournerDetailMinuterie(argv[1], resultat);
+        }
         else
         { // Commande inconnue
             codeResultat = MSG_BadRequest;
@@ -155,9 +166,20 @@ int ExecuterCommande(char* commande, char* resultat)
         {
             codeResultat = RetournerInformationConfig(PARAMETRE_NOMSERVEUR, INITIAL_NOMSERVEUR, resultat);
         }
-        else if (strcmp(commande, COMMANDE_PURGERMINUTERIE, sizeof(COMMANDE_PURGERMINUTERIE)-2) == 0)
+        else if (strncmp(commande, COMMANDE_PURGERMINUTERIE, sizeof(COMMANDE_PURGERMINUTERIE)-2) == 0)
         {
-            codeResultat = PurgerMinuterieConfig();
+            codeResultat = PurgerMinuteriesConfig();
+        }
+        else if (strncmp(commande, COMMANDE_NOMBREMINUTERIE, sizeof(COMMANDE_NOMBREMINUTERIE)-2) == 0)
+        {
+            if (sprintf(resultat, "%d\n", config.minuterie) < 0)
+            {
+                codeResultat = MSG_NotAcceptable;
+            }
+            else
+            {
+                codeResultat = MSG_OK;
+            }
         }
         else
         {
@@ -167,12 +189,12 @@ int ExecuterCommande(char* commande, char* resultat)
     free(argv);
     free(p);
     if (codeResultat != MSG_OK)
-        sprintf(resultat, "%d", codeResultat);
+        sprintf(resultat, "%d\n", codeResultat);
     else
     {
         if (strcmp(resultat, "") == 0) //Résultat vide
         {
-            sprintf(resultat, "%d", MSG_OK);
+            sprintf(resultat, "%d\n", MSG_OK);
         }
     }
     return codeResultat;
@@ -328,13 +350,13 @@ int StatutBoutonPlosible (int statutBouton)
     }
 }
 
-int PurgerMinuterieConfig()
+/**
+ * PurgerMinuteriesConfig
+ * 
+ * Efface les informations de minuterie dans le fichier et en cache
+ * @return : code résultat d'execution
+ */
+int PurgerMinuteriesConfig()
 {
-    for (int i = 0; i < strlen(config.infoMinuteries); i++)
-    {
-        // Efface du fichier de config
-        EffacerParametre(CONFIG_NOMFICHIER, config.infoMinuteries[i].id);
-        //Supprime du cache config
-        //TODO
-    }
+    return SupprimerMinuteries();
 }

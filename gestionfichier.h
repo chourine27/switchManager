@@ -6,13 +6,14 @@
 #include <stdbool.h>
 
 bool isEmpty(FILE *file);
-int copieTexteDeConfig(char* parametre, char* ligne, char* configParam);
-int copieEntierDeConfig(char* parametre, char* ligne, int* configParam, int valeur);
+int copieTexteDeConfig(char* Parametre, char* Ligne, char* ConfigParam);
+int copieEntierDeConfig(char* Parametre, char* Ligne, int* ConfigParam, int Valeur);
 FILE* OuvrirFichier(char* NomFichier);
-void FermerFichier(FILE* fichier);
-int InitialiseValeur(char* nomFichier, char* parametre, char* valeur);
-int LireParametre(char *NomFichier, char *Parametre, char *valeur);
+void FermerFichier(FILE* Fichier);
+int InitialiseValeur(char* NomFichier, char* Parametre, char* Valeur);
+int LireParametre(char *NomFichier, char *Parametre, char *Valeur);
 int EcrireParametre(char* NomFichier, char* Parametre, char* Valeur);
-int EffacerParametre(char* NomFichier, char* parametre);
+int EffacerParametre(char* NomFichier, char* Parametre);
+int traitementParametre(char* NomFichier, char* Parametre, char* Valeur);
 
 #endif // GESTIONFICHIER_H_INCLUDED

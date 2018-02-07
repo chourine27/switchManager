@@ -7,7 +7,7 @@
 #define DELIM "=" // Delimiteur de parametre / valeur
 #define SEPARINFO " " // Séparateur d'information
 #define SEPARVALEUR "|" // Séprateur de valeur dans l'info
-#define MAXARG 10 // Nombre maximum d'argument pour une commande
+#define MAXARG 15 // Nombre maximum d'argument pour une commande
 
 #define COMMANDE_NOMSERVEUR "TonNom" // command pour recuperer le nom du serveur
 #define COMMANDE_RENOMMERSERVEUR "RenommerTonNom" // commande pour changer le nom du serveur
@@ -19,10 +19,12 @@
 #define COMMANDE_RENOMMERNOMBOUTON "RenommerNomBouton" //prefix de commande pour renommer un bouton
 #define COMMANDE_IMAGEBOUTON "ImageBouton" // prefix de commande pour gerer l image d une prise
 #define COMMANDE_CHANGERIMAGEBOUTON "ChangeImageBouton" // prefix pour changer l'image d'une prise
-#define COMMANDE_STATUTBOUTON "EtatBouton" // Retourne l'etat d'une prise
-#define COMMANDE_CHANGESTATUTBOUTON "ChangeEtatBouton" // Change l'état d'un bouton
-#define COMMANDE_SAUVEGARDERMINUTERIE "SauvegarderMinuterie" // Enregistre les informations d'une minuterie
-#define COMMANDE_PURGERMINUTERIE "PurgerMinuterie" // Efface toutes les informations des minuteries
+#define COMMANDE_STATUTBOUTON "EtatBouton" // Commande pour retourner l'etat d'une prise
+#define COMMANDE_CHANGESTATUTBOUTON "ChangeEtatBouton" // Commande pour changer l'état d'un bouton
+#define COMMANDE_SAUVEGARDERMINUTERIE "SauvegarderMinuterie" // Commande enregistrer les informations d'une minuterie
+#define COMMANDE_PURGERMINUTERIE "PurgerMinuteries" // Commande pour effacer toutes les informations des minuteries
+#define COMMANDE_NOMBREMINUTERIE "CombienDeMinuteries" // Commande pour connaitre le nombre de minuteries
+#define COMMANDE_DETAILMINUTERIE "DetailMinuterie" // Commande pour récuperer le détail d'une minuterie
 
 #define CONFIG_NOMFICHIER "switchmanager.config" // nom du fichier de config
 #define FICHIERTEMPORAIRE "config.tmp" // nom du fichier temporaire

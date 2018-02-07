@@ -28,27 +28,6 @@ void testIsEmpty() {
     }
 }
 
-void testCopieTexteDeConfig() {
-    char* parametre;
-    char* ligne;
-    char* configParam;
-    int result = copieTexteDeConfig(parametre, ligne, configParam);
-    if (1 /*check result*/) {
-        printf("%%TEST_FAILED%% time=0 testname=testCopieTexteDeConfig (Test_gestionfichier) message=error message sample\n");
-    }
-}
-
-void testCopieEntierDeConfig() {
-    char* parametre;
-    char* ligne;
-    int* configParam;
-    int valeur;
-    int result = copieEntierDeConfig(parametre, ligne, configParam, valeur);
-    if (1 /*check result*/) {
-        printf("%%TEST_FAILED%% time=0 testname=testCopieEntierDeConfig (Test_gestionfichier) message=error message sample\n");
-    }
-}
-
 void testOuvrirFichier() {
     char* NomFichier;
     FILE* result = OuvrirFichier(NomFichier);

@@ -10,6 +10,6 @@ int retournerEtatBouton (int identifiantBouton);
 int ChangerStatutBouton (int identifiantBouton, int statutBouton);
 int IdentifiantBoutonPlosible (int identifiantBouton);
 int StatutBoutonPlosible (int statutBouton);
-int PurgerMinuterieConfig();
+int PurgerMinuteriesConfig();
 
 #endif // GESTIONCOMMANDES_H_INCLUDED

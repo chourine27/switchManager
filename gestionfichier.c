@@ -15,7 +15,13 @@
 #include <string.h>
 #include <assert.h>
 
-// Control si le fichier est vide
+/**
+ * isEmpty
+ * 
+ * Control si le fichier est vide
+ * @param file : fichier ouvert
+ * @return : Vrai si vide, Faux sinon
+ */
 bool isEmpty(FILE *file)
 {
     long savedOffset = ftell(file);
@@ -30,38 +36,36 @@ bool isEmpty(FILE *file)
     return false;
 }
 
-// Extrait la valeur du parametre demande
-// parametre : nom du parametre
-// ligne : ligne contenant un parametre et une valeur
-// configParam : valeur du parametre
-// Retour : 0 si OK
-int copieTexteDeConfig(char* parametre, char* ligne, char* configParam)
+/**
+ * copieTexteDeConfig
+ * 
+ * Extrait la valeur du parametre demande
+ * @param Parametre : nom du parametre
+ * @param Ligne : ligne contenant un parametre et une valeur
+ * @param @out ConfigParam : valeur du parametre
+ * @return : Code résultat d'execution
+ */
+int copieTexteDeConfig(char* Parametre, char* Ligne, char* ConfigParam)
 {
     char *valeurDansLaLigne;
-    if(strncmp(parametre, ligne, strlen(parametre)) == 0 )
+    if(strncmp(Parametre, Ligne, strlen(Parametre)) == 0 )
     {
-        valeurDansLaLigne = strstr((char *)ligne, DELIM);
+        valeurDansLaLigne = strstr((char *)Ligne, DELIM);
         valeurDansLaLigne = valeurDansLaLigne + strlen(DELIM);
 
-        strcpy(configParam, valeurDansLaLigne);
+        strcpy(ConfigParam, valeurDansLaLigne);
         return MSG_OK;
     }
     return MSG_NotFound;
 }
 
-int copieEntierDeConfig(char* parametre, char* ligne, int* configParam, int valeur)
-{
-    if(strncmp(parametre, ligne, strlen(parametre)) == 0 )
-    {
-        *configParam = valeur;
-        return MSG_OK;
-    }
-    return MSG_NotFound;
-}
-
-// Ouverture du fichier
-// NomFichier : Nom du fichier a ouvrir
-// Retour : Fichier si OK, NULL si probleme a ouverture
+/**
+ * OuvrirFichier
+ * 
+ * Ouvre le fichier de config
+ * @param NomFichier : Nom du fichier de configuration à ouvrir
+ * @return Fichier de config ouvert ou NULL si erreur
+ */
 FILE* OuvrirFichier(char* NomFichier)
 {
     FILE* fichier = NULL;
@@ -83,18 +87,32 @@ FILE* OuvrirFichier(char* NomFichier)
     }
 }
 
-// Ferme le fichier
-void FermerFichier(FILE* fichier)
+/**
+ * FermerFichier
+ * 
+ * Ferme le fichier ouvert
+ * @param Fichier : Fichier à fermer
+ */
+void FermerFichier(FILE* Fichier)
 {
-  if (fichier == NULL)
+  if (Fichier == NULL)
   {
     printf("FermerFichier - Fichier non ouvert");
     return;
   }
-  fclose(fichier);
+  fclose(Fichier);
 }
 
-int LireParametre(char *NomFichier, char *Parametre, char *valeur)
+/**
+ * LireParametre
+ * 
+ * Lecture d'un paramètre dans le fichier de config
+ * @param NomFichier : Nom du fichier de config
+ * @param Parametre : Nom du paramètre à chercher
+ * @param @out Valeur : Valeur du paramètre
+ * @return : Code résultat d'execution
+ */
+int LireParametre(char *NomFichier, char *Parametre, char *Valeur)
 {
     FILE* fichier = OuvrirFichier(NomFichier);
     char ligne[MAXBUF];
@@ -108,68 +126,104 @@ int LireParametre(char *NomFichier, char *Parametre, char *valeur)
         }
         if (strncmp(Parametre, ligne, strlen(Parametre)) == 0)
         {
-            if(copieTexteDeConfig(Parametre, ligne, valeur) == MSG_OK)
+            if(copieTexteDeConfig(Parametre, ligne, Valeur) == MSG_OK)
                 return MSG_OK;
             return MSG_NotAcceptable;
         }
     }
     FermerFichier(fichier);
     // Recherche sans avoir trouve le parametre
-    return InitialiseValeur(NomFichier, Parametre, valeur);
+    return InitialiseValeur(NomFichier, Parametre, Valeur);
 }
 
-// Initialise la valeur du parametre demande
-// nomFichier : Nom du fichier dans leauel enregistrer la valeur
-// parametre : Nom du parametre a initialiser
-// valeur : valeur du parametre initialise
-int InitialiseValeur(char* nomFichier, char* parametre, char* valeur)
+/**
+ * InitialiseValeur
+ * 
+ * Initialise la valeur du parametre demande
+ * @param NomFichier : Nom du fichier dans leauel enregistrer la valeur
+ * @param Parametre : Nom du parametre a initialiser
+ * @param @out Valeur : Valeur du parametre initialise
+ * @return : Code résultat d'execution
+ */
+int InitialiseValeur(char* NomFichier, char* Parametre, char* Valeur)
 {
-    if(strncmp(parametre, PARAMETRE_ETATDEFAUT, strlen(PARAMETRE_ETATDEFAUT)) == 0 )
+    if(strncmp(Parametre, PARAMETRE_ETATDEFAUT, strlen(PARAMETRE_ETATDEFAUT)) == 0 )
     {
-        strcpy(valeur, "0");
+        strcpy(Valeur, "0");
     }
-    else if(strncmp(parametre, PARAMETRE_IMAGEBOUTON, strlen(PARAMETRE_IMAGEBOUTON)) == 0 )
+    else if(strncmp(Parametre, PARAMETRE_IMAGEBOUTON, strlen(PARAMETRE_IMAGEBOUTON)) == 0 )
     {
-        strcpy(valeur, INITIAL_IMAGEBOUTON);
+        strcpy(Valeur, INITIAL_IMAGEBOUTON);
     }
-    else if(strncmp(parametre, PARAMETRE_IMAGESERVEUR, strlen(PARAMETRE_IMAGESERVEUR)) == 0 )
+    else if(strncmp(Parametre, PARAMETRE_IMAGESERVEUR, strlen(PARAMETRE_IMAGESERVEUR)) == 0 )
     {
-        strcpy(valeur, INITIAL_IMAGESERVEUR);
+        strcpy(Valeur, INITIAL_IMAGESERVEUR);
     }
-    else if(strncmp(parametre, PARAMETRE_MINUTERIEACTIVE, strlen(parametre)) == 0 )
+    else if(strncmp(Parametre, PARAMETRE_MINUTERIEACTIVE, strlen(Parametre)) == 0 )
     {
-        strcpy(valeur, INITIAL_MINUTERIEACTIVE);
+        strcpy(Valeur, INITIAL_MINUTERIEACTIVE);
     }
-    else if(strncmp(parametre, PARAMETRE_NOMBOUTON, strlen(PARAMETRE_NOMBOUTON)) == 0 )
+    else if(strncmp(Parametre, PARAMETRE_NOMBOUTON, strlen(PARAMETRE_NOMBOUTON)) == 0 )
     {
-        strcpy(valeur, INITIAL_NOMBOUTON);
+        strcpy(Valeur, INITIAL_NOMBOUTON);
     }
-    else if(strncmp(parametre, PARAMETRE_NOMBREINTERRUPTEUR, strlen(parametre)) == 0 )
+    else if(strncmp(Parametre, PARAMETRE_NOMBREINTERRUPTEUR, strlen(Parametre)) == 0 )
     {
-        strcpy(valeur, INITIAL_NOMBREINTERRUPTEUR);
+        strcpy(Valeur, INITIAL_NOMBREINTERRUPTEUR);
     }
-    else if(strncmp(parametre, PARAMETRE_NOMSERVEUR, strlen(parametre)) == 0 )
+    else if(strncmp(Parametre, PARAMETRE_NOMSERVEUR, strlen(Parametre)) == 0 )
     {
-        strcpy(valeur, INITIAL_NOMSERVEUR);
+        strcpy(Valeur, INITIAL_NOMSERVEUR);
     }
-    else if(strncmp(parametre, PARAMETRE_PORTSERVEUR, strlen(parametre)) == 0 )
+    else if(strncmp(Parametre, PARAMETRE_PORTSERVEUR, strlen(Parametre)) == 0 )
     {
-        strcpy(valeur, INITIAL_PORTSERVEUR);
+        strcpy(Valeur, INITIAL_PORTSERVEUR);
     }
     else
     {
         // Parametre inconnu
         return MSG_Unknow;
     }
-    return EcrireParametre(nomFichier, parametre, valeur);
+    return EcrireParametre(NomFichier, Parametre, Valeur);
 }
 
-// Sauvegarde le paramètre avec sa valeur ou met à jour
-// NomFichier : Nom du fichier à traiter
-// parametre : Nom du parametre à ajouter ou mettre à jour
-// valeur : Valeur du parametre sauvegarder
-// Sortie : code résultat d'execution
-int EcrireParametre(char* NomFichier, char* parametre, char* valeur)
+/**
+ * EcrireParametre
+ * 
+ * Ajoute ou met à jour la valeur d'un paramètre pour le sauvegarder dans le fichier de config
+ * @param NomFichier : Nom du fichier de config à traiter
+ * @param Parametre : Paramètre à mettre à jour
+ * @param Valeur : Valeur du paramètre à sauvegarder
+ * @return : Code résultat d'execution
+ */
+int EcrireParametre(char* NomFichier, char* Parametre, char* Valeur)
+{
+    return traitementParametre(NomFichier, Parametre, Valeur);
+}
+
+/**
+ * EffacerParametre
+ * 
+ * Efface un paramètre du fichier de configuration
+ * @param NomFichier : Nom du fichier de configuration à traiter
+ * @param parametre : Paramètre à retire
+ * @return : code résultat d'execution
+ */
+int EffacerParametre(char* NomFichier, char* parametre)
+{
+    return traitementParametre(NomFichier, parametre, 0);
+}
+
+/**
+ * traitementParametre
+ * 
+ * Permet d'ajouter, modifier, supprimer un paramètre dans le fichier de configuration
+ * @param NomFichier : Nom du fichier de configuration à mettre à jour
+ * @param Parametre : Nom du paramètre à traiter
+ * @param Valeur : Valeur à mettre à jour (mettre 0 si suppression)
+ * @return code résultat d'execution
+ */
+int traitementParametre(char* NomFichier, char* Parametre, char* Valeur)
 {
     FILE* fichier = OuvrirFichier(NomFichier);
     FILE* fichierMiseAJour = OuvrirFichier(FICHIERTEMPORAIRE);
@@ -185,10 +239,10 @@ int EcrireParametre(char* NomFichier, char* parametre, char* valeur)
         return -1;
     }
 
-    //Fichier vide
-    if (isEmpty(fichier))
+    //Fichier vide et Traitement n'est pas de supprimer un paramètre
+    if (isEmpty(fichier) && Valeur != 0)
     {
-        fprintf(fichierMiseAJour, "%s=%s\n", parametre, valeur);
+        fprintf(fichierMiseAJour, "%s%s%s\n", Parametre, DELIM, Valeur);
     }
     else
     {
@@ -197,11 +251,17 @@ int EcrireParametre(char* NomFichier, char* parametre, char* valeur)
         {
             printf("%s", ligne);
             //Refaire le fichier
-            //Est se ce param�tre et sauvegarde pas déjà faite
-            if (!found && strncmp(parametre, ligne, strlen(parametre)) == 0)
+            //Est se ce paramètre et sauvegarde pas déjà faite
+            if (!found && strncmp(Parametre, ligne, strlen(Parametre)) == 0)
             {
-                // mise a jour du parametre
-                fprintf(fichierMiseAJour, "%s=%s\n", parametre, valeur);
+                if (Valeur == 0) // Il faut supprimer la ligne
+                {
+                    continue;
+                }
+                else // Il faut mettre à jour le paramètre
+                {
+                    fprintf(fichierMiseAJour, "%s%s%s\n", Parametre, DELIM, Valeur);
+                }
                 found = true;
             }
             else
@@ -209,9 +269,9 @@ int EcrireParametre(char* NomFichier, char* parametre, char* valeur)
                 fputs(ligne, fichierMiseAJour);
             }
         }
-        if (!found)
+        if (!found && Valeur != 0) // C'est un nouveau paramètre, il faut l'ajouter
         {
-            fprintf(fichierMiseAJour, "%s=%s\n", parametre, valeur);
+            fprintf(fichierMiseAJour, "%s%s%s\n", Parametre, DELIM, Valeur);
         }
     }
     FermerFichier(fichier);
@@ -227,13 +287,4 @@ int EcrireParametre(char* NomFichier, char* parametre, char* valeur)
         return -1;
     }
     return MSG_OK;
-}
-
-// Efface un parametre du fichier de configuration
-// NomFichier : Nom du fichier à traiter
-// parametre : Nom du parametre à effacer
-// Sortie : code résultat d'execution
-int EffacerParametre(char* NomFichier, char* parametre)
-{
-    return MSG_NotImplemented;
 }

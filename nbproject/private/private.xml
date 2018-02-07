@@ -12,10 +12,13 @@
             <file>file:/NetBeansProjects/switchManager/tools.h</file>
             <file>file:/NetBeansProjects/switchManager/informationsminuteries.h</file>
             <file>file:/NetBeansProjects/switchManager/minuterie.c</file>
+            <file>file:/NetBeansProjects/switchManager/gestionfichier.h</file>
+            <file>file:/NetBeansProjects/switchManager/gestioncommandes.h</file>
             <file>file:/NetBeansProjects/switchManager/gestionfichier.c</file>
             <file>file:/NetBeansProjects/switchManager/tools.c</file>
             <file>file:/NetBeansProjects/switchManager/initialisation.c</file>
             <file>file:/NetBeansProjects/switchManager/constantes.h</file>
+            <file>file:/NetBeansProjects/switchManager/minuterie.h</file>
         </group>
     </open-files>
 </project-private>

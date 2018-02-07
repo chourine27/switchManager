@@ -18,20 +18,24 @@
 #include <signal.h>
 #include <time.h>
 
-
+/**
+ * ChargerMinuterie
+ * 
+ * Charge tous les paramètres du fichier de configuration
+ * @return 
+ */
 int ChargerMinuterie()
 {
-    int i=0;
-    int result;
+    int codeResultat;
     char param[MAXBUF];
     char ligne[MAXBUF];
     char valeurMinuterie[MAXBUF];
-    struct InformationsMinuteries infoMinuterie, *temp;
     
     FILE *fichierConfig = OuvrirFichier(CONFIG_NOMFICHIER);
     
+    config.minuterie = 0;
     //Init du nom du paramètre minuterire
-    sprintf(param, "%s%d", PARAMETRE_MINUTERIE, i);
+    sprintf(param, "%s%d", PARAMETRE_MINUTERIE, config.minuterie);
     
     while (fgets(ligne, sizeof(ligne), fichierConfig) != NULL)
     {
@@ -42,32 +46,28 @@ int ChargerMinuterie()
        
         if(copieTexteDeConfig(param, ligne, valeurMinuterie) == MSG_OK)
         {
-            //Convertion de la ligne paramètre en structure infoMinuterie
-            // L'identifiant de la minuterie
-            temp = realloc(config.infoMinuteries, sizeof(struct InformationsMinuteries) * ++i);
-            if (temp == NULL)
-            {
-                return MSG_InsufficientStorage;
-            }
-            config.infoMinuteries = temp;
-            config.infoMinuteries[i-1].id = malloc(sizeof(char *) * strlen(param));
-            strcpy(config.infoMinuteries[i-1].id, param);
-            // Tous les autres paramètres
-            result = LireMinuterie(valeurMinuterie, config.infoMinuteries +(i-1));
-            if (result != MSG_OK)
+            codeResultat = AjouterMinuterie(param, valeurMinuterie); 
+            if (codeResultat != MSG_OK)
             {
                 // TODO : tracer l'erreur 
                 continue;
             }
             //Mise à jour du paramètre minuterie comme le compteur évolue.
-            sprintf(param, "%s%d", PARAMETRE_MINUTERIE, i);
+            sprintf(param, "%s%d", PARAMETRE_MINUTERIE, config.minuterie);
         }
     }
-    config.minuterie = i;
     FermerFichier(fichierConfig);
     return MSG_OK;    
 }
 
+/**
+ * LireMinuterie
+ * 
+ * Charge en cache les valeurs de la minuterie
+ * @param valeurMinuterie : ensemble des valeurs de la minuterie
+ * @param @out Minuterie : struct Minuterie remplie
+ * @return : Code erreur de la méthode
+ */
 int LireMinuterie(char* valeurMinuterie, struct InformationsMinuteries* Minuterie)
 {
     char **donneesMinuterie= malloc(sizeof(char *) * MAXARG);
@@ -110,6 +110,81 @@ int LireMinuterie(char* valeurMinuterie, struct InformationsMinuteries* Minuteri
         //strcpy(Minuterie->bouton, donneesMinuterie[5]);
     }
     return MSG_OK;
+}
+
+/**
+ * SupprimerMinuteries
+ * 
+ * Supprimer du cache les minuteries et recharge les nouvelles
+ * @return : Code erreur de la méthode
+ */
+int SupprimerMinuteries ()
+{
+    struct InformationsMinuteries *temp;
+    int codeResultat = MSG_MethodFailure;
+    if (config.minuterie > 0)
+    {
+        for(int i = 0; i < config.minuterie; i++)
+        {
+            // Efface du fichier de config et passe à l'index suivant
+            codeResultat = EffacerParametre(CONFIG_NOMFICHIER, config.infoMinuteries[i].id);
+            if (codeResultat != MSG_OK)
+            {
+                //TODO Log Erreur
+                printf("Impossible de supprimer la minuterie %s. Erreur : %d", config.infoMinuteries[i].id, codeResultat);
+            }
+        }
+        config.infoMinuteries = NULL;
+        config.minuterie = 0;
+    }
+    return MSG_OK;
+}
+
+/**
+ * AjouterMinuterie
+ * 
+ * Ajoute une minuterie à la suite dans le cache
+ * @param NomMinuterie : Nom de la minuterie à ajouter
+ * @param InfoMinuterie : information liés à la minuterie
+ * @return : Code erreur de la méthode
+ */
+int AjouterMinuterie(char* NomMinuterie, char* InfoMinuterie)
+{
+    int codeResultat = MSG_MethodFailure;
+    struct InformationsMinuteries *temp;
+    
+    //Convertion de la ligne paramètre en structure infoMinuterie
+    // L'identifiant de la minuterie
+    temp = realloc(config.infoMinuteries, sizeof(struct InformationsMinuteries) * (config.minuterie+1));
+    if (temp == NULL)
+    {
+        return MSG_InsufficientStorage;
+    }
+    config.infoMinuteries = temp;
+    config.infoMinuteries[config.minuterie].id = malloc(sizeof(char *) * strlen(NomMinuterie));
+    strcpy(config.infoMinuteries[config.minuterie].id, NomMinuterie);
+    // Tous les autres paramètres
+    codeResultat = LireMinuterie(InfoMinuterie, config.infoMinuteries +(config.minuterie));
+    if (codeResultat == MSG_OK)
+    {
+        config.minuterie++;
+    }
+    return codeResultat;
+}
+
+/**
+ * RetournerDetailMinuterie
+ * 
+ * Retourne les informations d'une minuterie
+ * @param IndexMinuterie : Numéro de la minuterie à retourner
+ * @param @out Informations : Informations en ligne d'une minuterie
+ * @return : Code erreur de la méthode
+ */
+int RetournerDetailMinuterie (char *IndexMinuterie, char *Informations)
+{
+    char *parametre = malloc(sizeof(char*) * (strlen(PARAMETRE_MINUTERIE) + strlen(IndexMinuterie)));
+    sprintf(parametre, "%s%s", PARAMETRE_MINUTERIE, IndexMinuterie);
+    return LireParametre(CONFIG_NOMFICHIER, parametre, Informations);
 }
 
 int ajouterTimer( char *name, timer_t *timerID, int expireMS, int intervalMS )
