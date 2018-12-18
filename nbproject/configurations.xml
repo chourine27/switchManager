@@ -4,6 +4,7 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>USBRelais.h</itemPath>
       <itemPath>configuration.h</itemPath>
       <itemPath>constantes.h</itemPath>
       <itemPath>gestioncommandes.h</itemPath>
@@ -84,6 +85,8 @@
       <item path="ReadMe" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ToDo" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="USBRelais.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="configuration.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -203,6 +206,8 @@
       </item>
       <item path="ToDo" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="USBRelais.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="configuration.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="constantes.h" ex="false" tool="3" flavor2="0">
@@ -316,6 +321,8 @@
       <item path="ReadMe" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ToDo" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="USBRelais.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="configuration.h" ex="false" tool="3" flavor2="0">
       </item>

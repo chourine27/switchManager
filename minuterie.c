@@ -193,8 +193,8 @@ int RetournerDetailMinuterie (char *IndexMinuterie, char *Informations)
 
 int DelaiPourLeProchain(int *IdentifiantMinuterie)
 {
-    int delai = 1000000;
-    int current_delai;
+    int delai = 1000000, less_delai = 1000000;
+    int current_delai, temp_delai;
     time_t now;
     struct tm *current_time;
     now = time(NULL);
@@ -202,29 +202,121 @@ int DelaiPourLeProchain(int *IdentifiantMinuterie)
 
     for(int i=0; i < config.minuterie; i++)
     {
-        for(int j=0; j < config.infoMinuteries[i].nbSeconde; j++)
+        delai = 1000000;
+        for(int s=0; s < config.infoMinuteries[i].nbSeconde; s++)
         {
-            if (config.infoMinuteries[i].seconde[j] == 0)
+            if (config.infoMinuteries[i].seconde[s] == 0)
             {
                 current_delai = 1;
+                printf("0 -> chaque seconde\n");
             }
             else
             {
-                current_delai = config.infoMinuteries[i].seconde[j] - current_time->tm_sec;
+                current_delai = config.infoMinuteries[i].seconde[s] - current_time->tm_sec;
+                printf("délai seconde : %d\n", current_delai);
                 if (current_delai < 0)
                 {
                     current_delai += 60;
+                    printf("Seconde devient %d\n", current_delai);
                 }
             }
             if (delai > current_delai)
             {
                 delai = current_delai;
-                IdentifiantMinuterie[0] = i;
+                printf("Nouvelle valeur plus proche seconde %d\n", delai);
             }
         } 
+        temp_delai = delai;
+        printf("temp_delai : %d\n", temp_delai);
+        delai = 1000000;
+        for(int m=0; m < config.infoMinuteries[i].nbMinute; m++)
+        {
+            if (config.infoMinuteries[i].minute[m] == 0)
+            {
+                current_delai = 0;
+                printf("O -> chaque minutes\n");
+            }
+            else
+            {
+                current_delai = (config.infoMinuteries[i].minute[m] - current_time->tm_min) * 60;
+                printf("délai minute : %d\n", current_delai);
+                if (current_delai < 0)
+                {
+                    current_delai += 3600;
+                    printf("minutes devient %d\n",current_delai);
+                }
+            }
+            if (delai > current_delai)
+            {
+                delai = current_delai;
+                printf("Nouvelle valeur plus proche minute %d\n", delai);
+            }
+        }
+        temp_delai += delai;
+        printf("temp_delai : %d\n", temp_delai);
+        delai = 1000000;
+        for(int h=0; h < config.infoMinuteries[i].nbHeure; h++)
+        {
+            if (config.infoMinuteries[i].heure[h] == 0)
+            {
+                current_delai = 0;
+                printf("0 -> chaque heures\n");
+            }
+            else
+            {
+                current_delai = (config.infoMinuteries[i].heure[h] - current_time->tm_hour) * 3600;
+                printf("délai heure : %d\n", current_delai);
+                if (current_delai < 0)
+                {
+                    current_delai += 86400;
+                    printf("heure devient %d\n", current_delai);
+                }
+            }
+            if (delai > current_delai)
+            {
+                delai = current_delai;
+                printf("Nouvelle valeur plus proche heure %d\n", delai);
+            }
+        }
+        temp_delai += delai;
+        printf("temp_delai : %d\n", temp_delai);
+        delai = 1000000;
+        for(int j=0; j < config.infoMinuteries[i].nbJour; j++)
+        {
+            if (config.infoMinuteries[i].jour[j] == 0)
+            {
+                current_delai = 0;
+                printf("0 -> chaque jour\n");
+            }
+            else
+            {
+                //jour dans minuterie est de 1 à 7 pour dimanche à samedi. coté time c'est de 0 à 6
+                current_delai = (config.infoMinuteries[i].jour[j] -1 - current_time->tm_wday) * 86400;
+                printf("delai jour : %d\n", current_delai);
+                if (current_delai < 0)
+                {
+                    current_delai += 604800;
+                    printf("jour devient %d\n", current_delai);
+                }
+            }
+            if (delai > current_delai)
+            {
+                delai = current_delai;
+                printf("Nouvelle  valeur plus proche jour %d\n", delai);
+            }
+        }
+        temp_delai += delai;        
+        printf("less : %d \ttemp : %d\n", less_delai, temp_delai);
+        if (less_delai > temp_delai)
+        {
+            less_delai = temp_delai;
+            printf("Mise à jour meilleure minuterie : %d\n", less_delai);
+            IdentifiantMinuterie[0] = i;
+            printf("Numéro minuterie prise : %d\n", i);
+        }
     }
-    printf("Prochain délai : %d\n", delai);
-    return delai;
+    printf("Prochain délai : %d\n", less_delai);
+    return less_delai;
 }
 
 int ajouterTimer( char *name, timer_t *timerID, int expireMS, int intervalMS )

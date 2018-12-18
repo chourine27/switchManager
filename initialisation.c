@@ -76,9 +76,9 @@ int initMinuterie()
 
 void dingdong(int unused)
 {
-    int *numeroMinuterie;
+    int *numeroMinuterie = malloc(sizeof(int));
     if (config.minuterie ==0)
-        return MSG_NoContent;
+        return;
     int delai = DelaiPourLeProchain(numeroMinuterie);
     signal(SIGALRM,dingdong);    
     alarm(delai);
