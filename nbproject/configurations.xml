@@ -5,6 +5,7 @@
                    displayName="Header Files"
                    projectFiles="true">
       <itemPath>USBRelais.h</itemPath>
+      <itemPath>clientudp.h</itemPath>
       <itemPath>configuration.h</itemPath>
       <itemPath>constantes.h</itemPath>
       <itemPath>gestioncommandes.h</itemPath>
@@ -21,11 +22,14 @@
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
                    projectFiles="true">
+      <itemPath>.log4crc</itemPath>
       <itemPath>ToDo</itemPath>
     </logicalFolder>
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>USBRelais.c</itemPath>
+      <itemPath>clientudp.c</itemPath>
       <itemPath>gestioncommandes.c</itemPath>
       <itemPath>gestionfichier.c</itemPath>
       <itemPath>gestiongpio.c</itemPath>
@@ -67,6 +71,9 @@
     </logicalFolder>
     <itemPath>ReadMe</itemPath>
   </logicalFolder>
+  <sourceRootList>
+    <Elem>/usr/share/log4c/include</Elem>
+  </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
     <conf name="VoCore_Debug" type="1">
@@ -82,11 +89,19 @@
           </preprocessorList>
         </cTool>
       </compileType>
+      <item path=".log4crc" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="ReadMe" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ToDo" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="USBRelais.c" ex="false" tool="0" flavor2="0">
+      </item>
       <item path="USBRelais.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="clientudp.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="clientudp.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="configuration.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -202,11 +217,19 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path=".log4crc" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="ReadMe" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ToDo" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="USBRelais.c" ex="false" tool="0" flavor2="0">
+      </item>
       <item path="USBRelais.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="clientudp.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="clientudp.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="configuration.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -310,19 +333,27 @@
       </toolsSet>
       <compileType>
         <cTool>
-          <architecture>1</architecture>
           <commandlineTool>gcc</commandlineTool>
           <commandLine>-pthread</commandLine>
           <preprocessorList>
             <Elem>DEBUG</Elem>
+            <Elem>RASPBERRY</Elem>
           </preprocessorList>
         </cTool>
       </compileType>
+      <item path=".log4crc" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="ReadMe" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ToDo" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="USBRelais.c" ex="false" tool="0" flavor2="0">
+      </item>
       <item path="USBRelais.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="clientudp.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="clientudp.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="configuration.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -371,6 +402,144 @@
         </ccTool>
         <linkerTool>
           <output>${TESTDIR}/TestFiles/f3</output>
+        </linkerTool>
+      </folder>
+      <item path="gestioncommandes.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="gestioncommandes.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="gestionfichier.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="gestionfichier.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="gestiongpio.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="gestiongpio.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="informationsminuteries.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="initialisation.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="initialisation.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="listecodes.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="main.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="minuterie.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="minuterie.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="serveurudp.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="serveurudp.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tests/Test_gestioncommandes.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="tests/Test_gestionfichier.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="tests/Test_gestiongpio.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="tools.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="tools.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="voCoreGPIO.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="voCoreGPIO.h" ex="false" tool="3" flavor2="0">
+      </item>
+    </conf>
+    <conf name="Raspberry" type="1">
+      <toolsSet>
+        <compilerSet>GNU|GNU</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <commandlineTool>arm-linux-gnueabi-gcc</commandlineTool>
+          <commandLine>-pthread</commandLine>
+          <preprocessorList>
+            <Elem>RASPBERRY</Elem>
+          </preprocessorList>
+        </cTool>
+      </compileType>
+      <item path=".log4crc" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ReadMe" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ToDo" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="USBRelais.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="USBRelais.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="clientudp.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="clientudp.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="configuration.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="constantes.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <folder path="TestFiles/f1">
+        <cTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+          <commandLine>`cppunit-config --cflags`</commandLine>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+          <commandLine>`cppunit-config --cflags`</commandLine>
+        </ccTool>
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f1</output>
+          <linkerLibItems>
+            <linkerOptionItem>`cppunit-config --libs`</linkerOptionItem>
+          </linkerLibItems>
+        </linkerTool>
+      </folder>
+      <folder path="TestFiles/f2">
+        <cTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+          <commandLine>`cppunit-config --cflags`</commandLine>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+          <commandLine>`cppunit-config --cflags`</commandLine>
+        </ccTool>
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f2</output>
+          <linkerLibItems>
+            <linkerOptionItem>`cppunit-config --libs`</linkerOptionItem>
+          </linkerLibItems>
+        </linkerTool>
+      </folder>
+      <folder path="TestFiles/f3">
+        <cTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+          <commandLine>`cppunit-config --cflags`</commandLine>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+          <commandLine>`cppunit-config --cflags`</commandLine>
+        </ccTool>
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f3</output>
+          <linkerLibItems>
+            <linkerOptionItem>`cppunit-config --libs`</linkerOptionItem>
+          </linkerLibItems>
         </linkerTool>
       </folder>
       <item path="gestioncommandes.c" ex="false" tool="0" flavor2="0">

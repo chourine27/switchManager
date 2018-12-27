@@ -9,7 +9,9 @@
             <header-extensions>h</header-extensions>
             <sourceEncoding>UTF-8</sourceEncoding>
             <make-dep-projects/>
-            <sourceRootList/>
+            <sourceRootList>
+                <sourceRootElem>/usr/share/log4c/include</sourceRootElem>
+            </sourceRootList>
             <confList>
                 <confElem>
                     <name>VoCore_Debug</name>
@@ -21,6 +23,10 @@
                 </confElem>
                 <confElem>
                     <name>Debug</name>
+                    <type>1</type>
+                </confElem>
+                <confElem>
+                    <name>Raspberry</name>
                     <type>1</type>
                 </confElem>
             </confList>

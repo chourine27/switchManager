@@ -31,7 +31,7 @@ DEFAULTCONF=VoCore_Debug
 CONF=${DEFAULTCONF}
 
 # All Configurations
-ALLCONFS=VoCore_Debug Release Debug 
+ALLCONFS=VoCore_Debug Release Debug Raspberry 
 
 
 # build

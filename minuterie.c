@@ -5,12 +5,14 @@
  */
 
 #include "gestionfichier.h"
+#include "gestiongpio.h"
 #include "minuterie.h"
 #include "constantes.h"
 #include "listecodes.h"
 #include "configuration.h"
 #include "informationsminuteries.h"
 #include "tools.h"
+#include "clientudp.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -18,6 +20,8 @@
 #include <signal.h>
 #include <time.h>
 
+
+static int indexMinuterie;
 
 /**
  * ChargerMinuterie
@@ -193,7 +197,7 @@ int RetournerDetailMinuterie (char *IndexMinuterie, char *Informations)
 
 int DelaiPourLeProchain(int *IdentifiantMinuterie)
 {
-    int delai = 1000000, less_delai = 1000000;
+    int delai, less_delai = 1000000;
     int current_delai, temp_delai;
     time_t now;
     struct tm *current_time;
@@ -315,51 +319,36 @@ int DelaiPourLeProchain(int *IdentifiantMinuterie)
             printf("Numéro minuterie prise : %d\n", i);
         }
     }
+    if (less_delai == 0)
+        less_delai++;
     printf("Prochain délai : %d\n", less_delai);
     return less_delai;
 }
-
-int ajouterTimer( char *name, timer_t *timerID, int expireMS, int intervalMS )
+ 
+int AjouterTimer(int delai, int numMinuterie)
 {
-    struct sigevent         te;
-    struct itimerspec       its;
-    struct sigaction        sa;
-    int                     sigNo = SIGRTMIN;
-
-    /* Set up signal handler. */
-    sa.sa_flags = SA_SIGINFO;
-    sa.sa_sigaction = sigMinut_handler;
-    sigemptyset(&sa.sa_mask);
-    if (sigaction(sigNo, &sa, NULL) == -1)
-    {
-        //fprintf(stderr, "%s: Failed to setup signal handling for %s.\n", PROG, name);
-        return(-1);
-    }
-
-    /* Set and enable alarm */
-    te.sigev_notify = SIGEV_SIGNAL;
-    te.sigev_signo = sigNo;
-    te.sigev_value.sival_ptr = timerID;
-//    timer_create(CLOCK_REALTIME, &te, timerID);
-
-    its.it_interval.tv_sec = 0;
-    its.it_interval.tv_nsec = intervalMS * 1000000;
-    its.it_value.tv_sec = 0;
-    its.it_value.tv_nsec = expireMS * 1000000;
-//    timer_settime(*timerID, 0, &its, NULL);
-
-    return(0);
+    signal(SIGALRM, ALARMhandler);
+    alarm(delai);
+    indexMinuterie = numMinuterie;
+    return MSG_OK;
 }
 
-void sigMinut_handler( int sig, siginfo_t *si, void *uc )
+int TraiterMinuterie (int index)
 {
-    timer_t *tidp;
-    tidp = si->si_value.sival_ptr;
+    char commande[MAXBUF];
+    sprintf(commande, "%s %d %d\n", COMMANDE_CHANGESTATUTBOUTON, 1, config.infoMinuteries[index].etat);
+    printf("Minuterie : %s", commande);
+    sendData(commande);
+}
 
-    /* if ( *tidp == firstTimerID )
-        firstCB(sig, si, uc);
-    else if ( *tidp == secondTimerID )
-        secondCB(sig, si, uc);
-    else if ( *tidp == thirdTimerID )
-        thirdCB(sig, si, uc); */
+void  ALARMhandler(int sig)
+{
+    signal(SIGALRM, SIG_IGN);          /* ignore this signal       */
+
+    int *numeroMinuterie = malloc(sizeof(int));
+    if (config.minuterie ==0)
+        return MSG_NoContent;
+    TraiterMinuterie(indexMinuterie);
+    int delai = DelaiPourLeProchain(numeroMinuterie);
+    AjouterTimer(delai, numeroMinuterie[0]);
 }

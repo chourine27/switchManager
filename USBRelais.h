@@ -10,7 +10,7 @@
  *
  * Created on December 18, 2018, 10:43 AM
  */
-#ifdef Raspberry
+#ifdef RASPBERRY
 #define SERIALPORT "/dev/ttyUSB0" // Chemin d'accès au GPIO
 #else
 #define SERIALPORT "/NetBeansProjects/switchManager/gpio/gpio" // Chemin d'accès au GPIO
@@ -22,6 +22,8 @@
 #define XONXOFF false
 #define RTSCTS false
 #define DSRDTR false
+#define PREFIXRELAI "RLY"
+#define INFORELAIS "?RLY"
 
 #ifndef USBRELAIS_H
 #define USBRELAIS_H
@@ -30,10 +32,12 @@
 extern "C" {
 #endif
 
-int USBRelais_gpioSetValueByIndex(int index, int valeur);
-int USBRelais_gpioSetValue(char* index, char* valeur);
+int USBRelais_gpioSetValue(int index, int valeur);
 int USBRelais_gpioInit(char* index);
+int USBRelais_sendData(char* prefix, int index, int valeur);
 
+int set_interface_attribs (int fd, int speed, int parity);
+void set_blocking (int fd, int should_block);
 
 #ifdef __cplusplus
 }

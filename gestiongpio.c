@@ -11,6 +11,7 @@
 #include "listecodes.h"
 #include "constantes.h"
 #include "voCoreGPIO.h"
+#include "USBRelais.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -29,7 +30,12 @@ int EtatRelai(int index)
 // Retour : MSG_OK si OK, code d'erreur sinon
 int ActiverRelai(int index)
 {
+#ifdef VOCORE
     return voCore_gpioSetValueByIndex(index, CONFIG_ALLUME);
+#endif
+#ifdef RASPBERRY
+    return USBRelais_gpioSetValue(index, CONFIG_ALLUME);
+#endif
 }
 
 // Désactive un relai
@@ -37,5 +43,10 @@ int ActiverRelai(int index)
 // Retour : MSG_OK si OK, code d'erreur sinon
 int DesactiverRelai (int index)
 {
+#ifdef VOCORE
     return voCore_gpioSetValueByIndex(index, CONFIG_ETEINT);
+#endif
+#ifdef RASPBERRY
+    return USBRelais_gpioSetValue(index, CONFIG_ETEINT);
+#endif
 }

@@ -25,6 +25,7 @@
 #define COMMANDE_PURGERMINUTERIE "PurgerMinuteries" // Commande pour effacer toutes les informations des minuteries
 #define COMMANDE_NOMBREMINUTERIE "CombienDeMinuteries" // Commande pour connaitre le nombre de minuteries
 #define COMMANDE_DETAILMINUTERIE "DetailMinuterie" // Commande pour récuperer le détail d'une minuterie
+#define COMMANDE_AIDE "Aide" // Commande pour afficher toutes les commandes possibles
 
 #define CONFIG_NOMFICHIER "switchmanager.config" // nom du fichier de config
 #define FICHIERTEMPORAIRE "config.tmp" // nom du fichier temporaire

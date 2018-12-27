@@ -29,8 +29,9 @@ extern "C" {
     int DesactiverMinuterie ();
     int RetournerDetailMinuterie (char *IndexMinuterie, char *Informations);
     int DelaiPourLeProchain(int *IdentifiantMinuterie);
-    void sigMinut_handler( int sig, siginfo_t *si, void *uc );
-    int ajouterTimer( char *name, timer_t *timerID, int expireMS, int intervalMS );
+    int AjouterTimer(int delai, int numMinuterie);
+    int TraiterMinuterie (int index);
+    void  ALARMhandler(int sig);
 
 #ifdef __cplusplus
 }

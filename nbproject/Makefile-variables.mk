@@ -30,6 +30,14 @@ CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux/switchmanager
 CND_PACKAGE_DIR_Debug=dist/Debug/GNU-Linux/package
 CND_PACKAGE_NAME_Debug=switchmanager.tar
 CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux/package/switchmanager.tar
+# Raspberry configuration
+CND_PLATFORM_Raspberry=GNU-Linux
+CND_ARTIFACT_DIR_Raspberry=dist/Raspberry/GNU-Linux
+CND_ARTIFACT_NAME_Raspberry=switchmanager
+CND_ARTIFACT_PATH_Raspberry=dist/Raspberry/GNU-Linux/switchmanager
+CND_PACKAGE_DIR_Raspberry=dist/Raspberry/GNU-Linux/package
+CND_PACKAGE_NAME_Raspberry=switchmanager.tar
+CND_PACKAGE_PATH_Raspberry=dist/Raspberry/GNU-Linux/package/switchmanager.tar
 #
 # include compiler specific variables
 #

@@ -7,16 +7,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/NetBeansProjects/switchManager/gestioncommandes.c</file>
+            <file>file:/NetBeansProjects/switchManager/USBRelais.c</file>
             <file>file:/NetBeansProjects/switchManager/main.c</file>
-            <file>file:/NetBeansProjects/switchManager/informationsminuteries.h</file>
+            <file>file:/NetBeansProjects/switchManager/gestiongpio.c</file>
             <file>file:/NetBeansProjects/switchManager/minuterie.c</file>
-            <file>file:/NetBeansProjects/switchManager/serveurudp.c</file>
-            <file>file:/NetBeansProjects/switchManager/gestionfichier.c</file>
-            <file>file:/NetBeansProjects/switchManager/tools.c</file>
-            <file>file:/NetBeansProjects/switchManager/initialisation.c</file>
-            <file>file:/NetBeansProjects/switchManager/minuterie.h</file>
-            <file>file:/NetBeansProjects/switchManager/listecodes.h</file>
+            <file>file:/NetBeansProjects/switchManager/.log4crc</file>
+            <file>file:/NetBeansProjects/switchManager/configuration.h</file>
+            <file>file:/NetBeansProjects/switchManager/clientudp.c</file>
+            <file>file:/NetBeansProjects/switchManager/USBRelais.h</file>
         </group>
     </open-files>
 </project-private>

@@ -61,7 +61,6 @@ int initGPIO()
     }
     return MSG_OK;
 }
-void dingdong(int unused);
 
 int initMinuterie()
 {
@@ -69,18 +68,6 @@ int initMinuterie()
     if (config.minuterie ==0)
         return MSG_NoContent;
     int delai = DelaiPourLeProchain(numeroMinuterie);
-    signal(SIGALRM,dingdong);    
-    alarm(delai);
+    AjouterTimer(delai, numeroMinuterie[0]);
     return MSG_OK;
-}
-
-void dingdong(int unused)
-{
-    int *numeroMinuterie = malloc(sizeof(int));
-    if (config.minuterie ==0)
-        return;
-    int delai = DelaiPourLeProchain(numeroMinuterie);
-    signal(SIGALRM,dingdong);    
-    alarm(delai);
-    printf("Trop fort : %d\n", unused);
 }

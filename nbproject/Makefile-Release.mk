@@ -35,6 +35,8 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/USBRelais.o \
+	${OBJECTDIR}/clientudp.o \
 	${OBJECTDIR}/gestioncommandes.o \
 	${OBJECTDIR}/gestionfichier.o \
 	${OBJECTDIR}/gestiongpio.o \
@@ -83,6 +85,16 @@ LDLIBSOPTIONS=
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/switchmanager: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/switchmanager ${OBJECTFILES} ${LDLIBSOPTIONS}
+
+${OBJECTDIR}/USBRelais.o: USBRelais.c
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/USBRelais.o USBRelais.c
+
+${OBJECTDIR}/clientudp.o: clientudp.c
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/clientudp.o clientudp.c
 
 ${OBJECTDIR}/gestioncommandes.o: gestioncommandes.c
 	${MKDIR} -p ${OBJECTDIR}
@@ -166,6 +178,32 @@ ${TESTDIR}/tests/Test_gestiongpio.o: tests/Test_gestiongpio.c
 	${RM} "$@.d"
 	$(COMPILE.c) -O2 -I. -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/Test_gestiongpio.o tests/Test_gestiongpio.c
 
+
+${OBJECTDIR}/USBRelais_nomain.o: ${OBJECTDIR}/USBRelais.o USBRelais.c 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/USBRelais.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.c) -O2 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/USBRelais_nomain.o USBRelais.c;\
+	else  \
+	    ${CP} ${OBJECTDIR}/USBRelais.o ${OBJECTDIR}/USBRelais_nomain.o;\
+	fi
+
+${OBJECTDIR}/clientudp_nomain.o: ${OBJECTDIR}/clientudp.o clientudp.c 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/clientudp.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.c) -O2 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/clientudp_nomain.o clientudp.c;\
+	else  \
+	    ${CP} ${OBJECTDIR}/clientudp.o ${OBJECTDIR}/clientudp_nomain.o;\
+	fi
 
 ${OBJECTDIR}/gestioncommandes_nomain.o: ${OBJECTDIR}/gestioncommandes.o gestioncommandes.c 
 	${MKDIR} -p ${OBJECTDIR}
