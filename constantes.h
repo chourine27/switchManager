@@ -34,7 +34,6 @@
 #define CONFIG_ETEINT 0 // etat quand prise eteinte
 #define CONFIG_ACTIVER "Oui" // etat d un service active
 #define CONFIG_DESACTIVER "Non" //etat d un service inactif
-#define CONFIG_LOCALSERVEUR "localhost" // Nom local du serveur
 #define CONFIG_LOCALPORTSERVEUR "27601" // port de connexion du client UDP
 
 #define PARAMETRE_PORTSERVEUR "Port" // port de connexion au serveur UDP

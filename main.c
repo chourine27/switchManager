@@ -1,6 +1,6 @@
 
 #include "configuration.h"
-iu#include "initialisation.h"
+#include "initialisation.h"
 #include "serveurudp.h"
 #include "gestionlog.h"
 
