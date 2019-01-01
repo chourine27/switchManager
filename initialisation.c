@@ -7,6 +7,7 @@
 /*   Initialisation au démarrage ou après évolution materiel                  */
 /* ========================================================================== */
 
+
 #include "initialisation.h"
 #include "constantes.h"
 #include "gestioncommandes.h"
@@ -14,6 +15,8 @@
 #include "voCoreGPIO.h"
 #include "minuterie.h"
 #include "configuration.h"
+#include "gestionlog.h"
+#include "fastlogger/fastlogger.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -26,13 +29,12 @@ int initConfig()
 {
     char resultat[BUFLEN];
     int codeResultat;
-    
+
     codeResultat = RetournerInformationConfig(PARAMETRE_NOMSERVEUR, INITIAL_NOMSERVEUR, resultat);
     codeResultat = RetournerInformationConfig(PARAMETRE_NOMBREINTERRUPTEUR, INITIAL_NOMBREINTERRUPTEUR, resultat);
     
     //Pour pouvoir utiliser tout le temps realloc, init à NULL
     config.infoMinuteries = NULL;
-    
     codeResultat = ChargerMinuterie();
 }
 
@@ -66,8 +68,21 @@ int initMinuterie()
 {
     int *numeroMinuterie = malloc(sizeof(int));
     if (config.minuterie ==0)
+    {   
+        ecrireMessageErreur("initialisation", "Pas de minuterie configurée");
         return MSG_NoContent;
+    }
     int delai = DelaiPourLeProchain(numeroMinuterie);
     AjouterTimer(delai, numeroMinuterie[0]);
+    return MSG_OK;
+}
+
+int initLog()
+{
+    char* str =  fastlogger_thread_local_file_name(LOG_NOMFICHIER,0);
+    //free(str);
+    fastlogger_set_log_filename(LOG_NOMFICHIER);
+    fastlogger_set_min_default_log_level(FL_DEBUG);
+    fastlogger_separate_log_per_thread(1);
     return MSG_OK;
 }

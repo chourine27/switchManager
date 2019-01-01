@@ -37,9 +37,11 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/USBRelais.o \
 	${OBJECTDIR}/clientudp.o \
+	${OBJECTDIR}/fastlogger/fastlogger.o \
 	${OBJECTDIR}/gestioncommandes.o \
 	${OBJECTDIR}/gestionfichier.o \
 	${OBJECTDIR}/gestiongpio.o \
+	${OBJECTDIR}/gestionlog.o \
 	${OBJECTDIR}/initialisation.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/minuterie.o \
@@ -96,6 +98,11 @@ ${OBJECTDIR}/clientudp.o: clientudp.c nbproject/Makefile-${CND_CONF}.mk
 	${RM} "$@.d"
 	$(COMPILE.c) -g -DDEBUG -DRASPBERRY -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/clientudp.o clientudp.c
 
+${OBJECTDIR}/fastlogger/fastlogger.o: fastlogger/fastlogger.c nbproject/Makefile-${CND_CONF}.mk
+	${MKDIR} -p ${OBJECTDIR}/fastlogger
+	${RM} "$@.d"
+	$(COMPILE.c) -g -DDEBUG -DRASPBERRY -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/fastlogger/fastlogger.o fastlogger/fastlogger.c
+
 ${OBJECTDIR}/gestioncommandes.o: gestioncommandes.c nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
@@ -110,6 +117,11 @@ ${OBJECTDIR}/gestiongpio.o: gestiongpio.c nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -g -DDEBUG -DRASPBERRY -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/gestiongpio.o gestiongpio.c
+
+${OBJECTDIR}/gestionlog.o: gestionlog.c nbproject/Makefile-${CND_CONF}.mk
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -g -DDEBUG -DRASPBERRY -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/gestionlog.o gestionlog.c
 
 ${OBJECTDIR}/initialisation.o: initialisation.c nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} -p ${OBJECTDIR}
@@ -205,6 +217,19 @@ ${OBJECTDIR}/clientudp_nomain.o: ${OBJECTDIR}/clientudp.o clientudp.c
 	    ${CP} ${OBJECTDIR}/clientudp.o ${OBJECTDIR}/clientudp_nomain.o;\
 	fi
 
+${OBJECTDIR}/fastlogger/fastlogger_nomain.o: ${OBJECTDIR}/fastlogger/fastlogger.o fastlogger/fastlogger.c 
+	${MKDIR} -p ${OBJECTDIR}/fastlogger
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/fastlogger/fastlogger.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.c) -g -DDEBUG -DRASPBERRY -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/fastlogger/fastlogger_nomain.o fastlogger/fastlogger.c;\
+	else  \
+	    ${CP} ${OBJECTDIR}/fastlogger/fastlogger.o ${OBJECTDIR}/fastlogger/fastlogger_nomain.o;\
+	fi
+
 ${OBJECTDIR}/gestioncommandes_nomain.o: ${OBJECTDIR}/gestioncommandes.o gestioncommandes.c 
 	${MKDIR} -p ${OBJECTDIR}
 	@NMOUTPUT=`${NM} ${OBJECTDIR}/gestioncommandes.o`; \
@@ -242,6 +267,19 @@ ${OBJECTDIR}/gestiongpio_nomain.o: ${OBJECTDIR}/gestiongpio.o gestiongpio.c
 	    $(COMPILE.c) -g -DDEBUG -DRASPBERRY -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/gestiongpio_nomain.o gestiongpio.c;\
 	else  \
 	    ${CP} ${OBJECTDIR}/gestiongpio.o ${OBJECTDIR}/gestiongpio_nomain.o;\
+	fi
+
+${OBJECTDIR}/gestionlog_nomain.o: ${OBJECTDIR}/gestionlog.o gestionlog.c 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/gestionlog.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.c) -g -DDEBUG -DRASPBERRY -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/gestionlog_nomain.o gestionlog.c;\
+	else  \
+	    ${CP} ${OBJECTDIR}/gestionlog.o ${OBJECTDIR}/gestionlog_nomain.o;\
 	fi
 
 ${OBJECTDIR}/initialisation_nomain.o: ${OBJECTDIR}/initialisation.o initialisation.c 

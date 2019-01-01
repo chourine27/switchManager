@@ -9,12 +9,13 @@
         <group>
             <file>file:/NetBeansProjects/switchManager/USBRelais.c</file>
             <file>file:/NetBeansProjects/switchManager/main.c</file>
+            <file>file:/NetBeansProjects/switchManager/gestionlog.c</file>
             <file>file:/NetBeansProjects/switchManager/gestiongpio.c</file>
             <file>file:/NetBeansProjects/switchManager/minuterie.c</file>
-            <file>file:/NetBeansProjects/switchManager/.log4crc</file>
+            <file>file:/NetBeansProjects/switchManager/serveurudp.c</file>
             <file>file:/NetBeansProjects/switchManager/configuration.h</file>
             <file>file:/NetBeansProjects/switchManager/clientudp.c</file>
-            <file>file:/NetBeansProjects/switchManager/USBRelais.h</file>
+            <file>file:/NetBeansProjects/switchManager/constantes.h</file>
         </group>
     </open-files>
 </project-private>

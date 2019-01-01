@@ -28,14 +28,17 @@
 #define COMMANDE_AIDE "Aide" // Commande pour afficher toutes les commandes possibles
 
 #define CONFIG_NOMFICHIER "switchmanager.config" // nom du fichier de config
+#define LOG_NOMFICHIER "switchmanager.log" // nom du fichier de config
 #define FICHIERTEMPORAIRE "config.tmp" // nom du fichier temporaire
 #define CONFIG_ALLUME 1 // etat quand prise allume
 #define CONFIG_ETEINT 0 // etat quand prise eteinte
 #define CONFIG_ACTIVER "Oui" // etat d un service active
 #define CONFIG_DESACTIVER "Non" //etat d un service inactif
+#define CONFIG_LOCALSERVEUR "localhost" // Nom local du serveur
+#define CONFIG_LOCALPORTSERVEUR "27601" // port de connexion du client UDP
 
-#define PARAMETRE_PORTSERVEUR "Port" // port de connexion au serveur udp
-#define INITIAL_PORTSERVEUR "27600" // port de connexion pqr defaut au serveur udp
+#define PARAMETRE_PORTSERVEUR "Port" // port de connexion au serveur UDP
+#define INITIAL_PORTSERVEUR "27600" // port de connexion par defaut au serveur UDP
 #define PARAMETRE_NOMSERVEUR "NomServeur" // nom du serveur udp
 #define INITIAL_NOMSERVEUR "Interrupteur" // nom par defaut du serveur
 #define PARAMETRE_IMAGESERVEUR "ImageServeur" // Image representant le serveur

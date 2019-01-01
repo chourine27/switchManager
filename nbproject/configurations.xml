@@ -4,6 +4,10 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <logicalFolder name="f1" displayName="fastlogger" projectFiles="true">
+        <itemPath>fastlogger/fastlogger.h</itemPath>
+        <itemPath>fastlogger/linkedlist.h</itemPath>
+      </logicalFolder>
       <itemPath>USBRelais.h</itemPath>
       <itemPath>clientudp.h</itemPath>
       <itemPath>configuration.h</itemPath>
@@ -11,6 +15,7 @@
       <itemPath>gestioncommandes.h</itemPath>
       <itemPath>gestionfichier.h</itemPath>
       <itemPath>gestiongpio.h</itemPath>
+      <itemPath>gestionlog.h</itemPath>
       <itemPath>informationsminuteries.h</itemPath>
       <itemPath>initialisation.h</itemPath>
       <itemPath>listecodes.h</itemPath>
@@ -28,11 +33,15 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <logicalFolder name="f1" displayName="fastlogger" projectFiles="true">
+        <itemPath>fastlogger/fastlogger.c</itemPath>
+      </logicalFolder>
       <itemPath>USBRelais.c</itemPath>
       <itemPath>clientudp.c</itemPath>
       <itemPath>gestioncommandes.c</itemPath>
       <itemPath>gestionfichier.c</itemPath>
       <itemPath>gestiongpio.c</itemPath>
+      <itemPath>gestionlog.c</itemPath>
       <itemPath>initialisation.c</itemPath>
       <itemPath>main.c</itemPath>
       <itemPath>minuterie.c</itemPath>
@@ -71,9 +80,6 @@
     </logicalFolder>
     <itemPath>ReadMe</itemPath>
   </logicalFolder>
-  <sourceRootList>
-    <Elem>/usr/share/log4c/include</Elem>
-  </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
     <conf name="VoCore_Debug" type="1">
@@ -152,6 +158,12 @@
           <output>${TESTDIR}/TestFiles/f3</output>
         </linkerTool>
       </folder>
+      <item path="fastlogger/fastlogger.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="fastlogger/fastlogger.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="fastlogger/linkedlist.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="gestioncommandes.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="gestioncommandes.h" ex="false" tool="3" flavor2="0">
@@ -163,6 +175,10 @@
       <item path="gestiongpio.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="gestiongpio.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="gestionlog.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="gestionlog.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="informationsminuteries.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -280,6 +296,12 @@
           <output>${TESTDIR}/TestFiles/f3</output>
         </linkerTool>
       </folder>
+      <item path="fastlogger/fastlogger.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="fastlogger/fastlogger.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="fastlogger/linkedlist.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="gestioncommandes.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="gestioncommandes.h" ex="false" tool="3" flavor2="0">
@@ -291,6 +313,10 @@
       <item path="gestiongpio.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="gestiongpio.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="gestionlog.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="gestionlog.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="informationsminuteries.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -404,6 +430,12 @@
           <output>${TESTDIR}/TestFiles/f3</output>
         </linkerTool>
       </folder>
+      <item path="fastlogger/fastlogger.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="fastlogger/fastlogger.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="fastlogger/linkedlist.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="gestioncommandes.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="gestioncommandes.h" ex="false" tool="3" flavor2="0">
@@ -415,6 +447,10 @@
       <item path="gestiongpio.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="gestiongpio.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="gestionlog.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="gestionlog.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="informationsminuteries.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -542,6 +578,12 @@
           </linkerLibItems>
         </linkerTool>
       </folder>
+      <item path="fastlogger/fastlogger.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="fastlogger/fastlogger.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="fastlogger/linkedlist.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="gestioncommandes.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="gestioncommandes.h" ex="false" tool="3" flavor2="0">
@@ -553,6 +595,10 @@
       <item path="gestiongpio.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="gestiongpio.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="gestionlog.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="gestionlog.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="informationsminuteries.h" ex="false" tool="3" flavor2="0">
       </item>
