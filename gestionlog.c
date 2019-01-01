@@ -7,6 +7,7 @@
 #include "configuration.h"
 #include "fastlogger/fastlogger.h"
 #include "listecodes.h"
+#include "tools.h"
 
 #include <stdlib.h>
 

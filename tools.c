@@ -100,3 +100,10 @@ int splitInformationString(char* content, char** result)
 {
     return splitString(content, result, SEPARVALEUR);
 }
+
+char* concatString(char* content, int value)
+{
+    char resultat[MAXBUF];
+    sprintf(resultat, "%s%d\n", content, value);
+    return resultat;
+}
