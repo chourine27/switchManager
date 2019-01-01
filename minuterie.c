@@ -56,11 +56,12 @@ int ChargerMinuterie()
             codeResultat = AjouterMinuterie(param, valeurMinuterie); 
             if (codeResultat != MSG_OK)
             {
-                // TODO : tracer l'erreur 
+                ecrireMessageErreur("minuterie", concatString("Erreur à copieTexteDeConfig : ", codeResultat));
                 continue;
             }
             //Mise à jour du paramètre minuterie comme le compteur évolue.
             sprintf(param, "%s%d", PARAMETRE_MINUTERIE, config.minuterie);
+            ecrireMessageDebug("minuterie", concatString("Minuterie chargée : ", config.minuterie));
         }
     }
     FermerFichier(fichierConfig);
@@ -140,8 +141,8 @@ int SupprimerMinuteries ()
             codeResultat = EffacerParametre(CONFIG_NOMFICHIER, config.infoMinuteries[i].id);
             if (codeResultat != MSG_OK)
             {
-                //TODO Log Erreur
-                printf("Impossible de supprimer la minuterie %s. Erreur : %d", config.infoMinuteries[i].id, codeResultat);
+                ecrireMessageErreur("minuterie", concatString("Impossible de supprimer une minuterie : ", codeResultat));
+                ecrireMessageErreur("minuterie", config.infoMinuteries[i].id);
             }
         }
         config.infoMinuteries = NULL;
@@ -321,8 +322,8 @@ int TraiterMinuterie (int index)
 {
     char commande[MAXBUF];
     sprintf(commande, "%s %d %d\n", COMMANDE_CHANGESTATUTBOUTON, 1, config.infoMinuteries[index].etat);
-    printf("Minuterie : %s", commande);
     sendData(commande);
+    ecrireMessageInfo("minuterie", "TraitementMinuterie commande transmise");
 }
 
 void  ALARMhandler(int sig)
