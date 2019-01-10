@@ -21,14 +21,14 @@
 #define COMMANDE_CHANGERIMAGEBOUTON "ChangeImageBouton" // prefix pour changer l'image d'une prise
 #define COMMANDE_STATUTBOUTON "EtatBouton" // Commande pour retourner l'etat d'une prise
 #define COMMANDE_CHANGESTATUTBOUTON "ChangeEtatBouton" // Commande pour changer l'état d'un bouton
-#define COMMANDE_SAUVEGARDERMINUTERIE "SauvegarderMinuterie" // Commande enregistrer les informations d'une minuterie
+#define COMMANDE_SAUVEGARDERMINUTERIE "SauvegarderMinuterie" // Commande enregistrer les informations d'une minuterie : {index} {seconde} {minutes} {heure} {jour} {etat} {bouton}
 #define COMMANDE_PURGERMINUTERIE "PurgerMinuteries" // Commande pour effacer toutes les informations des minuteries
 #define COMMANDE_NOMBREMINUTERIE "CombienDeMinuteries" // Commande pour connaitre le nombre de minuteries
 #define COMMANDE_DETAILMINUTERIE "DetailMinuterie" // Commande pour récuperer le détail d'une minuterie
 #define COMMANDE_AIDE "Aide" // Commande pour afficher toutes les commandes possibles
 
 #define CONFIG_NOMFICHIER "switchmanager.config" // nom du fichier de config
-#define LOG_NOMFICHIER "switchmanager.log" // nom du fichier de config
+#define LOG_NOMFICHIER "switchmanager" // nom du fichier de config
 #define FICHIERTEMPORAIRE "config.tmp" // nom du fichier temporaire
 #define CONFIG_ALLUME 1 // etat quand prise allume
 #define CONFIG_ETEINT 0 // etat quand prise eteinte
@@ -36,6 +36,8 @@
 #define CONFIG_DESACTIVER "Non" //etat d un service inactif
 #define CONFIG_LOCALPORTSERVEUR "27601" // port de connexion du client UDP
 
+#define PARAMETRE_NIVEAULOG "NiveauLog" // Niveau de Log
+#define INITIAL_NIVEAULOG "2" // Niveau par defaut : ALERT
 #define PARAMETRE_PORTSERVEUR "Port" // port de connexion au serveur UDP
 #define INITIAL_PORTSERVEUR "27600" // port de connexion par defaut au serveur UDP
 #define PARAMETRE_NOMSERVEUR "NomServeur" // nom du serveur udp

@@ -14,14 +14,14 @@ GREP=grep
 NM=nm
 CCADMIN=CCadmin
 RANLIB=ranlib
-CC=mipsel-openwrt-linux-gcc
-CCC=mipsel-openwrt-linux-g++
-CXX=mipsel-openwrt-linux-g++
+CC=gcc
+CCC=clang++
+CXX=clang++
 FC=gfortran
-AS=mipsel-openwrt-linux-as
+AS=as
 
 # Macros
-CND_PLATFORM=VoCore-Linux
+CND_PLATFORM=OpenWRT-Linux
 CND_DLIB_EXT=so
 CND_CONF=VoCore_Debug
 CND_DISTDIR=dist
@@ -65,7 +65,7 @@ TESTOBJECTFILES= \
 	${TESTDIR}/tests/Test_gestiongpio.o
 
 # C Compiler Flags
-CFLAGS=
+CFLAGS=-pthread
 
 # CC Compiler Flags
 CCFLAGS=

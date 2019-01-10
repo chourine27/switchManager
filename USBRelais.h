@@ -33,8 +33,10 @@ extern "C" {
 #endif
 
 int USBRelais_gpioSetValue(int index, int valeur);
+int USBRelais_gpioGetValue(int index);
 int USBRelais_gpioInit(char* index);
-int USBRelais_sendData(char* prefix, int index, int valeur);
+int USBRelais_sendData(char* prefix, int index, int valeur, char* resultat);
+int USBRelais_sendDataByCommande(char* commande, char* resultat);
 
 int set_interface_attribs (int fd, int speed, int parity);
 void set_blocking (int fd, int should_block);

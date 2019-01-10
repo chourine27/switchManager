@@ -5,5 +5,5 @@
 #
 # VoCore_Debug configuration
 # Release configuration
-# Debug configuration
+# Rasp_Debug configuration
 # Raspberry configuration

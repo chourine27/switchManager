@@ -6,7 +6,7 @@
 
 # Macros
 TOP=`pwd`
-CND_PLATFORM=VoCore-Linux
+CND_PLATFORM=OpenWRT-Linux
 CND_CONF=VoCore_Debug
 CND_DISTDIR=dist
 CND_BUILDDIR=build

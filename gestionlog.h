@@ -24,7 +24,7 @@ extern "C" {
     int ecrireMessageInfo (char* origine, const char* message);
     int ecrireMessageAlerte (char* origine, const char* message);
     int ecrireMessageErreur (char* origine, const char* message);
-    int ecrireMessage (char* origine, const char* message, fastlogger_level_t priorite);
+    int ecrireMessage (const char* origine, const char* message, const char* libellePriorite, fastlogger_level_t priorite);
     int terminelog();
 
 #ifdef __cplusplus

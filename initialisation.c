@@ -17,6 +17,7 @@
 #include "configuration.h"
 #include "gestionlog.h"
 #include "fastlogger/fastlogger.h"
+#include "gestionfichier.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -79,10 +80,13 @@ int initMinuterie()
 
 int initLog()
 {
-    char* str =  fastlogger_thread_local_file_name(LOG_NOMFICHIER,0);
-    //free(str);
+    char niveauLog[MAXBUF];
+    char* str = fastlogger_thread_local_file_name(LOG_NOMFICHIER,0);
     fastlogger_set_log_filename(LOG_NOMFICHIER);
-    fastlogger_set_min_default_log_level(FL_DEBUG);
+    LireParametre(CONFIG_NOMFICHIER, PARAMETRE_NIVEAULOG, niveauLog);
+    fastlogger_set_min_default_log_level((fastlogger_level_offset_t) atoi(niveauLog));
+    //fastlogger_set_min_default_log_level((fastlogger_level_offset_t) atoi(niveauLog));
     fastlogger_separate_log_per_thread(1);
+        
     return MSG_OK;
 }

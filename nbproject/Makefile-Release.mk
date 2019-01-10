@@ -14,14 +14,14 @@ GREP=grep
 NM=nm
 CCADMIN=CCadmin
 RANLIB=ranlib
-CC=mipsel-openwrt-linux-gcc
-CCC=mipsel-openwrt-linux-g++
-CXX=mipsel-openwrt-linux-g++
+CC=gcc
+CCC=g++
+CXX=g++
 FC=gfortran
-AS=mipsel-openwrt-linux-as
+AS=as
 
 # Macros
-CND_PLATFORM=VoCore-Linux
+CND_PLATFORM=GNU-Linux
 CND_DLIB_EXT=so
 CND_CONF=Release
 CND_DISTDIR=dist

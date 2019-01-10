@@ -23,7 +23,6 @@ extern "C" {
     int splitInformationInt(char *content, int *result);
     int splitInformationString(char *content, char **result);
 
-    char* concatString(char* content, int value);
 
 #ifdef __cplusplus
 }

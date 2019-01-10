@@ -179,6 +179,10 @@ int InitialiseValeur(char* NomFichier, char* Parametre, char* Valeur)
     {
         strcpy(Valeur, INITIAL_PORTSERVEUR);
     }
+    else if(strncmp(Parametre, PARAMETRE_NIVEAULOG, strlen(Parametre)) == 0 )
+    {
+        strcpy(Valeur, INITIAL_NIVEAULOG);
+    }
     else
     {
         // Parametre inconnu

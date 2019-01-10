@@ -68,7 +68,7 @@
         </environment>
       </runprofile>
     </conf>
-    <conf name="Debug" type="1">
+    <conf name="Rasp_Debug" type="1">
       <toolsSet>
         <developmentServer>localhost</developmentServer>
         <platform>2</platform>

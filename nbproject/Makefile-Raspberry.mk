@@ -68,8 +68,8 @@ TESTOBJECTFILES= \
 CFLAGS=-pthread
 
 # CC Compiler Flags
-CCFLAGS=
-CXXFLAGS=
+CCFLAGS=-m32
+CXXFLAGS=-m32
 
 # Fortran Compiler Flags
 FFLAGS=

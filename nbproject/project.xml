@@ -20,7 +20,7 @@
                     <type>1</type>
                 </confElem>
                 <confElem>
-                    <name>Debug</name>
+                    <name>Rasp_Debug</name>
                     <type>1</type>
                 </confElem>
                 <confElem>

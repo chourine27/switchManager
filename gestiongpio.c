@@ -22,7 +22,12 @@
 // Retour : 1 si actif, 0 sinon
 int EtatRelai(int index)
 {
+#ifdef VOCORE
     return CONFIG_ALLUME;
+#endif
+#ifdef RASPBERRY
+    return USBRelais_gpioGetValue(index);
+#endif
 }
 
 // Active un relai
