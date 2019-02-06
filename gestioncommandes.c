@@ -14,6 +14,7 @@
 #include "constantes.h"
 #include "tools.h"
 #include "configuration.h"
+#include "minuterie.h"
 
 #include <stdio.h>
 #include <stdlib.h>

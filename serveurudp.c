@@ -71,8 +71,7 @@ int StartServerUDP(void)
         die("bind");
     }
 
-    printf("Server started. Ready to receive data\n");
-    ecrireMessageInfo("serveurudp", "Server started. Ready to receive data\n");
+    ecrireMessageInfo("serveurudp", "Server démarré, prêt à recevoir des données\n");
     //keep listening for data
     
     while(1)
@@ -89,7 +88,6 @@ int StartServerUDP(void)
         //print details of the client/peer and the data received
         sprintf(messageLog, "Received packet from %s:%d - Commande : %s", inet_ntoa(si_other.sin_addr), ntohs(si_other.sin_port), buf);
         ecrireMessageInfo("serveurudp", messageLog);
-        printf("Received packet from %s:%d\n", inet_ntoa(si_other.sin_addr), ntohs(si_other.sin_port));
         retourCode = ExecuterCommande(buf, resultat);
         if (retourCode != MSG_OK)
         {

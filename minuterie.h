@@ -31,7 +31,7 @@ extern "C" {
     int DelaiPourLeProchain(int *IdentifiantMinuterie);
     int AjouterTimer(int delai, int numMinuterie);
     int TraiterMinuterie (int index);
-    void  ALARMhandler(int sig);
+    void ALARMhandler(int sig);
 
 #ifdef __cplusplus
 }

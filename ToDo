@@ -2,7 +2,6 @@ Ligne de commande pour envoyer une commande : nc -u 127.0.01 27600
 
 Minuterie :
     à la fin c'est pas le nom du bouton mais l'index!
-    Pour l'instant pas de multi bouton dans minuterie
     Il faudrait mettre à jour le délai après une mise à jour de minuterie
     
   

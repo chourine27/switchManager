@@ -47,6 +47,7 @@ int ChargerMinuterie()
     
     while (fgets(ligne, sizeof(ligne), fichierConfig) != NULL)
     {
+        // Ligne de commentaire
         if(strncmp("#", ligne, strlen("#")) == 0 || strncmp("\n", ligne, strlen("\n")) == 0)
         {
             continue;
@@ -352,9 +353,12 @@ int AjouterTimer(int delai, int numMinuterie)
 int TraiterMinuterie (int index)
 {
     char commande[MAXBUF];
-    sprintf(commande, "%s %s %d\n", COMMANDE_CHANGESTATUTBOUTON, config.infoMinuteries[index].bouton[0], config.infoMinuteries[index].etat);
-    sendData(commande);
-    ecrireMessageInfo("minuterie", "TraitementMinuterie commande transmise\n");
+    for (int i=0; i<config.infoMinuteries[index].nbrBouton; i++)
+    {
+        sprintf(commande, "%s %s %d\n", COMMANDE_CHANGESTATUTBOUTON, config.infoMinuteries[index].bouton[i], config.infoMinuteries[index].etat);
+        sendData(commande);
+        ecrireMessageInfo("minuterie", "TraitementMinuterie commande transmise\n");
+    }
 }
 
 void  ALARMhandler(int sig)
@@ -363,7 +367,7 @@ void  ALARMhandler(int sig)
 
     int *numeroMinuterie = malloc(sizeof(int));
     if (config.minuterie ==0)
-        return MSG_NoContent;
+        return;
     TraiterMinuterie(indexMinuterie);
     int delai = DelaiPourLeProchain(numeroMinuterie);
     AjouterTimer(delai, numeroMinuterie[0]);
