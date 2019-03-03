@@ -7,9 +7,11 @@
 #include "tools.h"
 #include "constantes.h"
 #include "listecodes.h"
+#include "gestionlog.h"
 
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 // Découpage d'une chaine de caractère avec suppression du caractère fin de ligne
 // content : Contenu de la ligne à découper
@@ -37,7 +39,6 @@ int splitString(char* content, char** result, char *separator)
     if (content[strlen(content)-1] == '\n')
         {
             content[strlen(content)-1] = '\0';
-            //content = realloc(content, sizeof(char) * (strlen(content) - 1));
         } 
     // Récuperation de la commande
     p = strtok(content, separator);
@@ -56,19 +57,17 @@ int splitString(char* content, char** result, char *separator)
         // Possible de changer de délimiteur
        p = strtok(NULL, separator);
     }
-    // retrait du retour chariot pour le dernier parametre
-    if (i > 0)
-    {
-/*        if (result[i-1][strlen(result[i-1])-1] == '\n' || result[i-1][strlen(result[i-1])-1] == '\\')
-        {
-            result[i-1][strlen(result[i-1])-1] = 0;
-            result[i-1] = realloc(result[i-1], sizeof(char) * (strlen(result[i-1]) - 1));
-        } */
-    }
     result[i] = NULL;
     return i;
 }
 
+/**
+ * splitInformationInt
+ * Découpe une chaine de caractère en tableau d'entier
+ * @param content La chaine de caractère
+ * @param result le tableau d'entier
+ * @return Le nombre de chaine dans le tableau
+ */
 int splitInformationInt(char *content, int *result)
 {
     char *p;
@@ -96,7 +95,26 @@ int splitInformationInt(char *content, int *result)
     return i;    
 }
 
+/**
+ * splitInformationString
+ * Découpe une chaine de caractère en un tableau de chaine avec le séparateur prédéfini
+ * @param content Chaine de caractère à découper
+ * @param result Tableau de chaine découpée
+ * @return Nombre de valeur dans le tableau
+ */
 int splitInformationString(char* content, char** result)
 {
     return splitString(content, result, SEPARVALEUR);
+}
+
+/**
+ * VerifierDelai
+ * 
+ * Identifie une différence un time_t et maintenant
+ * @param derniereAction La valeur time_t initiale
+ * @return Différence entre 2 time_t
+ */
+int VerifierDelai(int derniereAction)
+{
+    return time(NULL) - derniereAction;   
 }

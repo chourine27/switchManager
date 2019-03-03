@@ -5,6 +5,6 @@ Minuterie :
     Il faudrait mettre à jour le délai après une mise à jour de minuterie
     
   
-
+Utilisation de fflush(stdout) pour écrire les logs
 
 

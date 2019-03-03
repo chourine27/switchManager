@@ -9,10 +9,18 @@
             <header-extensions>h</header-extensions>
             <sourceEncoding>UTF-8</sourceEncoding>
             <make-dep-projects/>
-            <sourceRootList/>
+            <sourceRootList>
+                <sourceRootElem>../wiringPi/wiringPi</sourceRootElem>
+                <sourceRootElem>wiringPi</sourceRootElem>
+                <sourceRootElem>wiringPiD</sourceRootElem>
+            </sourceRootList>
             <confList>
                 <confElem>
                     <name>VoCore_Debug</name>
+                    <type>1</type>
+                </confElem>
+                <confElem>
+                    <name>VoCore</name>
                     <type>1</type>
                 </confElem>
                 <confElem>
@@ -20,11 +28,15 @@
                     <type>1</type>
                 </confElem>
                 <confElem>
-                    <name>Rasp_Debug</name>
+                    <name>Raspberry_Debug</name>
                     <type>1</type>
                 </confElem>
                 <confElem>
-                    <name>Raspberry</name>
+                    <name>Raspberry_Release</name>
+                    <type>1</type>
+                </confElem>
+                <confElem>
+                    <name>Raspberry_Remote</name>
                     <type>1</type>
                 </confElem>
             </confList>

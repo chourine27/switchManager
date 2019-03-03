@@ -14,6 +14,14 @@ CND_ARTIFACT_PATH_VoCore_Debug=dist/VoCore_Debug/OpenWRT-Linux/switchmanager
 CND_PACKAGE_DIR_VoCore_Debug=dist/VoCore_Debug/OpenWRT-Linux/package
 CND_PACKAGE_NAME_VoCore_Debug=switchmanager.tar
 CND_PACKAGE_PATH_VoCore_Debug=dist/VoCore_Debug/OpenWRT-Linux/package/switchmanager.tar
+# VoCore configuration
+CND_PLATFORM_VoCore=OpenWRT-Linux
+CND_ARTIFACT_DIR_VoCore=dist/VoCore/OpenWRT-Linux
+CND_ARTIFACT_NAME_VoCore=switchmanager
+CND_ARTIFACT_PATH_VoCore=dist/VoCore/OpenWRT-Linux/switchmanager
+CND_PACKAGE_DIR_VoCore=dist/VoCore/OpenWRT-Linux/package
+CND_PACKAGE_NAME_VoCore=switchmanager.tar
+CND_PACKAGE_PATH_VoCore=dist/VoCore/OpenWRT-Linux/package/switchmanager.tar
 # Release configuration
 CND_PLATFORM_Release=GNU-Linux
 CND_ARTIFACT_DIR_Release=dist/Release/GNU-Linux
@@ -22,22 +30,30 @@ CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux/switchmanager
 CND_PACKAGE_DIR_Release=dist/Release/GNU-Linux/package
 CND_PACKAGE_NAME_Release=switchmanager.tar
 CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux/package/switchmanager.tar
-# Rasp_Debug configuration
-CND_PLATFORM_Rasp_Debug=GNU-Linux
-CND_ARTIFACT_DIR_Rasp_Debug=dist/Rasp_Debug/GNU-Linux
-CND_ARTIFACT_NAME_Rasp_Debug=switchmanager
-CND_ARTIFACT_PATH_Rasp_Debug=dist/Rasp_Debug/GNU-Linux/switchmanager
-CND_PACKAGE_DIR_Rasp_Debug=dist/Rasp_Debug/GNU-Linux/package
-CND_PACKAGE_NAME_Rasp_Debug=switchmanager.tar
-CND_PACKAGE_PATH_Rasp_Debug=dist/Rasp_Debug/GNU-Linux/package/switchmanager.tar
-# Raspberry configuration
-CND_PLATFORM_Raspberry=GNU-Linux
-CND_ARTIFACT_DIR_Raspberry=dist/Raspberry/GNU-Linux
-CND_ARTIFACT_NAME_Raspberry=switchmanager
-CND_ARTIFACT_PATH_Raspberry=dist/Raspberry/GNU-Linux/switchmanager
-CND_PACKAGE_DIR_Raspberry=dist/Raspberry/GNU-Linux/package
-CND_PACKAGE_NAME_Raspberry=switchmanager.tar
-CND_PACKAGE_PATH_Raspberry=dist/Raspberry/GNU-Linux/package/switchmanager.tar
+# Raspberry_Debug configuration
+CND_PLATFORM_Raspberry_Debug=GNU-Linux
+CND_ARTIFACT_DIR_Raspberry_Debug=dist/Raspberry_Debug/GNU-Linux
+CND_ARTIFACT_NAME_Raspberry_Debug=switchmanager
+CND_ARTIFACT_PATH_Raspberry_Debug=dist/Raspberry_Debug/GNU-Linux/switchmanager
+CND_PACKAGE_DIR_Raspberry_Debug=dist/Raspberry_Debug/GNU-Linux/package
+CND_PACKAGE_NAME_Raspberry_Debug=switchmanager.tar
+CND_PACKAGE_PATH_Raspberry_Debug=dist/Raspberry_Debug/GNU-Linux/package/switchmanager.tar
+# Raspberry_Release configuration
+CND_PLATFORM_Raspberry_Release=GNU-Linux
+CND_ARTIFACT_DIR_Raspberry_Release=dist/Raspberry_Release/GNU-Linux
+CND_ARTIFACT_NAME_Raspberry_Release=switchmanager
+CND_ARTIFACT_PATH_Raspberry_Release=dist/Raspberry_Release/GNU-Linux/switchmanager
+CND_PACKAGE_DIR_Raspberry_Release=dist/Raspberry_Release/GNU-Linux/package
+CND_PACKAGE_NAME_Raspberry_Release=switchmanager.tar
+CND_PACKAGE_PATH_Raspberry_Release=dist/Raspberry_Release/GNU-Linux/package/switchmanager.tar
+# Raspberry_Remote configuration
+CND_PLATFORM_Raspberry_Remote=GNU-Linux
+CND_ARTIFACT_DIR_Raspberry_Remote=dist/Raspberry_Remote/GNU-Linux
+CND_ARTIFACT_NAME_Raspberry_Remote=switchmanager
+CND_ARTIFACT_PATH_Raspberry_Remote=dist/Raspberry_Remote/GNU-Linux/switchmanager
+CND_PACKAGE_DIR_Raspberry_Remote=dist/Raspberry_Remote/GNU-Linux/package
+CND_PACKAGE_NAME_Raspberry_Remote=switchmanager.tar
+CND_PACKAGE_PATH_Raspberry_Remote=dist/Raspberry_Remote/GNU-Linux/package/switchmanager.tar
 #
 # include compiler specific variables
 #

@@ -22,7 +22,7 @@ extern "C" {
     int splitString (char *content, char ** result, char *separator);
     int splitInformationInt(char *content, int *result);
     int splitInformationString(char *content, char **result);
-
+    int VerifierDelai(int derniereAction);
 
 #ifdef __cplusplus
 }

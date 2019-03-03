@@ -6,8 +6,8 @@
 
 # Macros
 TOP=`pwd`
-CND_PLATFORM=GNU-Linux
-CND_CONF=Rasp_Debug
+CND_PLATFORM=OpenWRT-Linux
+CND_CONF=VoCore
 CND_DISTDIR=dist
 CND_BUILDDIR=build
 CND_DLIB_EXT=so

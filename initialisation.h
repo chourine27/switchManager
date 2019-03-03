@@ -21,6 +21,7 @@ extern "C" {
     int initConfig();
     int initGPIO();
     int initMinuterie();
+    int initLog();
     
 #ifdef __cplusplus
 }

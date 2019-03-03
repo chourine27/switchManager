@@ -25,7 +25,6 @@
 int sendData(char* commande)
 {
     struct sockaddr_in si_client, si_serveur;
-
     int s, retourCode, slen = sizeof(si_serveur) , recv_len;
     int broadcast=1;
     char buf[BUFLEN];
@@ -76,12 +75,12 @@ int sendData(char* commande)
     fflush(stdout);
     ecrireMessageDebug("clientudp", "fflush OK\n");
     //try to receive some data, this is a blocking call
-    if ((recv_len = recvfrom(s, buf, BUFLEN, 0, (struct sockaddr *) &si_serveur, &slen)) == -1)
-    {
-        die("recvfrom()");
-    }
-    sprintf(resultat, "Retour serveur au client : %s\n", commande);
-    ecrireMessageDebug("clientudp", resultat);
+    //if ((recv_len = recvfrom(s, buf, BUFLEN, 0, (struct sockaddr *) &si_serveur, &slen)) == -1)
+    //{
+    //    die("recvfrom()");
+    //}
+    //sprintf(resultat, "Retour serveur au client : %s\n", commande);
+    //ecrireMessageDebug("clientudp", resultat);
     close(s);
     return MSG_OK;
 }

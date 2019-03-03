@@ -26,8 +26,6 @@
 static int indexMinuterie;
 
 /**
- * ChargerMinuterie
- * 
  * Charge tous les paramètres du fichier de configuration
  * @return 
  */
@@ -73,8 +71,6 @@ int ChargerMinuterie()
 }
 
 /**
- * LireMinuterie
- * 
  * Charge en cache les valeurs de la minuterie
  * @param valeurMinuterie : ensemble des valeurs de la minuterie
  * @param @out Minuterie : struct Minuterie remplie
@@ -128,8 +124,6 @@ int LireMinuterie(char* valeurMinuterie, struct InformationsMinuteries* Minuteri
 }
 
 /**
- * SupprimerMinuteries
- * 
  * Supprimer du cache les minuteries et recharge les nouvelles
  * @return : Code erreur de la méthode
  */
@@ -157,8 +151,6 @@ int SupprimerMinuteries ()
 }
 
 /**
- * AjouterMinuterie
- * 
  * Ajoute une minuterie à la suite dans le cache
  * @param NomMinuterie : Nom de la minuterie à ajouter
  * @param InfoMinuterie : information liés à la minuterie
@@ -189,12 +181,10 @@ int AjouterMinuterie(char* NomMinuterie, char* InfoMinuterie)
 }
 
 /**
- * RetournerDetailMinuterie
- * 
  * Retourne les informations d'une minuterie
- * @param IndexMinuterie : Numéro de la minuterie à retourner
- * @param @out Informations : Informations en ligne d'une minuterie
- * @return : Code erreur de la méthode
+ * @param IndexMinuterie        Numéro de la minuterie à retourner
+ * @param @out Informations     Informations en ligne d'une minuterie
+ * @return                      Code erreur de la méthode
  */
 int RetournerDetailMinuterie (char *IndexMinuterie, char *Informations)
 {
@@ -203,6 +193,11 @@ int RetournerDetailMinuterie (char *IndexMinuterie, char *Informations)
     return LireParametre(CONFIG_NOMFICHIER, parametre, Informations);
 }
 
+/**
+ * Identifie la prochaine minuterie qui devra être traitée
+ * @param[out] IdentifiantMinuterie Identifiant de la prochaine minuterie à traiter
+ * @return                          Durée avant le traitement de la prochaine minuterie
+ */
 int DelaiPourLeProchain(int *IdentifiantMinuterie)
 {
     int delai, less_delai = 1000000;
@@ -211,7 +206,7 @@ int DelaiPourLeProchain(int *IdentifiantMinuterie)
     time_t now;
     struct tm *current_time;
     now = time(NULL);
-    current_time = localtime(&now);    
+    current_time = localtime(&now);
 
     for(int i=0; i < config.minuterie; i++)
     {
@@ -341,7 +336,14 @@ int DelaiPourLeProchain(int *IdentifiantMinuterie)
     ecrireMessageDebug("minuterie", contenuString);    
     return less_delai;
 }
- 
+
+/**
+ * Créer un signal avec un délai et un identifiant de minterie pour ensuite pouvoir lancer l'action "ALARMhandler"
+ * 
+ * @param delai         Délai en seconde avant déclanchement de l'évenement
+ * @param numMinuterie  Identifiant de la minuterie qui devra être traitée
+ * @return              Code erreur de la méthode            
+ */
 int AjouterTimer(int delai, int numMinuterie)
 {
     signal(SIGALRM, ALARMhandler);
@@ -350,6 +352,11 @@ int AjouterTimer(int delai, int numMinuterie)
     return MSG_OK;
 }
 
+/**
+ * Traite l'action lié à la minuterie identifiée
+ * @param index Identifiant de la minuterie à traiter
+ * @return      Code erreur de la méthode
+ */
 int TraiterMinuterie (int index)
 {
     char commande[MAXBUF];
@@ -361,6 +368,10 @@ int TraiterMinuterie (int index)
     }
 }
 
+/**
+ * Appelé par le signal
+ * @param sig   Inutile
+ */
 void  ALARMhandler(int sig)
 {
     signal(SIGALRM, SIG_IGN);          /* ignore this signal       */

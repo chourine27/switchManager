@@ -44,9 +44,13 @@ int ecrireMessage (const char* origine, const char* message, const char* libelle
 {
 #ifdef DEBUG
     printf("%s : %s \n", origine, message);
+#elif VOCORE
+    printf("%s : %s \n", origine, message);
 #else
+    
     initLog();
     Log(priorite, "%s - %s - %s", libellePriorite, origine, message);
+    fflush(stdout);
     terminelog();
 #endif
     return MSG_OK;

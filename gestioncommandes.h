@@ -1,5 +1,10 @@
 #ifndef GESTIONCOMMANDES_H_INCLUDED
+
+#include "constantes.h"
+
 #define GESTIONCOMMANDES_H_INCLUDED
+
+static int DerniereCommandeSurBouton[MAXBOUTON];
 
 int ExecuterCommande(char* commande, char* resultat);
 int RetournerInformationConfig(char* parametreALire, char* valeurDefaut, char* resultat);

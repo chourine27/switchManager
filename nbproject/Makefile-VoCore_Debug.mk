@@ -45,6 +45,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/initialisation.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/minuterie.o \
+	${OBJECTDIR}/raspberryGPIO.o \
 	${OBJECTDIR}/serveurudp.o \
 	${OBJECTDIR}/tools.o \
 	${OBJECTDIR}/voCoreGPIO.o
@@ -88,67 +89,72 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/switchmanager: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/switchmanager ${OBJECTFILES} ${LDLIBSOPTIONS}
 
-${OBJECTDIR}/USBRelais.o: USBRelais.c
+${OBJECTDIR}/USBRelais.o: USBRelais.c nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -g -DVOCORE -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/USBRelais.o USBRelais.c
 
-${OBJECTDIR}/clientudp.o: clientudp.c
+${OBJECTDIR}/clientudp.o: clientudp.c nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -g -DVOCORE -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/clientudp.o clientudp.c
 
-${OBJECTDIR}/fastlogger/fastlogger.o: fastlogger/fastlogger.c
+${OBJECTDIR}/fastlogger/fastlogger.o: fastlogger/fastlogger.c nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} -p ${OBJECTDIR}/fastlogger
 	${RM} "$@.d"
 	$(COMPILE.c) -g -DVOCORE -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/fastlogger/fastlogger.o fastlogger/fastlogger.c
 
-${OBJECTDIR}/gestioncommandes.o: gestioncommandes.c
+${OBJECTDIR}/gestioncommandes.o: gestioncommandes.c nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -g -DVOCORE -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/gestioncommandes.o gestioncommandes.c
 
-${OBJECTDIR}/gestionfichier.o: gestionfichier.c
+${OBJECTDIR}/gestionfichier.o: gestionfichier.c nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -g -DVOCORE -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/gestionfichier.o gestionfichier.c
 
-${OBJECTDIR}/gestiongpio.o: gestiongpio.c
+${OBJECTDIR}/gestiongpio.o: gestiongpio.c nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -g -DVOCORE -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/gestiongpio.o gestiongpio.c
 
-${OBJECTDIR}/gestionlog.o: gestionlog.c
+${OBJECTDIR}/gestionlog.o: gestionlog.c nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -g -DVOCORE -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/gestionlog.o gestionlog.c
 
-${OBJECTDIR}/initialisation.o: initialisation.c
+${OBJECTDIR}/initialisation.o: initialisation.c nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -g -DVOCORE -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/initialisation.o initialisation.c
 
-${OBJECTDIR}/main.o: main.c
+${OBJECTDIR}/main.o: main.c nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -g -DVOCORE -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.c
 
-${OBJECTDIR}/minuterie.o: minuterie.c
+${OBJECTDIR}/minuterie.o: minuterie.c nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -g -DVOCORE -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/minuterie.o minuterie.c
 
-${OBJECTDIR}/serveurudp.o: serveurudp.c
+${OBJECTDIR}/raspberryGPIO.o: raspberryGPIO.c nbproject/Makefile-${CND_CONF}.mk
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -g -DVOCORE -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/raspberryGPIO.o raspberryGPIO.c
+
+${OBJECTDIR}/serveurudp.o: serveurudp.c nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -g -DVOCORE -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/serveurudp.o serveurudp.c
 
-${OBJECTDIR}/tools.o: tools.c
+${OBJECTDIR}/tools.o: tools.c nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -g -DVOCORE -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/tools.o tools.c
 
-${OBJECTDIR}/voCoreGPIO.o: voCoreGPIO.c
+${OBJECTDIR}/voCoreGPIO.o: voCoreGPIO.c nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -g -DVOCORE -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/voCoreGPIO.o voCoreGPIO.c
@@ -319,6 +325,19 @@ ${OBJECTDIR}/minuterie_nomain.o: ${OBJECTDIR}/minuterie.o minuterie.c
 	    $(COMPILE.c) -g -DVOCORE -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/minuterie_nomain.o minuterie.c;\
 	else  \
 	    ${CP} ${OBJECTDIR}/minuterie.o ${OBJECTDIR}/minuterie_nomain.o;\
+	fi
+
+${OBJECTDIR}/raspberryGPIO_nomain.o: ${OBJECTDIR}/raspberryGPIO.o raspberryGPIO.c 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/raspberryGPIO.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.c) -g -DVOCORE -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/raspberryGPIO_nomain.o raspberryGPIO.c;\
+	else  \
+	    ${CP} ${OBJECTDIR}/raspberryGPIO.o ${OBJECTDIR}/raspberryGPIO_nomain.o;\
 	fi
 
 ${OBJECTDIR}/serveurudp_nomain.o: ${OBJECTDIR}/serveurudp.o serveurudp.c 

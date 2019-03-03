@@ -18,11 +18,12 @@
 #include "gestionlog.h"
 #include "fastlogger/fastlogger.h"
 #include "gestionfichier.h"
+#include "raspberryGPIO.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <x86_64-linux-gnu/bits/signum-generic.h>
+#include <time.h>
 
 // Initilise le fichier de config si il n'existe pas
 // Retour : MSG_OK si OK, code d'erreur sinon
@@ -37,6 +38,11 @@ int initConfig()
     //Pour pouvoir utiliser tout le temps realloc, init à NULL
     config.infoMinuteries = NULL;
     codeResultat = ChargerMinuterie();
+    
+    for (int i=0; i< MAXBOUTON; i++)
+    {
+        DerniereCommandeSurBouton[i] = time(NULL);
+    }
 }
 
 // Initialise les ports en sortie avec la valeur par defaut
@@ -56,7 +62,11 @@ int initGPIO()
     {
         sprintf(resultat, "%d", i);
         //Initialise le port en sortie avec la valeur par défaut
+#ifdef VOCORE
         voCore_gpioInit(resultat);
+#elif REMOTE
+        InitRaspberryGPIO();
+#endif
         //Initialise le fichier de configuration avec le nom du bouton
         RetournerInformationConfig(PARAMETRE_NOMBOUTON, INITIAL_NOMBOUTON, resultat);
         //Initialise le fichier de configuration avec l'image du bouton
@@ -80,6 +90,8 @@ int initMinuterie()
 
 int initLog()
 {
+#ifdef VOCORE
+#else
     char niveauLog[MAXBUF];
     char* str = fastlogger_thread_local_file_name(LOG_NOMFICHIER,0);
     fastlogger_set_log_filename(LOG_NOMFICHIER);
@@ -87,6 +99,6 @@ int initLog()
     fastlogger_set_min_default_log_level((fastlogger_level_offset_t) atoi(niveauLog));
     //fastlogger_set_min_default_log_level((fastlogger_level_offset_t) atoi(niveauLog));
     fastlogger_separate_log_per_thread(1);
-        
+#endif        
     return MSG_OK;
 }

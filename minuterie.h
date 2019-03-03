@@ -32,6 +32,7 @@ extern "C" {
     int AjouterTimer(int delai, int numMinuterie);
     int TraiterMinuterie (int index);
     void ALARMhandler(int sig);
+    int SupprimerMinuteries ();
 
 #ifdef __cplusplus
 }

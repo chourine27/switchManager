@@ -8,6 +8,8 @@
 #define SEPARINFO " " // Séparateur d'information
 #define SEPARVALEUR "|" // Séprateur de valeur dans l'info
 #define MAXARG 15 // Nombre maximum d'argument pour une commande
+#define MAXBOUTON 15 // Nombre maximum de bouton sur une prise
+#define MINIDELAIAVANTNOUVELLECOMMANDE 1 // delai en secondes
 
 #define COMMANDE_NOMSERVEUR "TonNom" // command pour recuperer le nom du serveur
 #define COMMANDE_RENOMMERSERVEUR "RenommerTonNom" // commande pour changer le nom du serveur

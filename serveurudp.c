@@ -91,9 +91,8 @@ int StartServerUDP(void)
         retourCode = ExecuterCommande(buf, resultat);
         if (retourCode != MSG_OK)
         {
-            sprintf(messageLog, "StartServerUDP - Commande retourne une erreur : %c\n ", retourCode);
+            sprintf(messageLog, "StartServerUDP - Commande retourne une erreur : %d\n ", retourCode);
             ecrireMessageInfo("serveurudp", messageLog);
-            printf("StartServerUDP - Commande retourne une erreur : %c\n ", retourCode);
             //now reply this error to client
         }
         if (sendto(s, resultat, strlen(resultat), 0, (struct sockaddr*) &si_other, slen) == -1)
