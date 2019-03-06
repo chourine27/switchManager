@@ -58,12 +58,17 @@ int initGPIO()
         return codeResultat;
     }
     nbrPort = atoi(resultat);
+
+#ifdef VOCORE
+    voCore_Init();
+#endif
+
     for(int i=0; i<nbrPort; i++)
     {
         sprintf(resultat, "%d", i);
         //Initialise le port en sortie avec la valeur par défaut
 #ifdef VOCORE
-        voCore_gpioInit(resultat);
+        voCore_gpioInit(i);
 #elif REMOTE
         InitRaspberryGPIO();
 #endif

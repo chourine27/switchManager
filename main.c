@@ -12,14 +12,15 @@ int main()
 {
     int i = 0;
     pthread_t thread_ServeurUDP;
-    
+    printf("\n");
     printf("  __         o _|_   __  |__   __ __   __   __   __   __   ___   __  \n");
     printf("__)  (__(__( |  |_, (___ |  ) |  )  ) (__( |  ) (__( (__| (__/_ |  ' \n");
     printf("                                                      __/            \n");
     printf("\n");
-    printf("\\ | |¯ |¯| |¯  | |¯| |\\|   |¯|   '| \n");
-    printf(" \\| |¯ |¯\\  ¯| | |_| | |   |/|    |\n");
-    printf("     ¯      ¯               ¯   °   \n");
+    
+    printf("\\ | |¯ |¯| |¯  | |¯| |\\|   |¯|   |¯|\n"); 
+    printf(" \\| |¯ |¯\\  ¯| | |_| | |   |/|    ¯|\n"); 
+    printf("     ¯      ¯               ¯     ¯ \n"); 
 
     // Initialisation
 //#ifdef DEBUG

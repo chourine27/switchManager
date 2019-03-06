@@ -15,7 +15,7 @@
 #define VOCOREGPIO_H
 
 #ifdef VOCORE
-#define RACINECHEMIN "/sys/class/gpio/gpio" // Chemin d'accès au GPIO
+#define RACINECHEMIN "/sys/class/gpio" // Chemin d'accès au GPIO
 #else
 #define RACINECHEMIN "/NetBeansProjects/switchManager/gpio/gpio" // Chemin d'accès au GPIO
 #endif
@@ -23,12 +23,14 @@
 #define DIRECTIONCHEMIN "/direction" // Chemin pour accèder a l'information de direction du port
 #define VALEURCHEMIN "/value" // Chemin pour accéder à la valeur du port
 #define DIRECTIONSORTIE "out" // Valeur à définir pour mettre le port en sortie
+#define EXPORTCHEMIN "/export" // Chemin pour definir une GPIO en Export
 
 int voCore_writeFile(char* cheminFichier, char* index, char* valeur);
 int voCore_gpioDirectionOut(char* index);
 int voCore_gpioSetValueByIndex(int index, int valeur);
 int voCore_gpioSetValue(char* index, char* valeur);
-int voCore_gpioInit(char* index);
+int voCore_gpioInit(int index);
+int voCore_Init();
 
 #ifdef __cplusplus
 extern "C" {

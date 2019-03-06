@@ -21,7 +21,7 @@ FC=gfortran
 AS=as
 
 # Macros
-CND_PLATFORM=GNU-Linux
+CND_PLATFORM=Ubuntu-Linux
 CND_DLIB_EXT=so
 CND_CONF=Raspberry_Debug
 CND_DISTDIR=dist

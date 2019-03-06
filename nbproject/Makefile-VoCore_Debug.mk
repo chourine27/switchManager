@@ -14,9 +14,9 @@ GREP=grep
 NM=nm
 CCADMIN=CCadmin
 RANLIB=ranlib
-CC=gcc
-CCC=clang++
-CXX=clang++
+CC=mipsel-openwrt-linux-gcc 
+CCC=g++
+CXX=g++
 FC=gfortran
 AS=as
 

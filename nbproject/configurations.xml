@@ -82,11 +82,6 @@
     </logicalFolder>
     <itemPath>ReadMe</itemPath>
   </logicalFolder>
-  <sourceRootList>
-    <Elem>../wiringPi/wiringPi</Elem>
-    <Elem>wiringPi</Elem>
-    <Elem>wiringPiD</Elem>
-  </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
     <conf name="VoCore_Debug" type="1">
@@ -97,7 +92,7 @@
       </toolsSet>
       <compileType>
         <cTool>
-          <commandlineTool>gcc</commandlineTool>
+          <commandlineTool>mipsel-openwrt-linux-gcc </commandlineTool>
           <commandLine>-pthread</commandLine>
           <preprocessorList>
             <Elem>VOCORE</Elem>
@@ -228,14 +223,14 @@
     </conf>
     <conf name="VoCore" type="1">
       <toolsSet>
-        <compilerSet>OpenWRT|CLang</compilerSet>
+        <compilerSet>OpenWRT|GNU</compilerSet>
         <dependencyChecking>true</dependencyChecking>
         <rebuildPropChanged>true</rebuildPropChanged>
       </toolsSet>
       <compileType>
         <cTool>
           <developmentMode>5</developmentMode>
-          <commandlineTool>gcc</commandlineTool>
+          <commandlineTool>mipsel-openwrt-linux-gcc</commandlineTool>
           <commandLine>-pthread</commandLine>
           <preprocessorList>
             <Elem>VOCORE</Elem>
@@ -512,7 +507,7 @@
     </conf>
     <conf name="Raspberry_Debug" type="1">
       <toolsSet>
-        <compilerSet>GNU|GNU</compilerSet>
+        <compilerSet>Ubuntu|GNU</compilerSet>
         <dependencyChecking>true</dependencyChecking>
         <rebuildPropChanged>true</rebuildPropChanged>
       </toolsSet>

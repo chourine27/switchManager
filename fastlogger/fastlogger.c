@@ -1,3 +1,6 @@
+#ifdef VOCORE
+#else
+
 #include "fastlogger.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -12,6 +15,7 @@
 #include <sys/stat.h>
 
 #include "linkedlist.h"
+
 #define MAX_PATH_LENGTH 1024
 #define IFFN(x) do {if (x) {free(x);x=NULL;}} while(0)
 
@@ -22,7 +26,11 @@ typedef struct _LoggerContext_t {
 } LoggerContext_t;
 
 static LoggerContext_t g_logger_context =  {"output.log", NULL,0};
+#ifdef VOCORE
+static pthread_mutex_t g_logger_lock = PTHREAD_MUTEX_INITIALIZER;
+#else
 static pthread_mutex_t g_logger_lock = PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP;
+#endif
 static ListNode_t  name_space_head = {NULL, NULL};
 
 FastLoggerNS_t _global_name_base = {NULL, "", FASTLOGGER_LEVEL( FL_ERROR), 0};
@@ -351,3 +359,4 @@ fastlogger_level_t _fastlogger_ns_load(FastLoggerNS_t *nsp){
 	return nsp->level;
 }
 
+#endif

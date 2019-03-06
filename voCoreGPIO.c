@@ -7,17 +7,27 @@
 #include "constantes.h"
 #include "voCoreGPIO.h"
 #include "listecodes.h"
+#include "gestionlog.h"
 
 #include <stdio.h>
 #include <string.h>
-//#include <c++/6/bits/regex.h>
+
+static int correspondanceIndexGPIO[16];
 
 // Initialise la direction du port en OUT
 // index : Index du port à traiter
 // Retour : MSG_OK si OK, code d'erreur sinon
 int voCore_gpioDirectionOut(char* index)
 {
-    return voCore_writeFile(DIRECTIONCHEMIN, index, DIRECTIONSORTIE);
+    int valeurRetour = 0;
+    char indexChar[10];
+    sprintf(indexChar, "/gpio%s", index);
+    valeurRetour = voCore_writeFile("", EXPORTCHEMIN, index);
+    if (valeurRetour != MSG_OK)
+    {
+        return valeurRetour;
+    }
+    return voCore_writeFile(DIRECTIONCHEMIN, indexChar, DIRECTIONSORTIE);
 }
 
 // Définie la valeur de sortie du port
@@ -28,7 +38,7 @@ int voCore_gpioSetValueByIndex(int index, int valeur)
 {
     char indexChar[10];
     char valeurChar[10];
-    sprintf(indexChar, "%d", index);
+    sprintf(indexChar, "/gpio%d", correspondanceIndexGPIO[index - 1]);
     sprintf(valeurChar, "%d", valeur);
     return voCore_gpioSetValue(indexChar, valeurChar);
 }
@@ -54,6 +64,10 @@ int voCore_writeFile(char* cheminFichier, char* index, char* valeur)
     
     strcat(cheminComplet, index);
     strcat(cheminComplet, cheminFichier);
+    ecrireMessageDebug("Valeur a ecrire dans VoCore", cheminComplet);
+    ecrireMessageDebug(" avec valeur ", valeur);
+    ecrireMessageDebug(" index etait ", index);
+    ecrireMessageDebug(" voila", "\n");
     fp = fopen(cheminComplet, "w");
     if (fp == NULL)
     {
@@ -66,14 +80,46 @@ int voCore_writeFile(char* cheminFichier, char* index, char* valeur)
 }
 
 // Définie la direction et la valeur par defaut d'un port
-// Index : Index du port à traiter
+// Index : Index du bouton à traiter
 // Retour : MSG_OK si OK, code d'erreur sinon
-int voCore_gpioInit(char* index)
+int voCore_gpioInit(int index)
 {
-    int retourValeur = voCore_gpioDirectionOut(index);
+    char valeurIndex[10];
+        
+    sprintf(valeurIndex, "%d", correspondanceIndexGPIO[index - 1]);
+    ecrireMessageDebug("Valeur index ", valeurIndex);
+    sprintf(valeurIndex, "%d", correspondanceIndexGPIO[0]);
+    ecrireMessageDebug("Valeur dans tableau 0\n", valeurIndex);
+    int retourValeur = voCore_gpioDirectionOut(valeurIndex);
     if (retourValeur != MSG_OK)
     {
         return retourValeur;
     }
-    return voCore_gpioSetValue(index, INITIAL_ETATDEFAUT);
+    return voCore_gpioSetValue(valeurIndex, INITIAL_ETATDEFAUT);
+}
+
+/**
+ * Initialise la configuration propre au VoCore
+ * @return  MSG_OK si OK, code d'erreur sinon
+ */
+int voCore_Init()
+{
+    correspondanceIndexGPIO[0] = 37;
+    correspondanceIndexGPIO[1] = 38;
+    correspondanceIndexGPIO[2] = 39;
+    correspondanceIndexGPIO[3] = 40;
+    correspondanceIndexGPIO[4] = 41;
+    correspondanceIndexGPIO[5] = 42;
+    correspondanceIndexGPIO[6] = 43;
+    correspondanceIndexGPIO[7] = 44;
+    correspondanceIndexGPIO[8] = 45;
+    correspondanceIndexGPIO[9] = 46;
+    correspondanceIndexGPIO[10] = 47;
+    correspondanceIndexGPIO[11] = 48;
+    correspondanceIndexGPIO[12] = 49;
+    correspondanceIndexGPIO[13] = 50;
+    correspondanceIndexGPIO[14] = 51;
+    correspondanceIndexGPIO[15] = 52;
+    ecrireMessageDebug("voCoreGPIO", "Correspondances GPIO initialisées\n");
+    return MSG_OK;
 }

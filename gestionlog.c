@@ -5,7 +5,10 @@
  */
 
 #include "configuration.h"
+#ifdef VOCORE
+#else
 #include "fastlogger/fastlogger.h"
+#endif
 #include "listecodes.h"
 #include "tools.h"
 #include "gestionlog.h"
@@ -35,19 +38,21 @@ int ecrireMessageErreur (char* origine, const char* message)
 
 int terminelog()
 {
+#ifdef VOCORE
+#else
     fastlogger_close_thread_local();
     fastlogger_close();
+#endif
     return MSG_OK;
 }
 
 int ecrireMessage (const char* origine, const char* message, const char* libellePriorite, fastlogger_level_t priorite)
 {
-#ifdef DEBUG
+#ifdef VOCORE
     printf("%s : %s \n", origine, message);
-#elif VOCORE
+#elif DEBUG
     printf("%s : %s \n", origine, message);
 #else
-    
     initLog();
     Log(priorite, "%s - %s - %s", libellePriorite, origine, message);
     fflush(stdout);

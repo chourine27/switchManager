@@ -6,7 +6,7 @@
 
 # Macros
 TOP=`pwd`
-CND_PLATFORM=GNU-Linux
+CND_PLATFORM=Ubuntu-Linux
 CND_CONF=Raspberry_Debug
 CND_DISTDIR=dist
 CND_BUILDDIR=build

@@ -9,11 +9,7 @@
             <header-extensions>h</header-extensions>
             <sourceEncoding>UTF-8</sourceEncoding>
             <make-dep-projects/>
-            <sourceRootList>
-                <sourceRootElem>../wiringPi/wiringPi</sourceRootElem>
-                <sourceRootElem>wiringPi</sourceRootElem>
-                <sourceRootElem>wiringPiD</sourceRootElem>
-            </sourceRootList>
+            <sourceRootList/>
             <confList>
                 <confElem>
                     <name>VoCore_Debug</name>
