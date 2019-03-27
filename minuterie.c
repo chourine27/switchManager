@@ -56,14 +56,14 @@ int ChargerMinuterie()
             codeResultat = AjouterMinuterie(param, valeurMinuterie); 
             if (codeResultat != MSG_OK)
             {
-                sprintf(contenuString, "Erreur dans copieTextDeConfig : %d\n", codeResultat);
-                ecrireMessageErreur("minuterie", contenuString);
+                sprintf(contenuString, "Erreur dans copieTextDeConfig : %d", codeResultat);
+                EcrireMessageErreur("minuterie", contenuString);
                 continue;
             }
             //Mise à jour du paramètre minuterie comme le compteur évolue.
             sprintf(param, "%s%d", PARAMETRE_MINUTERIE, config.minuterie);
-            sprintf(contenuString, "Minuterie chargée : %d\n", config.minuterie);
-            ecrireMessageErreur("minuterie", contenuString);
+            sprintf(contenuString, "Minuterie chargée : %d", config.minuterie);
+            EcrireMessageInfo("minuterie", contenuString);
         }
     }
     FermerFichier(fichierConfig);
@@ -140,8 +140,8 @@ int SupprimerMinuteries ()
             if (codeResultat != MSG_OK)
             {
                 char contenuString[MAXBUF];
-                sprintf(contenuString, "Impossible de supprimer la minuterie %s : Erreur %d\n", config.infoMinuteries[i].id, codeResultat);
-                ecrireMessageErreur("minuterie", contenuString);
+                sprintf(contenuString, "Impossible de supprimer la minuterie %s : Erreur %d", config.infoMinuteries[i].id, codeResultat);
+                EcrireMessageErreur("minuterie", contenuString);
             }
         }
         config.infoMinuteries = NULL;
@@ -177,6 +177,7 @@ int AjouterMinuterie(char* NomMinuterie, char* InfoMinuterie)
     {
         config.minuterie++;
     }
+    EcrireMessageInfo("minuterie", "minuterie ajoutée");
     return codeResultat;
 }
 
@@ -210,8 +211,8 @@ int DelaiPourLeProchain(int *IdentifiantMinuterie)
 
     for(int i=0; i < config.minuterie; i++)
     {
-        sprintf(contenuString, "Analyse de la minuterie : %d\n", i);
-        ecrireMessageDebug("minuterie", contenuString);
+        sprintf(contenuString, "Analyse de la minuterie : %d", i);
+        EcrireMessageDebug("minuterie", contenuString);
 
         delai = 1000000;
         for(int s=0; s < config.infoMinuteries[i].nbSeconde; s++)
@@ -220,7 +221,7 @@ int DelaiPourLeProchain(int *IdentifiantMinuterie)
             if (config.infoMinuteries[i].seconde[s] == -1)
             {
                 current_delai = 1;
-                ecrireMessageDebug("minuterie", "-1 -> chaque seconde\n");
+                EcrireMessageDebug("minuterie", "-1 -> chaque seconde");
             }
             else
             {
@@ -229,7 +230,7 @@ int DelaiPourLeProchain(int *IdentifiantMinuterie)
                 {
                     current_delai += 60;
                     secondePlus = 1;
-                    ecrireMessageDebug("minuterie", "Ajout 60 secondes\n");
+                    EcrireMessageDebug("minuterie", "Ajout 60 secondes");
                 }
             }
             if (delai > current_delai)
@@ -239,8 +240,8 @@ int DelaiPourLeProchain(int *IdentifiantMinuterie)
             }
         } 
         temp_delai = delai;
-        sprintf(contenuString, "Delai après les secondes : %d\n", temp_delai);
-        ecrireMessageDebug("minuterie", contenuString);
+        sprintf(contenuString, "Delai après les secondes : %d", temp_delai);
+        EcrireMessageDebug("minuterie", contenuString);
         delai = 1000000;
         for(int m=0; m < config.infoMinuteries[i].nbMinute; m++)
         {
@@ -248,7 +249,7 @@ int DelaiPourLeProchain(int *IdentifiantMinuterie)
             if (config.infoMinuteries[i].minute[m] == -1)
             {
                 current_delai = 0;
-                ecrireMessageDebug("minuterie", "-1 -> chaque minutes\n");
+                EcrireMessageDebug("minuterie", "-1 -> chaque minutes");
             }
             else
             {
@@ -257,7 +258,7 @@ int DelaiPourLeProchain(int *IdentifiantMinuterie)
                 {
                     minutePlus = 1;
                     current_delai += 3600;
-                    ecrireMessageDebug("minuterie", "Ajout 60 minutes\n");
+                    EcrireMessageDebug("minuterie", "Ajout 60 minutes");
                 }
             }
             if (delai > current_delai)
@@ -267,8 +268,8 @@ int DelaiPourLeProchain(int *IdentifiantMinuterie)
             }
         }
         temp_delai += delai;
-        sprintf(contenuString, "Delai après les minutes : %d\n", temp_delai);
-        ecrireMessageDebug("minuterie", contenuString);        
+        sprintf(contenuString, "Delai après les minutes : %d", temp_delai);
+        EcrireMessageDebug("minuterie", contenuString);        
         delai = 1000000;
         for(int h=0; h < config.infoMinuteries[i].nbHeure; h++)
         {
@@ -284,7 +285,7 @@ int DelaiPourLeProchain(int *IdentifiantMinuterie)
                 {
                     heurePlus = 1;
                     current_delai += 86400;
-                    ecrireMessageDebug("minuterie", "Ajout 24 heures\n");
+                    EcrireMessageDebug("minuterie", "Ajout 24 heures");
                 }
             }
             if (delai > current_delai)
@@ -294,15 +295,15 @@ int DelaiPourLeProchain(int *IdentifiantMinuterie)
             }
         }
         temp_delai += delai;
-        sprintf(contenuString, "Delai après les heures : %d\n", temp_delai);
-        ecrireMessageDebug("minuterie", contenuString);        
+        sprintf(contenuString, "Delai après les heures : %d", temp_delai);
+        EcrireMessageDebug("minuterie", contenuString);        
         delai = 1000000;
         for(int j=0; j < config.infoMinuteries[i].nbJour; j++)
         {
             if (config.infoMinuteries[i].jour[j] == -1)
             {
                 current_delai = 0;
-                ecrireMessageDebug("minuterie", "-1 -> chaque jour\n");
+                EcrireMessageDebug("minuterie", "-1 -> chaque jour");
             }
             else
             {
@@ -311,7 +312,7 @@ int DelaiPourLeProchain(int *IdentifiantMinuterie)
                 if (current_delai < 0)
                 {
                     current_delai += 604800;
-                    ecrireMessageDebug("minuterie", "Ajout 7 jours\n");
+                    EcrireMessageDebug("minuterie", "Ajout 7 jours");
                 }
             }
             if (delai > current_delai)
@@ -320,8 +321,8 @@ int DelaiPourLeProchain(int *IdentifiantMinuterie)
             }
         }
         temp_delai += delai;
-        sprintf(contenuString, "Delai après les jours : %d\n", temp_delai);
-        ecrireMessageDebug("minuterie", contenuString);
+        sprintf(contenuString, "Delai après les jours : %d", temp_delai);
+        EcrireMessageDebug("minuterie", contenuString);
         if (less_delai > temp_delai)
         {
             less_delai = temp_delai;
@@ -330,10 +331,10 @@ int DelaiPourLeProchain(int *IdentifiantMinuterie)
     }
     if (less_delai == 0)
         less_delai++;
-    sprintf(contenuString, "Delai avant la prochaine alarme : %d\n", less_delai);
-    ecrireMessageDebug("minuterie", contenuString);
-    sprintf(contenuString, "Numéro minuterie %d\n", IdentifiantMinuterie[0]);
-    ecrireMessageDebug("minuterie", contenuString);    
+    sprintf(contenuString, "Delai avant la prochaine alarme : %d", less_delai);
+    EcrireMessageDebug("minuterie", contenuString);
+    sprintf(contenuString, "Numéro minuterie %d", IdentifiantMinuterie[0]);
+    EcrireMessageDebug("minuterie", contenuString);    
     return less_delai;
 }
 
@@ -362,9 +363,9 @@ int TraiterMinuterie (int index)
     char commande[MAXBUF];
     for (int i=0; i<config.infoMinuteries[index].nbrBouton; i++)
     {
-        sprintf(commande, "%s %s %d\n", COMMANDE_CHANGESTATUTBOUTON, config.infoMinuteries[index].bouton[i], config.infoMinuteries[index].etat);
+        sprintf(commande, "%s %s %d", COMMANDE_CHANGESTATUTBOUTON, config.infoMinuteries[index].bouton[i], config.infoMinuteries[index].etat);
         sendData(commande);
-        ecrireMessageInfo("minuterie", "TraitementMinuterie commande transmise\n");
+        EcrireMessageInfo("minuterie", "TraitementMinuterie commande transmise");
     }
 }
 
@@ -380,6 +381,10 @@ void  ALARMhandler(int sig)
     if (config.minuterie ==0)
         return;
     TraiterMinuterie(indexMinuterie);
+    EcrireMessageDebug("minuterie", "Evenement minuterie traitée");
+    sleep(1);
     int delai = DelaiPourLeProchain(numeroMinuterie);
+    EcrireMessageDebug("minuterie", "Prochaine minuterie identifiée");
     AjouterTimer(delai, numeroMinuterie[0]);
+    EcrireMessageDebug("minuterie", "Nouveau timer ajouté");
 }

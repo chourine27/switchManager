@@ -11,7 +11,7 @@
 #include "listecodes.h"
 #include "constantes.h"
 #include "voCoreGPIO.h"
-#include "USBRelais.h"
+#include "raspberryGPIO.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -26,7 +26,7 @@ int EtatRelai(int index)
     return CONFIG_ALLUME;
 #endif
 #ifdef RASPBERRY
-    return USBRelais_gpioGetValue(index);
+    return WiringPiGetValue(index);
 #endif
 }
 
@@ -39,7 +39,7 @@ int ActiverRelai(int index)
     return voCore_gpioSetValueByIndex(index, CONFIG_ALLUME);
 #endif
 #ifdef RASPBERRY
-    return USBRelais_gpioSetValue(index, CONFIG_ALLUME);
+    return WiringPiSetValue(index, CONFIG_ALLUME);
 #endif
 }
 
@@ -52,6 +52,6 @@ int DesactiverRelai (int index)
     return voCore_gpioSetValueByIndex(index, CONFIG_ETEINT);
 #endif
 #ifdef RASPBERRY
-    return USBRelais_gpioSetValue(index, CONFIG_ETEINT);
+    return WiringPiSetValue(index, CONFIG_ETEINT);
 #endif
 }

@@ -14,17 +14,15 @@
 #ifndef GESTIONLOG_H
 #define GESTIONLOG_H
 
-#include "fastlogger/fastlogger.h"
-
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-    int ecrireMessageDebug (char* origine, const char* message);
-    int ecrireMessageInfo (char* origine, const char* message);
-    int ecrireMessageAlerte (char* origine, const char* message);
-    int ecrireMessageErreur (char* origine, const char* message);
-    int ecrireMessage (const char* origine, const char* message, const char* libellePriorite, fastlogger_level_t priorite);
+    int InitLog();
+    int EcrireMessageDebug (char* origine, const char* message);
+    int EcrireMessageInfo (char* origine, const char* message);
+    int EcrireMessageAlerte (char* origine, const char* message);
+    int EcrireMessageErreur (char* origine, const char* message);
+    int ecrireMessage (const char* origine, const char* message, const char* libellePriorite, int priorite);
     int terminelog();
 
 #ifdef __cplusplus

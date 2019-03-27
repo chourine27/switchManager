@@ -19,6 +19,8 @@
 #define COMMANDE_CHANGERNOMBREINTERRUPTEUR "ChangeLeNombre" // commande pour modifier le nombre de prises connectées
 #define COMMANDE_NOMBOUTON "NomBouton" // prefix de commande pour gerer une prise
 #define COMMANDE_RENOMMERNOMBOUTON "RenommerNomBouton" //prefix de commande pour renommer un bouton
+#define COMMANDE_CHANGERSTATUTDEFAUTBOUTON "ChangerEtatDefautBouton" // prefix de commande pour définir une valeur par defaut
+#define COMMANDE_STATUTDEFAUTBOUTON  "EtatDefautBouton" // prefix de commande pour lire la valeur par defaut d'un bouton
 #define COMMANDE_IMAGEBOUTON "ImageBouton" // prefix de commande pour gerer l image d une prise
 #define COMMANDE_CHANGERIMAGEBOUTON "ChangeImageBouton" // prefix pour changer l'image d'une prise
 #define COMMANDE_STATUTBOUTON "EtatBouton" // Commande pour retourner l'etat d'une prise
@@ -29,7 +31,7 @@
 #define COMMANDE_DETAILMINUTERIE "DetailMinuterie" // Commande pour récuperer le détail d'une minuterie
 #define COMMANDE_AIDE "Aide" // Commande pour afficher toutes les commandes possibles
 
-#define CONFIG_NOMFICHIER "switchmanager.config" // nom du fichier de config
+#define CONFIG_NOMFICHIER "/etc/switchmanager.conf" // nom du fichier de config
 #define LOG_NOMFICHIER "switchmanager" // nom du fichier de config
 #define FICHIERTEMPORAIRE "config.tmp" // nom du fichier temporaire
 #define CONFIG_ALLUME 1 // etat quand prise allume
@@ -48,14 +50,16 @@
 #define INITIAL_IMAGESERVEUR "ImageServer.png" // Image par defaut representant le serveur
 #define PARAMETRE_NOMBOUTON "NomBouton_" // nom du paramtre qui reference le nom de la prise
 #define INITIAL_NOMBOUTON "Bouton" // nom par defaut d une prise
+#define PARAMETRE_DEFAUTBOUTON "DefautBouton_" // nom du paramtre qui reference la valeur par defaut d'un bouton
+#define INITIAL_DEFAUTBOUTON "0" // Etat par defaut d'un bouton
 #define PARAMETRE_NOMBREINTERRUPTEUR "NombreBouton" // Nombre de prise connecte au serveur
-#define INITIAL_NOMBREINTERRUPTEUR "1" // nombre de prise par defaut connecte au serveur
+#define INITIAL_NOMBREINTERRUPTEUR "8" // nombre de prise par defaut connecte au serveur
 #define PARAMETRE_IMAGEBOUTON "ImageBouton_" // nom du parametre qui reference l image de la prise
 #define INITIAL_IMAGEBOUTON "Light-BulbLeaf-icon.png" // image par defaut d une prise
 #define PARAMETRE_MINUTERIEACTIVE "MinuterieActive" // nom du parametre pour la minuterie
 #define INITIAL_MINUTERIEACTIVE CONFIG_DESACTIVER // valeur par defaut du parametre minuterie
-#define PARAMETRE_ETATDEFAUT "EtatDefaut" // nom du parametre d etat d initialisation d une prise au demarrage
-#define INITIAL_ETATDEFAUT "0" // etat par defaut d une prise au demarrage
+#define PARAMETRE_STATUTDEFAUTBOUTON "EtatDefautBouton_" // nom du parametre d etat d initialisation d une prise au demarrage
+#define INITIAL_STATUTDEFAUTBOUTON "0" // etat par defaut d une prise au demarrage
 #define PARAMETRE_MINUTERIE "Minuterie" // Information sur une minuterie
 #define INITIAL_MINUTERIE "0" // Valeur par defaut d'une minuterie
 #endif // CONSTANTES_H_INCLUDED

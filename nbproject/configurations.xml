@@ -4,11 +4,6 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
-      <logicalFolder name="f1" displayName="fastlogger" projectFiles="true">
-        <itemPath>fastlogger/fastlogger.h</itemPath>
-        <itemPath>fastlogger/linkedlist.h</itemPath>
-      </logicalFolder>
-      <itemPath>USBRelais.h</itemPath>
       <itemPath>clientudp.h</itemPath>
       <itemPath>configuration.h</itemPath>
       <itemPath>constantes.h</itemPath>
@@ -30,14 +25,11 @@
                    projectFiles="true">
       <itemPath>.log4crc</itemPath>
       <itemPath>ToDo</itemPath>
+      <itemPath>zlog.conf</itemPath>
     </logicalFolder>
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <logicalFolder name="f1" displayName="fastlogger" projectFiles="true">
-        <itemPath>fastlogger/fastlogger.c</itemPath>
-      </logicalFolder>
-      <itemPath>USBRelais.c</itemPath>
       <itemPath>clientudp.c</itemPath>
       <itemPath>gestioncommandes.c</itemPath>
       <itemPath>gestionfichier.c</itemPath>
@@ -105,10 +97,6 @@
       </item>
       <item path="ToDo" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="USBRelais.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="USBRelais.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="clientudp.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="clientudp.h" ex="false" tool="3" flavor2="0">
@@ -162,12 +150,6 @@
           <output>${TESTDIR}/TestFiles/f3</output>
         </linkerTool>
       </folder>
-      <item path="fastlogger/fastlogger.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="fastlogger/fastlogger.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="fastlogger/linkedlist.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="gestioncommandes.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="gestioncommandes.h" ex="false" tool="3" flavor2="0">
@@ -220,6 +202,8 @@
       </item>
       <item path="voCoreGPIO.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="zlog.conf" ex="false" tool="3" flavor2="0">
+      </item>
     </conf>
     <conf name="VoCore" type="1">
       <toolsSet>
@@ -242,10 +226,6 @@
       <item path="ReadMe" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ToDo" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="USBRelais.c" ex="false" tool="0" flavor2="9">
-      </item>
-      <item path="USBRelais.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="clientudp.c" ex="false" tool="0" flavor2="9">
       </item>
@@ -300,12 +280,6 @@
           <output>${TESTDIR}/TestFiles/f3</output>
         </linkerTool>
       </folder>
-      <item path="fastlogger/fastlogger.c" ex="false" tool="0" flavor2="9">
-      </item>
-      <item path="fastlogger/fastlogger.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="fastlogger/linkedlist.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="gestioncommandes.c" ex="false" tool="0" flavor2="9">
       </item>
       <item path="gestioncommandes.h" ex="false" tool="3" flavor2="0">
@@ -358,6 +332,8 @@
       </item>
       <item path="voCoreGPIO.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="zlog.conf" ex="false" tool="3" flavor2="0">
+      </item>
     </conf>
     <conf name="Release" type="1">
       <toolsSet>
@@ -368,7 +344,7 @@
       <compileType>
         <cTool>
           <developmentMode>5</developmentMode>
-          <commandLine>-pthread</commandLine>
+          <commandLine>-pthread -lzlog</commandLine>
           <preprocessorList>
             <Elem>RELEASE</Elem>
           </preprocessorList>
@@ -389,10 +365,6 @@
       </item>
       <item path="ToDo" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="USBRelais.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="USBRelais.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="clientudp.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="clientudp.h" ex="false" tool="3" flavor2="0">
@@ -446,12 +418,6 @@
           <output>${TESTDIR}/TestFiles/f3</output>
         </linkerTool>
       </folder>
-      <item path="fastlogger/fastlogger.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="fastlogger/fastlogger.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="fastlogger/linkedlist.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="gestioncommandes.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="gestioncommandes.h" ex="false" tool="3" flavor2="0">
@@ -504,6 +470,8 @@
       </item>
       <item path="voCoreGPIO.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="zlog.conf" ex="false" tool="3" flavor2="0">
+      </item>
     </conf>
     <conf name="Raspberry_Debug" type="1">
       <toolsSet>
@@ -514,7 +482,7 @@
       <compileType>
         <cTool>
           <commandlineTool>gcc</commandlineTool>
-          <commandLine>-pthread -lwiringPi -lwiringPiDev -I/usr/local/include -L/usr/local/lib</commandLine>
+          <commandLine>-pthread -lwiringPi -lzlog -I/usr/local/include -L/usr/local/lib</commandLine>
           <preprocessorList>
             <Elem>DEBUG</Elem>
             <Elem>RASPBERRY</Elem>
@@ -527,10 +495,6 @@
       </item>
       <item path="ToDo" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="USBRelais.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="USBRelais.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="clientudp.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="clientudp.h" ex="false" tool="3" flavor2="0">
@@ -584,12 +548,6 @@
           <output>${TESTDIR}/TestFiles/f3</output>
         </linkerTool>
       </folder>
-      <item path="fastlogger/fastlogger.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="fastlogger/fastlogger.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="fastlogger/linkedlist.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="gestioncommandes.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="gestioncommandes.h" ex="false" tool="3" flavor2="0">
@@ -641,6 +599,8 @@
       <item path="voCoreGPIO.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="voCoreGPIO.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="zlog.conf" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
     <conf name="Raspberry_Release" type="1">
@@ -669,10 +629,6 @@
       </item>
       <item path="ToDo" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="USBRelais.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="USBRelais.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="clientudp.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="clientudp.h" ex="false" tool="3" flavor2="0">
@@ -741,12 +697,6 @@
           </linkerLibItems>
         </linkerTool>
       </folder>
-      <item path="fastlogger/fastlogger.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="fastlogger/fastlogger.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="fastlogger/linkedlist.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="gestioncommandes.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="gestioncommandes.h" ex="false" tool="3" flavor2="0">
@@ -799,6 +749,8 @@
       </item>
       <item path="voCoreGPIO.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="zlog.conf" ex="false" tool="3" flavor2="0">
+      </item>
     </conf>
     <conf name="Raspberry_Remote" type="1">
       <toolsSet>
@@ -808,9 +760,8 @@
       </toolsSet>
       <compileType>
         <cTool>
-          <developmentMode>5</developmentMode>
           <commandlineTool>gcc</commandlineTool>
-          <commandLine>-pthread -lwiringPi -lwiringPiDev</commandLine>
+          <commandLine>-pthread -lwiringPi -lzlog</commandLine>
           <preprocessorList>
             <Elem>RASPBERRY</Elem>
             <Elem>REMOTE</Elem>
@@ -826,10 +777,6 @@
       <item path="ReadMe" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ToDo" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="USBRelais.c" ex="false" tool="0" flavor2="9">
-      </item>
-      <item path="USBRelais.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="clientudp.c" ex="false" tool="0" flavor2="9">
       </item>
@@ -899,12 +846,6 @@
           </linkerLibItems>
         </linkerTool>
       </folder>
-      <item path="fastlogger/fastlogger.c" ex="false" tool="0" flavor2="9">
-      </item>
-      <item path="fastlogger/fastlogger.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="fastlogger/linkedlist.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="gestioncommandes.c" ex="false" tool="0" flavor2="9">
       </item>
       <item path="gestioncommandes.h" ex="false" tool="3" flavor2="0">
@@ -956,6 +897,8 @@
       <item path="voCoreGPIO.c" ex="false" tool="0" flavor2="9">
       </item>
       <item path="voCoreGPIO.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="zlog.conf" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>

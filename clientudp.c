@@ -27,15 +27,16 @@ int sendData(char* commande)
     struct sockaddr_in si_client, si_serveur;
     int s, retourCode, slen = sizeof(si_serveur) , recv_len;
     int broadcast=1;
-    char buf[BUFLEN];
+    char buf[MAXBUF];
     char resultat[MAXBUF];
+    char commandeFinale[MAXBUF];
 
     //create a UDP socket
     if ((s=socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == -1)
     {
         die("socket");
     }
-    ecrireMessageDebug("clientudp", "Socket UDP\n");
+    EcrireMessageDebug("clientudp", "Socket UDP");
 //    setsockopt(s, SOL_SOCKET, SO_BROADCAST, &broadcast, sizeof broadcast);
     
     // zero out the structure
@@ -44,36 +45,38 @@ int sendData(char* commande)
     si_client.sin_family = AF_INET;
     si_client.sin_port = htons(atoi(CONFIG_LOCALPORTSERVEUR));
     si_client.sin_addr.s_addr = htonl(INADDR_LOOPBACK);
-    ecrireMessageDebug("clientudp", "Structur init\n");
+    EcrireMessageDebug("clientudp", "Structur init");
     if (LireParametre(CONFIG_NOMFICHIER, PARAMETRE_PORTSERVEUR, resultat) != MSG_OK)
     {
-        ecrireMessageErreur("clientUDP", "Erreur de recuperation du port de connexion\n");
+        EcrireMessageErreur("clientUDP", "Erreur de recuperation du port de connexion");
         return MSG_InternalServerError;
     }
-    ecrireMessageDebug("clientudp", "Lecture param OK\n");
+    EcrireMessageDebug("clientudp", "Lecture param OK");
     si_serveur.sin_family = AF_INET;
     si_serveur.sin_port = htons(atoi(resultat));
     si_serveur.sin_addr.s_addr = htonl(INADDR_LOOPBACK);
-    ecrireMessageDebug("clientudp", "Config serveur OK\n");
+    EcrireMessageDebug("clientudp", "Config serveur OK");
     //bind socket to port
     if( bind(s , (struct sockaddr*)&si_client, sizeof(si_client) ) == -1)
     {
         die("bind");
     }
-    ecrireMessageDebug("clientudp", "bind OK\n");
-    sprintf(resultat, "Commande client : %s\n", commande);
-    ecrireMessageDebug("clientudp", resultat);
-    if (sendto(s, commande, strlen(commande), 0, (struct sockaddr*) &si_serveur, slen) == -1)
+    EcrireMessageDebug("clientudp", "bind OK");
+    sprintf(resultat, "Commande client : %s", commande);
+    EcrireMessageDebug("clientudp", resultat);
+    sprintf(commandeFinale, "%s\n", commande);
+    if (sendto(s, commandeFinale, strlen(commandeFinale), 0, (struct sockaddr*) &si_serveur, slen) == -1)
     {
         die("sendto()");
     }
-    ecrireMessageDebug("clientudp", "sendto OK\n");
+    EcrireMessageDebug("clientudp", "sendto OK");
+    memset(commandeFinale, 0, sizeof (commandeFinale));
     memset(commande, 0, sizeof (commande));
-    ecrireMessageDebug("clientudp", "memset OK\n");
+    EcrireMessageDebug("clientudp", "memset OK");
     bzero(buf, BUFLEN);
-    ecrireMessageDebug("clientudp", "bzero OK\n");
+    EcrireMessageDebug("clientudp", "bzero OK");
     fflush(stdout);
-    ecrireMessageDebug("clientudp", "fflush OK\n");
+    EcrireMessageDebug("clientudp", "fflush OK");
     //try to receive some data, this is a blocking call
     //if ((recv_len = recvfrom(s, buf, BUFLEN, 0, (struct sockaddr *) &si_serveur, &slen)) == -1)
     //{

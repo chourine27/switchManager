@@ -16,7 +16,6 @@
 #include "minuterie.h"
 #include "configuration.h"
 #include "gestionlog.h"
-#include "fastlogger/fastlogger.h"
 #include "gestionfichier.h"
 #include "raspberryGPIO.h"
 
@@ -50,6 +49,7 @@ int initConfig()
 int initGPIO()
 {
     char resultat[BUFLEN];
+    char index[BUFLEN];
     int codeResultat;
     int nbrPort = 0;
     codeResultat = RetournerInformationConfig(PARAMETRE_NOMBREINTERRUPTEUR, INITIAL_NOMBREINTERRUPTEUR, resultat);
@@ -58,25 +58,45 @@ int initGPIO()
         return codeResultat;
     }
     nbrPort = atoi(resultat);
-
+    EcrireMessageDebug("initialisation", "Chargement du nombre de bouton OK");
 #ifdef VOCORE
     voCore_Init();
+#elif REMOTE
+    InitWiringPiGPIO();
+    EcrireMessageDebug("initialisation", "InitWiringPiGPIO OK");
+    EcrireMessageDebug("initialisation", resultat);
 #endif
-
     for(int i=0; i<nbrPort; i++)
     {
-        sprintf(resultat, "%d", i);
+        sprintf(index, "%d", i+1);
         //Initialise le port en sortie avec la valeur par défaut
 #ifdef VOCORE
         voCore_gpioInit(i);
-#elif REMOTE
-        InitRaspberryGPIO();
 #endif
+        EcrireMessageDebug("initialisation", index);
         //Initialise le fichier de configuration avec le nom du bouton
-        RetournerInformationConfig(PARAMETRE_NOMBOUTON, INITIAL_NOMBOUTON, resultat);
+        RetournerInformationConfigIndex(PARAMETRE_NOMBOUTON, index, INITIAL_NOMBOUTON, resultat);
+        EcrireMessageDebug("initialisation", "Initialisation du nom du bouton");
         //Initialise le fichier de configuration avec l'image du bouton
-        RetournerInformationConfig(PARAMETRE_IMAGEBOUTON, INITIAL_IMAGEBOUTON, resultat);
+        RetournerInformationConfigIndex(PARAMETRE_IMAGEBOUTON, index, INITIAL_IMAGEBOUTON, resultat);
+        EcrireMessageDebug("initialisation", "Initialisation du nom de l'image du bouton");
+        //Initialise le statut par defaut d'un bouton ou initialise le fichier de configuration avec la valeur par defaut du bouton
+        codeResultat = RetournerInformationConfigIndex(PARAMETRE_STATUTDEFAUTBOUTON, index, INITIAL_STATUTDEFAUTBOUTON, resultat);
+        EcrireMessageDebug("initialisation", "Valeur par defaut du bouton chargée");
+        if (codeResultat == MSG_OK)
+        {
+            ChangerStatutBouton(i, atoi(resultat));
+            EcrireMessageDebug("initialisation", "Valeur par defaut du bouton initialisée");
+        }
+        else
+        {
+            EcrireMessageErreur("initialisation", "Erreur à l'initialisation des valeurs par defaut");
+            EcrireMessageDebug("initialisation", resultat);
+        }
     }
+#if REMOTE
+    InitWiringPiGPIOEvent();
+#endif
     return MSG_OK;
 }
 
@@ -85,25 +105,10 @@ int initMinuterie()
     int *numeroMinuterie = malloc(sizeof(int));
     if (config.minuterie ==0)
     {   
-        ecrireMessageErreur("initialisation", "Pas de minuterie configurée");
+        EcrireMessageErreur("initialisation", "Pas de minuterie configurée");
         return MSG_NoContent;
     }
     int delai = DelaiPourLeProchain(numeroMinuterie);
     AjouterTimer(delai, numeroMinuterie[0]);
-    return MSG_OK;
-}
-
-int initLog()
-{
-#ifdef VOCORE
-#else
-    char niveauLog[MAXBUF];
-    char* str = fastlogger_thread_local_file_name(LOG_NOMFICHIER,0);
-    fastlogger_set_log_filename(LOG_NOMFICHIER);
-    LireParametre(CONFIG_NOMFICHIER, PARAMETRE_NIVEAULOG, niveauLog);
-    fastlogger_set_min_default_log_level((fastlogger_level_offset_t) atoi(niveauLog));
-    //fastlogger_set_min_default_log_level((fastlogger_level_offset_t) atoi(niveauLog));
-    fastlogger_separate_log_per_thread(1);
-#endif        
     return MSG_OK;
 }

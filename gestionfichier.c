@@ -147,7 +147,7 @@ int LireParametre(char *NomFichier, char *Parametre, char *Valeur)
  */
 int InitialiseValeur(char* NomFichier, char* Parametre, char* Valeur)
 {
-    if(strncmp(Parametre, PARAMETRE_ETATDEFAUT, strlen(PARAMETRE_ETATDEFAUT)) == 0 )
+    if(strncmp(Parametre, PARAMETRE_STATUTDEFAUTBOUTON, strlen(PARAMETRE_STATUTDEFAUTBOUTON)) == 0 )
     {
         strcpy(Valeur, "0");
     }

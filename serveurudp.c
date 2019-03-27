@@ -58,7 +58,7 @@ int StartServerUDP(void)
     si_me.sin_family = AF_INET;
     if (LireParametre(CONFIG_NOMFICHIER, PARAMETRE_PORTSERVEUR, resultat) != MSG_OK)
     {
-        printf("StartServerUDP - Erreur de recuperation du port de connexion\n");
+        EcrireMessageInfo("StartServerUDP", "Erreur de recuperation du port de connexion");
         return MSG_InternalServerError;
     }
 
@@ -71,7 +71,7 @@ int StartServerUDP(void)
         die("bind");
     }
 
-    ecrireMessageInfo("serveurudp", "Server démarré, prêt à recevoir des données\n");
+    EcrireMessageInfo("serveurudp", "Server démarré, prêt à recevoir des données");
     //keep listening for data
     
     while(1)
@@ -85,17 +85,20 @@ int StartServerUDP(void)
             die("recvfrom()");
         }
 
-        //print details of the client/peer and the data received
+        // Supprime le dernier caractère de retour à la ligne
+        buf[strlen(buf)-1] = '\0';
+        // Log le message reçu
         sprintf(messageLog, "Received packet from %s:%d - Commande : %s", inet_ntoa(si_other.sin_addr), ntohs(si_other.sin_port), buf);
-        ecrireMessageInfo("serveurudp", messageLog);
+        EcrireMessageInfo("serveurudp", messageLog);
         retourCode = ExecuterCommande(buf, resultat);
         if (retourCode != MSG_OK)
         {
-            sprintf(messageLog, "StartServerUDP - Commande retourne une erreur : %d\n ", retourCode);
-            ecrireMessageInfo("serveurudp", messageLog);
+            sprintf(messageLog, "StartServerUDP - Commande retourne une erreur : %d", retourCode);
+            EcrireMessageErreur("serveurudp", messageLog);
             //now reply this error to client
         }
-        if (sendto(s, resultat, strlen(resultat), 0, (struct sockaddr*) &si_other, slen) == -1)
+        sprintf(buf, "%s\n", resultat);
+        if (sendto(s, buf, strlen(buf), 0, (struct sockaddr*) &si_other, slen) == -1)
         {
             die("sendto()");
         }

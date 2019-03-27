@@ -7,6 +7,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
+#include <error.h>
+
+extern int errno;
 
 int main()
 {
@@ -24,15 +27,15 @@ int main()
 
     // Initialisation
 //#ifdef DEBUG
-    initLog();
-    ecrireMessageInfo("main", "InitLog OK\n");
+    InitLog();
+    EcrireMessageInfo("main", "InitLog OK");
 //#endif
     initConfig();
-    ecrireMessageInfo("main", "InitConfig OK\n");
+    EcrireMessageInfo("main", "InitConfig OK");
     initGPIO();
-    ecrireMessageInfo("main", "InitGPIO OK\n");
+    EcrireMessageInfo("main", "InitGPIO OK");
     initMinuterie();
-    ecrireMessageInfo("main", "InitMinuterie OK\n");
+    EcrireMessageInfo("main", "InitMinuterie OK");
     pthread_create (&thread_ServeurUDP, NULL, fn_StartServerUDP, NULL);
     pthread_join (thread_ServeurUDP, NULL);
     

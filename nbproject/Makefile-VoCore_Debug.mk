@@ -35,9 +35,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/USBRelais.o \
 	${OBJECTDIR}/clientudp.o \
-	${OBJECTDIR}/fastlogger/fastlogger.o \
 	${OBJECTDIR}/gestioncommandes.o \
 	${OBJECTDIR}/gestionfichier.o \
 	${OBJECTDIR}/gestiongpio.o \
@@ -89,20 +87,10 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/switchmanager: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/switchmanager ${OBJECTFILES} ${LDLIBSOPTIONS}
 
-${OBJECTDIR}/USBRelais.o: USBRelais.c nbproject/Makefile-${CND_CONF}.mk
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.c) -g -DVOCORE -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/USBRelais.o USBRelais.c
-
 ${OBJECTDIR}/clientudp.o: clientudp.c nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -g -DVOCORE -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/clientudp.o clientudp.c
-
-${OBJECTDIR}/fastlogger/fastlogger.o: fastlogger/fastlogger.c nbproject/Makefile-${CND_CONF}.mk
-	${MKDIR} -p ${OBJECTDIR}/fastlogger
-	${RM} "$@.d"
-	$(COMPILE.c) -g -DVOCORE -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/fastlogger/fastlogger.o fastlogger/fastlogger.c
 
 ${OBJECTDIR}/gestioncommandes.o: gestioncommandes.c nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} -p ${OBJECTDIR}
@@ -197,19 +185,6 @@ ${TESTDIR}/tests/Test_gestiongpio.o: tests/Test_gestiongpio.c
 	$(COMPILE.c) -g -DVOCORE -I. -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/Test_gestiongpio.o tests/Test_gestiongpio.c
 
 
-${OBJECTDIR}/USBRelais_nomain.o: ${OBJECTDIR}/USBRelais.o USBRelais.c 
-	${MKDIR} -p ${OBJECTDIR}
-	@NMOUTPUT=`${NM} ${OBJECTDIR}/USBRelais.o`; \
-	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
-	then  \
-	    ${RM} "$@.d";\
-	    $(COMPILE.c) -g -DVOCORE -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/USBRelais_nomain.o USBRelais.c;\
-	else  \
-	    ${CP} ${OBJECTDIR}/USBRelais.o ${OBJECTDIR}/USBRelais_nomain.o;\
-	fi
-
 ${OBJECTDIR}/clientudp_nomain.o: ${OBJECTDIR}/clientudp.o clientudp.c 
 	${MKDIR} -p ${OBJECTDIR}
 	@NMOUTPUT=`${NM} ${OBJECTDIR}/clientudp.o`; \
@@ -221,19 +196,6 @@ ${OBJECTDIR}/clientudp_nomain.o: ${OBJECTDIR}/clientudp.o clientudp.c
 	    $(COMPILE.c) -g -DVOCORE -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/clientudp_nomain.o clientudp.c;\
 	else  \
 	    ${CP} ${OBJECTDIR}/clientudp.o ${OBJECTDIR}/clientudp_nomain.o;\
-	fi
-
-${OBJECTDIR}/fastlogger/fastlogger_nomain.o: ${OBJECTDIR}/fastlogger/fastlogger.o fastlogger/fastlogger.c 
-	${MKDIR} -p ${OBJECTDIR}/fastlogger
-	@NMOUTPUT=`${NM} ${OBJECTDIR}/fastlogger/fastlogger.o`; \
-	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
-	then  \
-	    ${RM} "$@.d";\
-	    $(COMPILE.c) -g -DVOCORE -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/fastlogger/fastlogger_nomain.o fastlogger/fastlogger.c;\
-	else  \
-	    ${CP} ${OBJECTDIR}/fastlogger/fastlogger.o ${OBJECTDIR}/fastlogger/fastlogger_nomain.o;\
 	fi
 
 ${OBJECTDIR}/gestioncommandes_nomain.o: ${OBJECTDIR}/gestioncommandes.o gestioncommandes.c 

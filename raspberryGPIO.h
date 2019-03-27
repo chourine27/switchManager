@@ -18,10 +18,13 @@
 extern "C" {
 #endif
 
-    void InitRaspberryGPIO();
+    void InitWiringPiGPIO();
+    void InitWiringPiGPIOEvent();
     void EvenementCouperInterrupteur();
     void EvenementAllumerInterrupteur();
     int EnvoyerCommande(int index, int etat);
+    int WiringPiSetValue(int index, int value);
+    int WiringPiGetValue(int index);
 
 #ifdef __cplusplus
 }

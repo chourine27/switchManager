@@ -64,10 +64,9 @@ int voCore_writeFile(char* cheminFichier, char* index, char* valeur)
     
     strcat(cheminComplet, index);
     strcat(cheminComplet, cheminFichier);
-    ecrireMessageDebug("Valeur a ecrire dans VoCore", cheminComplet);
-    ecrireMessageDebug(" avec valeur ", valeur);
-    ecrireMessageDebug(" index etait ", index);
-    ecrireMessageDebug(" voila", "\n");
+    EcrireMessageDebug("Valeur a ecrire dans VoCore", cheminComplet);
+    EcrireMessageDebug(" avec valeur ", valeur);
+    EcrireMessageDebug(" index etait ", index);
     fp = fopen(cheminComplet, "w");
     if (fp == NULL)
     {
@@ -87,15 +86,15 @@ int voCore_gpioInit(int index)
     char valeurIndex[10];
         
     sprintf(valeurIndex, "%d", correspondanceIndexGPIO[index - 1]);
-    ecrireMessageDebug("Valeur index ", valeurIndex);
+    EcrireMessageDebug("Valeur index ", valeurIndex);
     sprintf(valeurIndex, "%d", correspondanceIndexGPIO[0]);
-    ecrireMessageDebug("Valeur dans tableau 0\n", valeurIndex);
+    EcrireMessageDebug("Valeur dans tableau 0", valeurIndex);
     int retourValeur = voCore_gpioDirectionOut(valeurIndex);
     if (retourValeur != MSG_OK)
     {
         return retourValeur;
     }
-    return voCore_gpioSetValue(valeurIndex, INITIAL_ETATDEFAUT);
+    return voCore_gpioSetValue(valeurIndex, INITIAL_STATUTDEFAUTBOUTON);
 }
 
 /**
@@ -120,6 +119,6 @@ int voCore_Init()
     correspondanceIndexGPIO[13] = 50;
     correspondanceIndexGPIO[14] = 51;
     correspondanceIndexGPIO[15] = 52;
-    ecrireMessageDebug("voCoreGPIO", "Correspondances GPIO initialisées\n");
+    EcrireMessageDebug("voCoreGPIO", "Correspondances GPIO initialisées");
     return MSG_OK;
 }

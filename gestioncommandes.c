@@ -35,7 +35,7 @@ int ExecuterCommande(char* commande, char* resultat)
     const char *spaceChar = " ";
     char parametreComplet[MAXBUF];
     int codeResultat = MSG_NotImplemented;
-    // Verification si la commande contient des espaces
+    // Verification si la commande contient des espaces donc des arguments
     if (strpbrk(commande, spaceChar) != 0)
     {
         // Initialise le tableau d'arguments
@@ -55,6 +55,10 @@ int ExecuterCommande(char* commande, char* resultat)
         else if (strncmp(argv[0], COMMANDE_NOMBOUTON, sizeof(COMMANDE_NOMBOUTON)) == 0)
         {
             codeResultat = RetournerInformationConfigIndex(PARAMETRE_NOMBOUTON, argv[1], INITIAL_NOMBOUTON, resultat);
+        }
+        else if (strncmp(argv[0], COMMANDE_STATUTDEFAUTBOUTON, sizeof(COMMANDE_STATUTDEFAUTBOUTON)) == 0)
+        {
+            codeResultat = RetournerInformationConfigIndex(PARAMETRE_STATUTDEFAUTBOUTON, argv[1], INITIAL_STATUTDEFAUTBOUTON, resultat);
         }
         else if (strncmp(argv[0], COMMANDE_IMAGEBOUTON, sizeof(COMMANDE_IMAGEBOUTON)) == 0)
         {
@@ -121,7 +125,7 @@ int ExecuterCommande(char* commande, char* resultat)
                 }
                 else
                 {
-                    ecrireMessageInfo("gestioncommandes", "Précédente commande envoyé il y a trop peu de temps. Commande annulée\n");
+                    EcrireMessageInfo("gestioncommandes", "Précédente commande envoyée il y a trop peu de temps. Commande annulée");
                     codeResultat = MSG_OK;
                 }
             }
@@ -194,7 +198,7 @@ int ExecuterCommande(char* commande, char* resultat)
         }
         else if (strncmp(commande, COMMANDE_NOMBREMINUTERIE, sizeof(COMMANDE_NOMBREMINUTERIE)-2) == 0)
         {
-            if (sprintf(resultat, "%d\n", config.minuterie) < 0)
+            if (sprintf(resultat, "%d", config.minuterie) < 0)
             {
                 codeResultat = MSG_NotAcceptable;
             }
@@ -211,12 +215,12 @@ int ExecuterCommande(char* commande, char* resultat)
     free(argv);
     free(p);
     if (codeResultat != MSG_OK)
-        sprintf(resultat, "%d\n", codeResultat);
+        sprintf(resultat, "%d", codeResultat);
     else
     {
         if (strcmp(resultat, "") == 0) //Résultat vide
         {
-            sprintf(resultat, "%d\n", MSG_OK);
+            sprintf(resultat, "%d", MSG_OK);
         }
     }
     return codeResultat;

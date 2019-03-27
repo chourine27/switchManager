@@ -7,7 +7,7 @@
 #include "configuration.h"
 #ifdef VOCORE
 #else
-#include "fastlogger/fastlogger.h"
+#include <zlog.h>
 #endif
 #include "listecodes.h"
 #include "tools.h"
@@ -16,47 +16,63 @@
 
 #include <stdlib.h>
 
-int ecrireMessageDebug (char* origine, const char* message)
+zlog_category_t *c;
+
+int InitLog()
 {
-    return ecrireMessage(origine, message, "DEBUG", FL_DEBUG);
+    	int rc;
+	
+	rc = zlog_init("/etc/zlog.conf");
+	if (rc) {
+		printf("init failed : %d\n", rc);
+		return -1;
+	}
+
+	c = zlog_get_category("switchmanager");
+	if (!c) {
+		printf("get cat fail\n");
+		zlog_fini();
+		return -2;
+	}
+
+	return MSG_OK;
 }
 
-int ecrireMessageInfo (char* origine, const char* message)
+int EcrireMessageDebug (char* origine, const char* message)
 {
-    return ecrireMessage(origine, message, "INFO", FL_EXTRA_INFO);
+    zlog_category_t *category = zlog_get_category(origine);
+    zlog_debug(category, message);
+    return MSG_OK;
+    //return ecrireMessage(origine, message, "DEBUG", FL_DEBUG);
 }
 
-int ecrireMessageAlerte (char* origine, const char* message)
+int EcrireMessageInfo (char* origine, const char* message)
 {
-    return ecrireMessage(origine, message, "ALERTE", FL_KEY_INFO);
+    zlog_category_t *category = zlog_get_category(origine);
+    zlog_info(category, message);
+    return MSG_OK;
+    //return ecrireMessage(origine, message, "INFO", FL_EXTRA_INFO);
 }
 
-int ecrireMessageErreur (char* origine, const char* message)
+int EcrireMessageAlerte (char* origine, const char* message)
 {
-    return ecrireMessage(origine, message, "ERREUR", FL_ERROR);
+    zlog_category_t *category = zlog_get_category(origine);
+    zlog_warn(category, message);
+    return 0; //return ecrireMessage(origine, message, "ALERTE", FL_KEY_INFO);
+}
+
+int EcrireMessageErreur (char* origine, const char* message)
+{
+    zlog_category_t *category = zlog_get_category(origine);
+    zlog_error(category, message);
+    return 0; //return ecrireMessage(origine, message, "ERREUR", FL_ERROR);
 }
 
 int terminelog()
 {
 #ifdef VOCORE
 #else
-    fastlogger_close_thread_local();
-    fastlogger_close();
-#endif
-    return MSG_OK;
-}
-
-int ecrireMessage (const char* origine, const char* message, const char* libellePriorite, fastlogger_level_t priorite)
-{
-#ifdef VOCORE
-    printf("%s : %s \n", origine, message);
-#elif DEBUG
-    printf("%s : %s \n", origine, message);
-#else
-    initLog();
-    Log(priorite, "%s - %s - %s", libellePriorite, origine, message);
-    fflush(stdout);
-    terminelog();
+    zlog_fini();
 #endif
     return MSG_OK;
 }
